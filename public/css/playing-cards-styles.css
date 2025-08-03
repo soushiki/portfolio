@@ -1,0 +1,100 @@
+
+#playing-cards{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+
+
+  flex-wrap: wrap;
+
+  gap: 20px;
+
+
+}
+
+.left {
+  align-self: flex-start;
+
+  margin: 10px;
+  font-size: 32px;
+
+  width: 32px;
+}
+
+.middle {
+
+   text-align: center;
+
+  display: flex;
+
+  align-self: center;
+
+  flex-direction: column;
+
+  font-size: 40px;
+
+
+
+  width: 80px;
+
+  
+
+  
+}
+
+.right {
+  align-self: flex-end;
+
+   margin: 20px;
+  font-size: 32px;
+
+  width: 32px;
+
+  transform: rotate(180deg);
+}
+
+.card {
+  background-color: #eee;
+  border: 1px solid black;
+
+  border-radius: 5px;
+
+  width: 250px;
+
+  height: 300px;
+
+  padding: 1px;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  box-shadow: 10px 1px 10px grey;
+}
+
+.six-diamonds .left  {
+   color: red;
+}
+
+.six-diamonds .middle  {
+   color: red;
+}
+
+.six-diamonds .right  {
+   color: red;
+}
+
+.ace-diamond .middle {
+
+  font-size: 80px;
+
+ 
+}
+
+.three-spades .middle{
+  font-size: 60px;
+  text-align: center;
+
+  width: 60px;
+}

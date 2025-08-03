@@ -1,0 +1,69 @@
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Mozilla headline', sans-serif;
+    background-color: #22223B;
+    color: #F2E9E4;
+}  
+
+
+header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+hr {
+    width: 100%;
+    border-color: #4A4E69
+}
+
+a {
+    color:#C9ADA7;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: font-size 0.3s ease;
+}
+
+a:hover{
+    font-size: 1.2rem;
+}
+
+
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+img {
+    min-width: 200px;
+    width: 80%;
+    max-width: 500px;
+    object-fit: cover;
+    margin: 20px;
+    border: 2px solid #F2E9E4;
+}
+
+footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin: 1rem 0;
+}

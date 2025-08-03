@@ -1,0 +1,106 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+  color: white;
+}
+tr th {
+  color: black;
+}
+
+h1 {
+  text-align: center;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ddd;
+  min-width: 200px;
+  width: 300px;
+}
+.read, .to-read, .in-progress {
+  background-image: linear-gradient(rgb(120, 250, 200), rgb(120, 200, 150));
+} 
+
+span{
+  display: inline-block;
+  margin: auto;
+  width: 50%;
+  text-align: center;
+}
+
+tr[class="to-read"] span[class="status"]{
+   border: 1px solid yellow;
+   background-image: linear-gradient(rgb(140, 150, 50), rgb(120, 120, 40)); 
+}
+
+tr[class="read"] span[class="status"]{
+   border: 1px solid orange;
+   background-image: linear-gradient(rgb(70, 150, 100), rgb(82, 20, 154)); 
+}
+
+tr[class="in-progress"] span[class="status"]{
+   border: 1px solid red;
+   background-image: linear-gradient(rgb(250, 50, 100), rgb(220, 90, 40)); 
+}
+
+
+
+span[class="status"], span[class^="rate"] {
+  text-align: center;
+  margin: auto;
+  height: 100%;
+  width: 100%;
+  background-color: hsl(250, 50%, 50%);
+  padding: 2px;
+}
+
+span[class~="one"] span:first-child{
+  
+   height: 70%;
+  width: 20%;
+  background-image: linear-gradient( to right, purple, yellow);
+}
+
+span[class~="two"] span:nth-child(-n+2){
+   height: 70%;
+  width: 20%;
+  background-image: linear-gradient(pink, purple);
+}
+
+span[class~="three"] span{
+
+  height: 70%;
+  width: 20%;
+  background-image: linear-gradient(rgb(40, 50, 50), rgb(100, 50, 200));
+}
+
+span[class~="three"], span[class~="two"], span[class~="one"]{
+
+  padding: auto 0px;
+}
+tr[class="read"] {
+  
+  background-image:linear-gradient(rgb(40, 150, 200), rgb(100, 50, 200));
+
+}
+
+tr[class="to-read"] {
+   border: 1px solid yellow;
+   background-image: linear-gradient(rgb(150, 150, 50), rgb(120, 120, 40)); 
+}
+
+tr[class="in-progress"] {
+   border: 1px solid yellow;
+   background-image: linear-gradient(rgb(150, 50, 100), rgb(220, 90, 40)); 
+}
+
+span[class^="rate"] > span{
+  
+  border: 3px solid purple;
+  border-radius: 3px;
+  margin: auto 5px;
+  height: 70%;
+  width: 20%;
+  background-color: #fff;
+}
