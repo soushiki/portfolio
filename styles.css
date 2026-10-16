@@ -145,6 +145,7 @@ a.media-placeholder:hover { text-decoration: none; }
 .media-stockroom  { background: linear-gradient(135deg, #8A5A51, #4A2F2A); }
 .media-reddit     { background: linear-gradient(135deg, #D9572B, #7A2C12); }
 .media-jammming   { background: linear-gradient(135deg, #1DB954, #125F2E); }
+.media-gacha      { background: linear-gradient(135deg, #FF6FA3, #8A4FD8); }
 
 .card-body { display: flex; flex-direction: column; gap: 0.75rem; padding: 1.25rem; flex: 1; }
 .card-body h3 { margin: 0; font-size: 1.25rem; }
