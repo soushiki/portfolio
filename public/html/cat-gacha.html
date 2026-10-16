@@ -1002,15 +1002,19 @@ window.MEOW_CLIPS = [{"len":0.83,"data":"UklGRuRnAABXQVZFZm10IBAAAAABAAEAgD4AAAB
       return ctx.decodeAudioData(bytes.buffer).then(buf => ({ buf, len: c.len }));
     })).then(list => { realMeows = list; }).catch(() => { decoding = false; });
   }
-  function playRealMeow(dest, catId, short) {
-    const pool = realMeows.map((m, i) => i).filter(i => !short || realMeows[i].len < .9);
-    let k = pool[Math.floor(Math.random() * pool.length)];
-    if (k === lastReal && pool.length > 1) k = pool[(pool.indexOf(k) + 1) % pool.length];
-    lastReal = k;
+  // Every cat has its own voice: one recording at one pitch. There are 12 recordings for 21 cats,
+  // so cats that share a recording are pitched far apart.
+  const VOICES = {
+    mochi: [1, 1.05], biscuit: [2, 1], pepper: [3, .95], bean: [4, .9], latte: [0, 1], sakura: [5, 1.12],
+    pebble: [6, .88], mint: [7, 1.08], berry: [8, 1.16], ember: [9, .97], frost: [10, 1.1], volt: [11, 1.2],
+    fern: [1, 1.28], nebula: [3, .78], solaris: [2, .84], tsunami: [7, .88], comet: [8, .94],
+    marshmallow: [5, .93], prism: [0, 1.22], aurora: [10, .9], midnight: [4, 1.12],
+  };
+  function playRealMeow(dest, catId) {
+    const [k, rate] = VOICES[catId] || [(lastReal = (lastReal + 1) % realMeows.length), 1];
     const ctx = dest.context, src = ctx.createBufferSource(), g = ctx.createGain();
-    // each cat keeps its own voice: a gentle pitch shift per cat, plus a little variety per meow
-    src.buffer = realMeows[k].buf;
-    src.playbackRate.value = (.9 + (catPitch(catId || "cat") - .82) * .6) * (.97 + Math.random() * .06);
+    src.buffer = realMeows[k % realMeows.length].buf;
+    src.playbackRate.value = rate;
     g.gain.value = .5;
     src.connect(g).connect(dest);
     src.start(ctx.currentTime + .01);
@@ -1020,7 +1024,7 @@ window.MEOW_CLIPS = [{"len":0.83,"data":"UklGRuRnAABXQVZFZm10IBAAAAABAAEAgD4AAAB
   function meow(catId, variant) {
     const dest = fxOut(); if (!dest) return;
     loadRealMeows();
-    if (realMeows) { playRealMeow(dest, catId, variant === 1); return; }
+    if (realMeows) { playRealMeow(dest, catId); return; }
     let k = variant ?? Math.floor(Math.random() * MEOWS.length);
     if (variant == null && k === lastMeow) k = (k + 1) % MEOWS.length;
     lastMeow = k;
