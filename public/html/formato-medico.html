@@ -11,53 +11,87 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../../styles.css" />
     <link rel="stylesheet" href="../css/case-study.css" />
+    <script>window.I18N_ES = {
+      "meta.title": "Formato Médico · Sebastian Herrera",
+      "meta.description": "Formato Médico: una app en React y Android que llena los formatos en papel de un médico como PDF, con búsqueda de diagnósticos CIE-10 sin conexión.",
+      "nav.projects": "Proyectos",
+      "nav.resume": "Hoja de vida",
+      "url.resume": "./spanish.html",
+      "back": "Todos los proyectos",
+      "eyebrow": "Caso de estudio · React · Android <span class=\"cs-badge\">Privado · en uso</span>",
+      "ft.portfolio": "Portafolio",
+      "h1": "Formato Médico: el formato en papel, sin el papel",
+      "lead": "Un médico llena los mismos formatos impresos todo el día: órdenes de laboratorio, fórmulas médicas, certificados médicos, incapacidades y solicitudes de imágenes diagnósticas. Esta app reproduce esos formatos exactamente como PDF, listos para imprimir o enviar por WhatsApp. Incluye una búsqueda de diagnósticos que funciona sin conexión, en la web y como app de Android.",
+      "f1.s": "tipos de formato: laboratorio, fórmula, certificado, incapacidad, imágenes, otro",
+      "f2.b": "~10.700",
+      "f2.s": "códigos CIE-10 con búsqueda sin conexión, en español",
+      "f3.s": "un solo código en React, empaquetado para Android con Capacitor",
+      "f4.s": "cada push compila el APK de Android en GitHub Actions",
+      "how.h": "Cómo funciona",
+      "s0": "Elige el formato",
+      "s1": "Órdenes de laboratorio, fórmula, certificado, incapacidad, imágenes o formato libre. Cada uno tiene sus propios campos y casillas, igual que el papel original.",
+      "s2": "Busca diagnósticos",
+      "s3": "Escribe parte de un nombre o código para buscar en el catálogo CIE-10 incluido en la app. Hasta cuatro diagnósticos, o texto libre.",
+      "s4": "Genera el PDF",
+      "s5": "jsPDF dibuja sobre coordenadas medidas del formato original, así que el resultado coincide con el papel que el paciente espera.",
+      "s6": "Compártelo",
+      "s7": "En Android, \"Guardar / enviar PDF\" abre el menú nativo para compartir (WhatsApp, Drive, Archivos) y \"Ver PDF\" abre el visor del teléfono.",
+      "dec.h": "Decisiones que vale la pena explicar",
+      "d1.h": "Por qué el catálogo CIE-10 va incluido en la app",
+      "d1.p": "El popular sitio público de consulta CIE-10 no tiene API: su búsqueda necesita un token CSRF y bloquea las solicitudes de otros orígenes, así que un navegador no puede consultarlo. Incluir un catálogo generado (que se reconstruye con un solo script) hace la búsqueda instantánea, independiente de un sitio de terceros y utilizable sin internet.",
+      "d2.h": "Por qué Capacitor en lugar de reescribirla en nativo",
+      "d2.p": "Los formatos se llenan en el consultorio, muchas veces desde un celular. Capacitor empaqueta la misma app de React como un APK de Android con acceso nativo a archivos y para compartir, así que hay un solo código que mantener. Un flujo de GitHub Actions produce un APK instalable en cada push, sin necesidad de configurar Android localmente.",
+      "note": "Construida para un médico de mi familia y usada de forma privada en su consultorio. Ni la app ni su código fuente son públicos, porque contienen el diseño real de sus formatos, su logo y su firma. Esta página describe el diseño sin exponer nada de eso. Hay una demostración disponible si la solicitas.",
+      "stack": "Stack"
+    };</script>
+    <script src="../js/i18n.js" defer></script>
 </head>
 <body>
     <nav class="nav">
         <a class="nav-brand" href="../../index.html">sebherr<span>.</span></a>
         <ul class="nav-links">
-            <li><a href="../../index.html#projects">Projects</a></li>
-            <li><a href="./english.html">Resume</a></li>
+            <li><a href="../../index.html#projects" data-i18n="nav.projects">Projects</a></li>
+            <li><a href="./english.html" data-i18n="nav.resume" data-i18n-attr="href:url.resume">Resume</a></li>
         </ul>
     </nav>
 
     <header class="cs-hero">
-        <a class="back" href="../../index.html#projects"><i class="fa-solid fa-arrow-left"></i> All projects</a>
-        <p class="eyebrow">Case study · React · Android <span class="cs-badge">Private · in use</span></p>
-        <h1>Formato Médico: the paper form, without the paper</h1>
-        <p class="lead">A physician fills out the same printed forms all day: lab orders, prescriptions, medical certificates, sick-leave notes and imaging requests. This app reproduces those forms exactly as PDFs, ready to print or send by WhatsApp. It includes a diagnosis search that works offline, on the web and as an Android app.</p>
+        <a class="back" href="../../index.html#projects"><i class="fa-solid fa-arrow-left"></i> <span data-i18n="back">All projects</span></a>
+        <p class="eyebrow" data-i18n-html="eyebrow">Case study · React · Android <span class="cs-badge">Private · in use</span></p>
+        <h1 data-i18n="h1">Formato Médico: the paper form, without the paper</h1>
+        <p class="lead" data-i18n="lead">A physician fills out the same printed forms all day: lab orders, prescriptions, medical certificates, sick-leave notes and imaging requests. This app reproduces those forms exactly as PDFs, ready to print or send by WhatsApp. It includes a diagnosis search that works offline, on the web and as an Android app.</p>
         <div class="cs-facts">
-            <div><b>6</b><span>form types: lab, prescription, certificate, sick leave, imaging, other</span></div>
-            <div><b>~10,700</b><span>ICD-10 codes searchable offline, in Spanish</span></div>
-            <div><b>Web + APK</b><span>one React codebase, packaged for Android with Capacitor</span></div>
-            <div><b>CI</b><span>every push builds the Android APK on GitHub Actions</span></div>
+            <div><b>6</b><span data-i18n="f1.s">form types: lab, prescription, certificate, sick leave, imaging, other</span></div>
+            <div><b data-i18n="f2.b">~10,700</b><span data-i18n="f2.s">ICD-10 codes searchable offline, in Spanish</span></div>
+            <div><b>Web + APK</b><span data-i18n="f3.s">one React codebase, packaged for Android with Capacitor</span></div>
+            <div><b>CI</b><span data-i18n="f4.s">every push builds the Android APK on GitHub Actions</span></div>
         </div>
     </header>
 
     <section class="cs-section">
-        <h2>How it works</h2>
+        <h2 data-i18n="how.h">How it works</h2>
         <ol class="flow" style="--steps:4">
-            <li><b>Pick the form</b><p>Lab orders, prescription, certificate, sick leave, imaging or free-form. Each has its own fields and checkboxes, matching the original paper.</p></li>
-            <li><b>Search diagnoses</b><p>Type part of a name or code to search the bundled ICD-10 (CIE-10) catalog. Up to four diagnoses, or free text.</p></li>
-            <li><b>Generate the PDF</b><p>jsPDF draws onto coordinates measured from the original form, so the output lines up with the paper the patient expects.</p></li>
-            <li><b>Share it</b><p>On Android, "Save / send PDF" opens the native share sheet (WhatsApp, Drive, Files), and "View PDF" opens the phone's viewer.</p></li>
+            <li><b data-i18n="s0">Pick the form</b><p data-i18n="s1">Lab orders, prescription, certificate, sick leave, imaging or free-form. Each has its own fields and checkboxes, matching the original paper.</p></li>
+            <li><b data-i18n="s2">Search diagnoses</b><p data-i18n="s3">Type part of a name or code to search the bundled ICD-10 (CIE-10) catalog. Up to four diagnoses, or free text.</p></li>
+            <li><b data-i18n="s4">Generate the PDF</b><p data-i18n="s5">jsPDF draws onto coordinates measured from the original form, so the output lines up with the paper the patient expects.</p></li>
+            <li><b data-i18n="s6">Share it</b><p data-i18n="s7">On Android, "Save / send PDF" opens the native share sheet (WhatsApp, Drive, Files), and "View PDF" opens the phone's viewer.</p></li>
         </ol>
     </section>
 
     <section class="cs-section">
-        <h2>Decisions worth explaining</h2>
+        <h2 data-i18n="dec.h">Decisions worth explaining</h2>
         <div class="cs-grid">
-            <div class="cs-card"><h3>Why the ICD-10 catalog is bundled</h3><p>The popular public ICD-10 lookup site has no API: its search needs a CSRF token and blocks cross-origin requests, so a browser can't query it. Bundling a generated catalog (rebuilt with one script) makes the search instant, independent of a third-party site, and usable without internet.</p></div>
-            <div class="cs-card"><h3>Why Capacitor instead of a native rewrite</h3><p>Forms get filled out in the consulting room, often from a phone. Capacitor wraps the same React app as an Android APK with native file access and sharing, so there's one codebase to maintain. A GitHub Actions workflow produces an installable APK on every push, with no local Android setup needed.</p></div>
+            <div class="cs-card"><h3 data-i18n="d1.h">Why the ICD-10 catalog is bundled</h3><p data-i18n="d1.p">The popular public ICD-10 lookup site has no API: its search needs a CSRF token and blocks cross-origin requests, so a browser can't query it. Bundling a generated catalog (rebuilt with one script) makes the search instant, independent of a third-party site, and usable without internet.</p></div>
+            <div class="cs-card"><h3 data-i18n="d2.h">Why Capacitor instead of a native rewrite</h3><p data-i18n="d2.p">Forms get filled out in the consulting room, often from a phone. Capacitor wraps the same React app as an Android APK with native file access and sharing, so there's one codebase to maintain. A GitHub Actions workflow produces an installable APK on every push, with no local Android setup needed.</p></div>
         </div>
-        <p class="cs-note">Built for a physician in my family and used privately in his practice. Neither the app nor its source code is public, because they contain his real form layout, logo and signature. This page describes the design without exposing any of them. A walkthrough is available on request.</p>
+        <p class="cs-note" data-i18n="note">Built for a physician in my family and used privately in his practice. Neither the app nor its source code is public, because they contain his real form layout, logo and signature. This page describes the design without exposing any of them. A walkthrough is available on request.</p>
     </section>
 
     <section class="cs-section">
-        <h2>Stack</h2>
+        <h2 data-i18n="stack">Stack</h2>
         <ul class="tags"><li>React</li><li>Vite</li><li>jsPDF</li><li>Capacitor</li><li>Android</li><li>GitHub Actions</li><li>Node.js scripts</li></ul>
     </section>
 
-    <footer class="cs-footer">Sebastian Herrera Claro · <a href="../../index.html">Portfolio</a> · <a href="./english.html">Resume</a></footer>
+    <footer class="cs-footer">Sebastian Herrera Claro · <a href="../../index.html" data-i18n="ft.portfolio">Portfolio</a> · <a href="./english.html" data-i18n="nav.resume" data-i18n-attr="href:url.resume">Resume</a></footer>
 </body>
 </html>

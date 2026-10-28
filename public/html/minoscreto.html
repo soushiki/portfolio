@@ -11,56 +11,91 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../../styles.css" />
     <link rel="stylesheet" href="../css/case-study.css" />
+    <script>window.I18N_ES = {
+      "meta.title": "Minoscreto · Sebastian Herrera",
+      "meta.description": "Minoscreto: anonimiza documentos de Word y PDF en el navegador antes de usar IA y luego restaura los nombres reales en la respuesta.",
+      "nav.projects": "Proyectos",
+      "nav.resume": "Hoja de vida",
+      "url.resume": "./spanish.html",
+      "back": "Todos los proyectos",
+      "eyebrow": "Caso de estudio · React · Privacidad",
+      "ft.portfolio": "Portafolio",
+      "h1": "Minoscreto: usa IA sin entregar nombres",
+      "lead": "Abogados, médicos y contadores quieren ayuda de la IA con documentos llenos de datos personales. Minoscreto cambia cada nombre y entidad sensible por un marcador antes de que el texto llegue a la IA y luego devuelve los nombres reales a la respuesta. Todo corre en el navegador, así que no se sube nada a ningún lado.",
+      "l.live": "Pruébalo en vivo",
+      "l.code": "Código",
+      "f1.s": "en el navegador: sin servidor, sin subidas",
+      "f2.s": "archivos de Word y expedientes largos en PDF",
+      "f3.s": "la lógica del modelo separada de las vistas de React",
+      "f4.b": "1 archivo",
+      "f4.s": "se entrega como un único HTML autocontenido",
+      "how.h": "Cómo funciona",
+      "s0": "Carga un documento",
+      "s1": "Un archivo de Word, o un expediente largo en PDF o Word en modo \"expediente\". El archivo se procesa localmente (JSZip para .docx, pdf.js para PDF).",
+      "s2": "Detecta entidades",
+      "s3": "Los nombres y otras entidades sensibles se detectan y se muestran para revisión antes de reemplazar nada.",
+      "s4": "Protege y descarga",
+      "s5": "Con un clic se descarga el documento protegido junto con su diccionario (marcador → valor real), de modo que el diccionario no se pueda olvidar.",
+      "s6": "Restaura la respuesta",
+      "s7": "Pega de nuevo la respuesta de la IA y el diccionario restaura los nombres reales, así el texto final queda listo para usar.",
+      "eng.h": "Ingeniería",
+      "arch.h": "Arquitectura",
+      "arch.ul": "<li><b>Modelo:</b> lógica pura sin React, que cubre la detección, las entidades, el diccionario y el manejo de .docx</li><li><b>View-models:</b> hooks (<code>useAnonymizer</code>, <code>useRestorer</code>) más un reducer para el estado</li><li><b>Vistas:</b> componentes de presentación que solo reciben el view-model como props</li>",
+      "qual.h": "Calidad",
+      "qual.ul": "<li>Pruebas con Vitest + Testing Library tanto del modelo como de la interfaz</li><li>Un benchmark de extremo a extremo sobre un expediente generado de 600 páginas, con una clave de respuestas como referencia</li><li>Se construye con Vite en un único archivo HTML autocontenido, que se puede enviar y abrir sin conexión</li>",
+      "stack": "Stack"
+    };</script>
+    <script src="../js/i18n.js" defer></script>
 </head>
 <body>
     <nav class="nav">
         <a class="nav-brand" href="../../index.html">sebherr<span>.</span></a>
         <ul class="nav-links">
-            <li><a href="../../index.html#projects">Projects</a></li>
-            <li><a href="./english.html">Resume</a></li>
+            <li><a href="../../index.html#projects" data-i18n="nav.projects">Projects</a></li>
+            <li><a href="./english.html" data-i18n="nav.resume" data-i18n-attr="href:url.resume">Resume</a></li>
         </ul>
     </nav>
 
     <header class="cs-hero">
-        <a class="back" href="../../index.html#projects"><i class="fa-solid fa-arrow-left"></i> All projects</a>
-        <p class="eyebrow">Case study · React · Privacy</p>
-        <h1>Minoscreto: use AI without handing over names</h1>
-        <p class="lead">Lawyers, doctors and accountants want AI help with documents full of personal data. Minoscreto swaps every name and sensitive entity for a placeholder before the text goes to the AI, then puts the real names back into the AI's answer. It all runs in the browser, so nothing is uploaded anywhere.</p>
+        <a class="back" href="../../index.html#projects"><i class="fa-solid fa-arrow-left"></i> <span data-i18n="back">All projects</span></a>
+        <p class="eyebrow" data-i18n-html="eyebrow">Case study · React · Privacy</p>
+        <h1 data-i18n="h1">Minoscreto: use AI without handing over names</h1>
+        <p class="lead" data-i18n="lead">Lawyers, doctors and accountants want AI help with documents full of personal data. Minoscreto swaps every name and sensitive entity for a placeholder before the text goes to the AI, then puts the real names back into the AI's answer. It all runs in the browser, so nothing is uploaded anywhere.</p>
         <div class="cs-actions">
-            <a class="btn btn-primary" href="https://minoscreto.netlify.app/" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> Try it live</a>
-            <a class="btn" href="https://github.com/soushiki/minoscreto" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Code</a>
+            <a class="btn btn-primary" href="https://minoscreto.netlify.app/" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="l.live">Try it live</span></a>
+            <a class="btn" href="https://github.com/soushiki/minoscreto" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> <span data-i18n="l.code">Code</span></a>
         </div>
         <div class="cs-facts">
-            <div><b>100%</b><span>in-browser: no server, no upload</span></div>
-            <div><b>.docx + PDF</b><span>Word files and long PDF case files</span></div>
-            <div><b>MVVM</b><span>model logic separated from React views</span></div>
-            <div><b>1 file</b><span>ships as a single self-contained HTML</span></div>
+            <div><b>100%</b><span data-i18n="f1.s">in-browser: no server, no upload</span></div>
+            <div><b>.docx + PDF</b><span data-i18n="f2.s">Word files and long PDF case files</span></div>
+            <div><b>MVVM</b><span data-i18n="f3.s">model logic separated from React views</span></div>
+            <div><b data-i18n="f4.b">1 file</b><span data-i18n="f4.s">ships as a single self-contained HTML</span></div>
         </div>
     </header>
 
     <section class="cs-section">
-        <h2>How it works</h2>
+        <h2 data-i18n="how.h">How it works</h2>
         <ol class="flow" style="--steps:4">
-            <li><b>Load a document</b><p>A Word file, or a long PDF or Word case file in "expediente" mode. The file is parsed locally (JSZip for .docx, pdf.js for PDFs).</p></li>
-            <li><b>Detect entities</b><p>Names and other sensitive entities are detected and shown for review before anything is replaced.</p></li>
-            <li><b>Protect and download</b><p>One click downloads the protected document plus its dictionary (placeholder → real value), together, so the dictionary can't be forgotten.</p></li>
-            <li><b>Restore the answer</b><p>Paste the AI's response back in, and the dictionary restores the real names, so the final text is ready to use.</p></li>
+            <li><b data-i18n="s0">Load a document</b><p data-i18n="s1">A Word file, or a long PDF or Word case file in "expediente" mode. The file is parsed locally (JSZip for .docx, pdf.js for PDFs).</p></li>
+            <li><b data-i18n="s2">Detect entities</b><p data-i18n="s3">Names and other sensitive entities are detected and shown for review before anything is replaced.</p></li>
+            <li><b data-i18n="s4">Protect and download</b><p data-i18n="s5">One click downloads the protected document plus its dictionary (placeholder → real value), together, so the dictionary can't be forgotten.</p></li>
+            <li><b data-i18n="s6">Restore the answer</b><p data-i18n="s7">Paste the AI's response back in, and the dictionary restores the real names, so the final text is ready to use.</p></li>
         </ol>
     </section>
 
     <section class="cs-section">
-        <h2>Engineering</h2>
+        <h2 data-i18n="eng.h">Engineering</h2>
         <div class="cs-grid">
-            <div class="cs-card"><h3>Architecture</h3><ul><li><b>Model:</b> pure logic with no React, covering detection, entities, the dictionary and .docx handling</li><li><b>View-models:</b> hooks (<code>useAnonymizer</code>, <code>useRestorer</code>) plus a reducer for state</li><li><b>Views:</b> presentational components that only receive the view-model as props</li></ul></div>
-            <div class="cs-card"><h3>Quality</h3><ul><li>Vitest + Testing Library tests for both the model and the UI</li><li>An end-to-end benchmark on a generated 600-page case file, with a ground-truth answer key</li><li>Built with Vite into one self-contained HTML file, which can be sent and opened offline</li></ul></div>
+            <div class="cs-card"><h3 data-i18n="arch.h">Architecture</h3><ul data-i18n-html="arch.ul"><li><b>Model:</b> pure logic with no React, covering detection, entities, the dictionary and .docx handling</li><li><b>View-models:</b> hooks (<code>useAnonymizer</code>, <code>useRestorer</code>) plus a reducer for state</li><li><b>Views:</b> presentational components that only receive the view-model as props</li></ul></div>
+            <div class="cs-card"><h3 data-i18n="qual.h">Quality</h3><ul data-i18n-html="qual.ul"><li>Vitest + Testing Library tests for both the model and the UI</li><li>An end-to-end benchmark on a generated 600-page case file, with a ground-truth answer key</li><li>Built with Vite into one self-contained HTML file, which can be sent and opened offline</li></ul></div>
         </div>
     </section>
 
     <section class="cs-section">
-        <h2>Stack</h2>
+        <h2 data-i18n="stack">Stack</h2>
         <ul class="tags"><li>React 19</li><li>Vite</li><li>Vitest</li><li>Testing Library</li><li>pdf.js</li><li>JSZip</li><li>Netlify</li></ul>
     </section>
 
-    <footer class="cs-footer">Sebastian Herrera Claro · <a href="../../index.html">Portfolio</a> · <a href="./english.html">Resume</a></footer>
+    <footer class="cs-footer">Sebastian Herrera Claro · <a href="../../index.html" data-i18n="ft.portfolio">Portfolio</a> · <a href="./english.html" data-i18n="nav.resume" data-i18n-attr="href:url.resume">Resume</a></footer>
 </body>
 </html>

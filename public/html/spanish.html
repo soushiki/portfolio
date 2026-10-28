@@ -1,0 +1,459 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sebastian Herrera Claro - Hoja de vida</title>
+    <style>
+        @media print {
+            @page {
+                size: A4;
+                margin: 0.5in 0.75in;
+            }
+            body {
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+            .no-print {
+                display: none;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 10pt;
+            line-height: 1.1;
+            color: #000;
+            background: white;
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 0.4in 0.6in;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #000;
+            padding-bottom: 10px;
+        }
+
+        .header h1 {
+            font-size: 16pt;
+            font-weight: bold;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .header h2 {
+            font-size: 12pt;
+            font-weight: normal;
+            margin-bottom: 8px;
+        }
+
+        .contact-info {
+            font-size: 10pt;
+            line-height: 1.3;
+        }
+
+        .section {
+            margin-bottom: 14px;
+        }
+
+        .section-title {
+            font-size: 12pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-bottom: 1px solid #000;
+            margin-bottom: 8px;
+            padding-bottom: 2px;
+        }
+
+        .subsection {
+            margin-bottom: 10px;
+        }
+
+        .job-header, .project-header, .education-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 4px;
+        }
+
+        .job-title, .project-title, .degree {
+            font-weight: bold;
+            font-size: 10pt;
+        }
+
+        .company, .university {
+            font-style: italic;
+            font-size: 10pt;
+        }
+
+        .date {
+            font-size: 10pt;
+            white-space: nowrap;
+        }
+
+        .location {
+            font-size: 10pt;
+            margin-bottom: 4px;
+        }
+
+        .description {
+            margin-left: 0;
+        }
+
+        .description li {
+            margin-bottom: 2px;
+            list-style-type: disc;
+            margin-left: 18px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4px;
+        }
+
+        .skill-category {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+        }
+
+        .skill-category strong {
+            min-width: 180px;
+            font-weight: bold;
+        }
+
+        .skill-list {
+            flex: 1;
+        }
+
+        .summary-text {
+            text-align: justify;
+            line-height: 1.2;
+        }
+
+        .qualifications ul {
+            margin-left: 0;
+        }
+
+        .qualifications li {
+            margin-bottom: 3px;
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+
+        .languages-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .language-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .language-name {
+            font-weight: bold;
+        }
+
+        .language-level {
+            font-style: italic;
+        }
+
+        .contact-info a, .date a, .description a {
+            color: inherit;
+        }
+
+        .download-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        .download-btn:hover {
+            background: #0056b3;
+        }
+
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 20px;
+                font-size: 10pt;
+            }
+            
+            .job-header, .project-header, .education-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .skill-category {
+                flex-direction: column;
+            }
+            
+            .skill-category strong {
+                min-width: auto;
+                margin-bottom: 2px;
+            }
+
+            .languages-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+        }
+
+        .lang-link {
+            position: fixed;
+            top: 24px;
+            left: 20px;
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            color: #007bff;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <button class="download-btn no-print" onclick="downloadPDF()">Descargar como PDF</button>
+    <a class="lang-link no-print" href="./english.html">English version</a>
+
+    <div class="header">
+        <h1>Sebastian Herrera Claro</h1>
+        <h2>Desarrollador Junior</h2>
+        <div class="contact-info">
+            Correo: sebastianherrerajr@gmail.com • Teléfono: +57 (318) 802-2279<br>
+            Ubicación: Cartagena de Indias, Colombia<br>
+            LinkedIn: linkedin.com/in/sebastian-herrera-claro-23a0af/<br>
+            Portafolio: <a href="https://sebherr.netlify.app">sebherr.netlify.app</a> • GitHub: <a href="https://github.com/soushiki">github.com/soushiki</a>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Perfil profesional</div>
+        <p class="summary-text">
+            Ingeniero de Sistemas y desarrollador React que construye herramientas prácticas para flujos de trabajo reales: un anonimizador de documentos que corre solo en el navegador para usar IA de forma segura, una app de formatos médicos publicada en web y Android, y una plantilla contable con IA local que convierte fotos de recibos en un libro contable balanceado. Experiencia profesional en frontend, UI/UX y React, y hoy en expansión hacia backends en Python, OCR, modelos de IA locales y empaquetado móvil. Trabaja con pruebas, decisiones de arquitectura documentadas y dependencias fijadas y auditadas.
+        </p>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Experiencia profesional</div>
+        
+        <div class="subsection">
+            <div class="job-header">
+                <div>
+                    <div class="job-title">Desarrollador Frontend</div>
+                    <div class="company">Tecnologías y Desarrollo Global, Cartagena, Colombia</div>
+                </div>
+                <div class="date">Julio – Diciembre de 2024</div>
+            </div>
+            <ul class="description">
+                <li>Diseño de interfaces UI/UX completas para el Proyecto SIMARUBA, con soluciones de diseño centradas en el usuario y wireframes</li>
+                <li>Depuración y solución de problemas críticos en un sitio web basado en WordPress, mejorando su rendimiento y la experiencia del usuario</li>
+                <li>Desarrollo de las primeras implementaciones en React.js para la arquitectura frontend, migrando sistemas heredados a una estructura moderna basada en componentes</li>
+                <li>Colaboración con el equipo de desarrollo para establecer estándares de diseño e implementar principios de diseño web responsive</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Habilidades técnicas</div>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <strong>Desarrollo Frontend:</strong>
+                <span class="skill-list">React.js, JavaScript ES6+, HTML5, CSS3, TailwindCSS, TypeScript, Bootstrap, Diseño responsive, Arquitectura de componentes</span>
+            </div>
+            <div class="skill-category">
+                <strong>Diseño UI/UX:</strong>
+                <span class="skill-list">Diseño de interfaces de usuario, Diseño de experiencia de usuario, Wireframing, Prototipado, Sistemas de diseño</span>
+            </div>
+            <div class="skill-category">
+                <strong>Herramientas y tecnologías:</strong>
+                <span class="skill-list">Git, GitHub Actions, npm, Vite, Vitest, RESTful APIs, Node.js, Flask, NextJS, Capacitor (Android), jsPDF, Ollama / OCR, Prisma, Firebase, Docker, MySQL, PostgreSQL, MongoDB, WordPress</span>
+            </div>
+            <div class="skill-category">
+                <strong>Lenguajes de programación:</strong>
+                <span class="skill-list">JavaScript, Python, Java, C++, C#, TypeScript</span>
+            </div>
+            <div class="skill-category">
+                <strong>Prácticas de desarrollo:</strong>
+                <span class="skill-list">Control de versiones, Metodologías ágiles, Integración de APIs, Programación asíncrona, Diseño mobile-first</span>
+            </div>
+            <div class="skill-category">
+                <strong>Software:</strong>
+                <span class="skill-list">Suite de Microsoft Office, Sistemas CRM, API de Google Classroom</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Idiomas</div>
+        <div class="languages-grid">
+            <div class="language-item">
+                <span class="language-name">Español</span>
+                <span class="language-level">Nativo</span>
+            </div>
+            <div class="language-item">
+                <span class="language-name">Inglés</span>
+                <span class="language-level">C2 (Dominio)</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Proyectos</div>
+        
+        <div class="subsection">
+            <div class="project-header">
+                <div>
+                    <div class="project-title">Minoscreto - Anonimizador de documentos para IA</div>
+                    <div class="company">React 19, Vite, Vitest, pdf.js, JSZip</div>
+                </div>
+                <div class="date"><a href="https://minoscreto.netlify.app/">En vivo</a> • <a href="https://sebherr.netlify.app/public/html/minoscreto.html?lang=es">Caso de estudio</a></div>
+            </div>
+            <ul class="description">
+                <li>Reemplaza nombres y entidades sensibles en documentos de Word y PDF antes de enviarlos a una herramienta de IA y luego restaura los nombres reales en la respuesta, todo en el navegador y sin subir archivos</li>
+                <li>Arquitectura MVVM (lógica de modelo pura, hooks de view-model, vistas de presentación) con pruebas en Vitest y Testing Library, entregada como un único archivo HTML autocontenido</li>
+            </ul>
+        </div>
+
+        <div class="subsection">
+            <div class="project-header">
+                <div>
+                    <div class="project-title">Formato Médico - App de formatos médicos (Web + Android)</div>
+                    <div class="company">React, Vite, jsPDF, Capacitor, GitHub Actions</div>
+                </div>
+                <div class="date"><a href="https://sebherr.netlify.app/public/html/formato-medico.html?lang=es">Caso de estudio</a></div>
+            </div>
+            <ul class="description">
+                <li>Genera como PDF las órdenes de laboratorio, fórmulas, certificados, incapacidades y solicitudes de imágenes de un médico, idénticos al formato impreso original y listos para imprimir o compartir por WhatsApp</li>
+                <li>Incluí una búsqueda CIE-10 sin conexión (~10.700 códigos en español), porque el sitio público de consulta no ofrece API, y empaqueté el mismo código React como un APK de Android compilado por CI en cada push</li>
+            </ul>
+        </div>
+
+        <div class="subsection">
+            <div class="project-header">
+                <div>
+                    <div class="project-title">Ingresos App - Plantilla contable con IA local para restaurantes</div>
+                    <div class="company">Python, Flask, Ollama (Qwen2.5-VL), Tesseract, PyMuPDF, openpyxl, Pyodide</div>
+                </div>
+                <div class="date"><a href="https://sebherr.netlify.app/public/html/ingresos.html?lang=es">Caso de estudio</a> • <a href="https://github.com/soushiki/ingresos-app">Código</a></div>
+            </div>
+            <ul class="description">
+                <li>Lee fotos y PDF de cierres de POS, recibos y facturas con un modelo de visión local y OCR, y produce asientos contables de partida doble balanceados y un libro de Excel mensual con fórmulas</li>
+                <li>Concilia el cierre del POS con los recibos para señalar cualquier documento faltante. Respaldada por 30 suites de pruebas automáticas, pruebas de ataque, dependencias auditadas y 28 registros de decisiones de arquitectura</li>
+            </ul>
+        </div>
+
+        <div class="subsection">
+            <div class="project-header">
+                <div>
+                    <div class="project-title">Aplicaciones React y de APIs</div>
+                    <div class="company">React, Redux Toolkit, Next.js, Firebase, Three.js, TailwindCSS</div>
+                </div>
+                <div class="date"><a href="https://sebherr.netlify.app/?lang=es#more">Portafolio</a></div>
+            </div>
+            <ul class="description">
+                <li>Cliente de Reddit con Redux Toolkit, creador de listas de reproducción de Spotify, app de notas en Markdown con Next.js y Firebase, visor de NASA APOD, generador de rutinas de gimnasio y un portafolio 3D conducible con Three.js y física Rapier</li>
+                <li>Además: un <a href="https://soushiki.github.io/data-science/">portafolio de ciencia de datos</a> (pronósticos, pruebas A/B, machine learning sobre datos públicos en vivo)</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Educación</div>
+        <div class="subsection">
+            <div class="education-header">
+                <div>
+                    <div class="degree">Ingeniería de Sistemas</div>
+                    <div class="university">Universidad de Cartagena, Cartagena, Colombia</div>
+                </div>
+                <div class="date">Marzo 2019 – Marzo 2025</div>
+            </div>
+            <p><strong>Asignaturas relevantes:</strong> Desarrollo Web, Ingeniería de Software, Gestión de Bases de Datos, Programación Orientada a Objetos, Estructuras de Datos y Algoritmos</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Certificaciones</div>
+        <div class="subsection">
+            <div class="education-header">
+                <div>
+                    <div class="degree">Diseño Web Responsive</div>
+                    <div class="university">freeCodeCamp</div>
+                </div>
+            </div>
+        </div>
+        <div class="subsection">
+            <div class="education-header">
+                <div>
+                    <div class="degree">Algoritmos y Estructuras de Datos en JavaScript (Legacy)</div>
+                    <div class="university">freeCodeCamp</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Competencias clave</div>
+        <div class="qualifications">
+            <ul>
+                <li><strong>Desarrollo con React:</strong> Experiencia construyendo interfaces basadas en componentes con prácticas modernas de React.js</li>
+                <li><strong>Dominio de JavaScript:</strong> Base sólida en características de ES6+, programación asíncrona y manipulación del DOM</li>
+                <li><strong>Diseño UI/UX:</strong> Capacidad demostrada para crear diseños centrados en el usuario e implementar sistemas de diseño</li>
+                <li><strong>Integración de APIs:</strong> Experiencia práctica con APIs RESTful y con la integración de servicios de terceros</li>
+                <li><strong>Control de versiones:</strong> Dominio de los flujos de trabajo con Git y de las prácticas de desarrollo colaborativo</li>
+                <li><strong>Diseño responsive:</strong> Experiencia creando aplicaciones web mobile-first y compatibles con distintos navegadores</li>
+                <li><strong>Resolución de problemas:</strong> Capacidad demostrada para depurar problemas complejos e implementar soluciones técnicas eficientes</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function downloadPDF() {
+            // Oculta el botón de descarga antes de imprimir
+            const btn = document.querySelector('.download-btn');
+            btn.style.display = 'none';
+            
+            // Abre el diálogo de impresión
+            window.print();
+            
+            // Muestra el botón de nuevo tras una breve pausa
+            setTimeout(() => {
+                btn.style.display = 'block';
+            }, 1000);
+        }
+
+        // También oculta el botón con Ctrl+P
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'p') {
+                const btn = document.querySelector('.download-btn');
+                btn.style.display = 'none';
+                setTimeout(() => {
+                    btn.style.display = 'block';
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+</html>

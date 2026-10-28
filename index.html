@@ -10,108 +10,163 @@
     <link href="https://fonts.googleapis.com/css2?family=Mozilla+Headline:wght@200..700&family=Outfit:wght@100..900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="./styles.css" />
+      <script>window.I18N_ES = {
+      "meta.title": "Sebastian Herrera · Portafolio",
+      "meta.description": "Sebastian Herrera Claro — ingeniero de sistemas y desarrollador frontend que construye apps en React y herramientas prácticas.",
+      "nav.projects": "Proyectos",
+      "nav.more": "Más",
+      "nav.skills": "Habilidades",
+      "nav.contact": "Contacto",
+      "url3d": "https://sebherr-3d.netlify.app/?lang=es",
+      "nav.3dtitle": "Recorre mi portafolio en 3D",
+      "hero.avatar": "Avatar de GitHub de Sebastian",
+      "hero.eyebrow": "Hola, soy Sebastian Herrera",
+      "hero.h1": "Construyo aplicaciones web que<br />resuelven problemas reales del día a día.",
+      "hero.lead": "Ingeniero de sistemas y desarrollador frontend. Trabajo sobre todo con React y, últimamente, me he ido ampliando hacia el backend y las herramientas asistidas por IA: anonimizadores de documentos, OCR para contabilidad y prototipos full-stack. Me encantan los gatos.",
+      "hero.see": "Ver mi trabajo",
+      "btn.resume": "Hoja de vida",
+      "url.resume": "./public/html/spanish.html",
+      "drive.text": "<strong>¿Prefieres explorar?</strong> Recorre mi portafolio en 3D: cada plataforma luminosa es un proyecto y hay un puente hacia una isla de ciencia de datos.",
+      "drive.btn": "Recórrelo en 3D",
+      "proj.h": "Proyectos destacados",
+      "proj.sub": "Trabajo reciente, desde herramientas de privacidad que corren solo en el navegador hasta prototipos full-stack.",
+      "more.h": "Más proyectos",
+      "more.sub": "Apps en React de mi ruta de aprendizaje, más algunos experimentos pequeños.",
+      "c.minoscreto": "Anonimiza documentos de Word antes de pegarlos en una IA y luego restaura los nombres reales en la respuesta. Todo corre en el navegador, así que nada sale de tu computador.",
+      "c.brasa": "Prototipo de landing page para un restaurante de Cartagena: smash burgers, pizza al horno de leña y costillas, con secciones de menú, sedes y pedidos.",
+      "c.ingresos": "Plantilla contable para restaurantes: lee fotos y PDF de recibos y de cierres de caja del POS con OCR y un modelo de visión local, arma el libro contable del día y lo exporta a Excel.",
+      "c.formato": "Llena las órdenes de laboratorio, fórmulas y certificados de un médico como PDF idénticos al formato impreso, con búsqueda CIE-10 sin conexión. Un solo código React para web y Android.",
+      "c.gacha": "Juego gacha de máquina de cápsulas con 21 gatos con poderes: pity suave y duro, sistema 50/50 de probabilidad aumentada, un frasco de premios, retos diarios y una revelación Mítica animada.",
+      "c.davinci": "App de notas en Markdown con inicio de sesión y base de datos en Firebase.",
+      "c.apod": "Muestra la Imagen Astronómica del Día de la NASA desde la API de APOD, con las respuestas guardadas en el almacenamiento local.",
+      "c.gym": "Genera un entrenamiento aleatorio según tus objetivos. Datos de rutinas cortesía de @smoljames.",
+      "c.todo": "Lista de tareas con CRUD construida con hooks de React.",
+      "c.reddit": "Cliente de Reddit construido sobre la API de Reddit, con el estado manejado en Redux.",
+      "c.jammming": "Busca en Spotify y crea listas de reproducción con la API Web de Spotify.",
+      "l.live": "Ver en vivo",
+      "l.case": "Caso de estudio",
+      "l.code": "Código",
+      "l.play": "Jugar",
+      "a.minoscreto": "Abrir Minoscreto",
+      "a.ingresos": "Caso de estudio de Ingresos App",
+      "a.formato": "Caso de estudio de Formato Médico",
+      "a.gacha": "Jugar Whisker Gacha",
+      "i.brasa": "Vista previa del sitio de Brasa Food & Drinks",
+      "i.davinci": "Vista previa de Da Vinci Diary",
+      "i.apod": "Vista previa de la app NASA APOD",
+      "i.gym": "Vista previa de la app de rutinas de gimnasio",
+      "i.todo": "Vista previa de la app de tareas",
+      "sk.h": "Habilidades",
+      "sk.back": "Backend y datos",
+      "sk.tools": "Herramientas",
+      "sk.rest": "APIs REST",
+      "sk.ocr": "OCR / LLM locales",
+      "ct.h": "Hablemos",
+      "ct.p": "Abierto a roles junior de frontend y full-stack. La forma más rápida de contactarme es LinkedIn."
+    };</script>
+    <script src="./public/js/i18n.js" defer></script>
   </head>
 
   <body>
     <nav class="nav">
       <a class="nav-brand" href="#top">sebherr<span>.</span></a>
       <ul class="nav-links">
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#more">More</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a class="nav-3d" href="https://sebherr-3d.netlify.app" target="_blank" rel="noopener" title="Drive through my portfolio in 3D"><i class="fa-solid fa-car-side"></i> 3D</a></li>
+        <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
+        <li><a href="#more" data-i18n="nav.more">More</a></li>
+        <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
+        <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+        <li><a class="nav-3d" href="https://sebherr-3d.netlify.app" target="_blank" rel="noopener" title="Drive through my portfolio in 3D" data-i18n-attr="href:url3d;title:nav.3dtitle"><i class="fa-solid fa-car-side"></i> 3D</a></li>
       </ul>
     </nav>
 
     <header class="hero" id="top">
-      <img class="avatar" src="https://avatars.githubusercontent.com/u/79419348?v=4" alt="Sebastian's GitHub avatar" width="112" height="112" />
-      <p class="eyebrow">Hi, I'm Sebastian Herrera</p>
-      <h1>I build web apps that solve<br />real, everyday problems.</h1>
-      <p class="lead">
+      <img class="avatar" src="https://avatars.githubusercontent.com/u/79419348?v=4" alt="Sebastian's GitHub avatar" data-i18n-attr="alt:hero.avatar" width="112" height="112" />
+      <p class="eyebrow" data-i18n="hero.eyebrow">Hi, I'm Sebastian Herrera</p>
+      <h1 data-i18n-html="hero.h1">I build web apps that solve<br />real, everyday problems.</h1>
+      <p class="lead" data-i18n="hero.lead">
         Systems engineering graduate and frontend developer. I work mostly in React, and lately I've been
         branching into backend and AI-assisted tools: document anonymizers, OCR for accounting, and full-stack prototypes.
         I love cats.
       </p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="#projects">See my work</a>
+        <a class="btn btn-primary" href="#projects" data-i18n="hero.see">See my work</a>
         <a class="btn" href="https://github.com/soushiki" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>
-        <a class="btn" href="./public/html/english.html"><i class="fa-solid fa-file-lines"></i> Resume</a>
+        <a class="btn" href="./public/html/english.html" data-i18n-attr="href:url.resume"><i class="fa-solid fa-file-lines"></i> <span data-i18n="btn.resume">Resume</span></a>
       </div>
       <div class="drive-cta">
         <i class="fa-solid fa-car-side drive-car" aria-hidden="true"></i>
         <p>
-          <strong>Prefer to explore?</strong> Drive through my portfolio in 3D: each glowing pad is a project,
-          and there's a bridge to a data science island.
+          <span data-i18n-html="drive.text"><strong>Prefer to explore?</strong> Drive through my portfolio in 3D: each glowing pad is a project,
+          and there's a bridge to a data science island.</span>
         </p>
-        <a class="btn btn-primary" href="https://sebherr-3d.netlify.app" target="_blank" rel="noopener">Drive through it <i class="fa-solid fa-arrow-right"></i></a>
+        <a class="btn btn-primary" href="https://sebherr-3d.netlify.app" data-i18n-attr="href:url3d" target="_blank" rel="noopener"><span data-i18n="drive.btn">Drive through it</span> <i class="fa-solid fa-arrow-right"></i></a>
       </div>
     </header>
 
     <main>
       <section class="section" id="projects">
         <div class="section-head">
-          <h2>Featured projects</h2>
-          <p>Recent work, from browser-only privacy tools to full-stack prototypes.</p>
+          <h2 data-i18n="proj.h">Featured projects</h2>
+          <p data-i18n="proj.sub">Recent work, from browser-only privacy tools to full-stack prototypes.</p>
         </div>
 
         <div class="grid grid-featured">
           <article class="card">
-            <a class="card-media media-placeholder media-minoscreto" href="https://minoscreto.netlify.app/" target="_blank" rel="noopener" aria-label="Open Minoscreto">
+            <a class="card-media media-placeholder media-minoscreto" href="https://minoscreto.netlify.app/" target="_blank" rel="noopener" aria-label="Open Minoscreto" data-i18n-attr="aria-label:a.minoscreto">
               <i class="fa-solid fa-user-secret"></i>
             </a>
             <div class="card-body">
               <h3>Minoscreto</h3>
-              <p>Anonymizes Word documents before you paste them into an AI, then restores the real names in the answer. Everything runs in the browser, so nothing leaves your computer.</p>
+              <p data-i18n="c.minoscreto">Anonymizes Word documents before you paste them into an AI, then restores the real names in the answer. Everything runs in the browser, so nothing leaves your computer.</p>
               <ul class="tags"><li>React</li><li>Vite</li><li>Vitest</li><li>.docx</li></ul>
               <div class="card-links">
-                <a href="https://minoscreto.netlify.app/" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live</a>
-                <a href="./public/html/minoscreto.html"><i class="fa-solid fa-book-open"></i> Case study</a>
-                <a href="https://github.com/soushiki/minoscreto" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Code</a>
+                <a href="https://minoscreto.netlify.app/" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="l.live">Live</span></a>
+                <a href="./public/html/minoscreto.html"><i class="fa-solid fa-book-open"></i> <span data-i18n="l.case">Case study</span></a>
+                <a href="https://github.com/soushiki/minoscreto" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> <span data-i18n="l.code">Code</span></a>
               </div>
             </div>
           </article>
 
           <article class="card">
             <a class="card-media" href="https://protorest.netlify.app/" target="_blank" rel="noopener">
-              <img src="./assets/images/restaurant.jpg" alt="Brasa Food & Drinks website preview" loading="lazy" />
+              <img src="./assets/images/restaurant.jpg" alt="Brasa Food & Drinks website preview" data-i18n-attr="alt:i.brasa" loading="lazy" />
             </a>
             <div class="card-body">
               <h3>Brasa Food &amp; Drinks</h3>
-              <p>Landing page prototype for a Cartagena restaurant: smash burgers, wood-fired pizza and ribs, with menu, locations and ordering sections.</p>
+              <p data-i18n="c.brasa">Landing page prototype for a Cartagena restaurant: smash burgers, wood-fired pizza and ribs, with menu, locations and ordering sections.</p>
               <ul class="tags"><li>HTML</li><li>CSS</li><li>Responsive</li></ul>
               <div class="card-links">
-                <a href="https://protorest.netlify.app/" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live</a>
-                <a href="https://github.com/soushiki/restaurant-prototype" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Code</a>
+                <a href="https://protorest.netlify.app/" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="l.live">Live</span></a>
+                <a href="https://github.com/soushiki/restaurant-prototype" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> <span data-i18n="l.code">Code</span></a>
               </div>
             </div>
           </article>
 
           <article class="card">
-            <a class="card-media media-placeholder media-ingresos" href="./public/html/ingresos.html" aria-label="Ingresos App case study">
+            <a class="card-media media-placeholder media-ingresos" href="./public/html/ingresos.html" aria-label="Ingresos App case study" data-i18n-attr="aria-label:a.ingresos">
               <i class="fa-solid fa-receipt"></i>
             </a>
             <div class="card-body">
               <h3>Ingresos App</h3>
-              <p>Bookkeeping template for restaurants: reads photos and PDFs of receipts and POS cash-closing reports with OCR and a local vision model, then builds the day's accounting ledger and exports it to Excel.</p>
+              <p data-i18n="c.ingresos">Bookkeeping template for restaurants: reads photos and PDFs of receipts and POS cash-closing reports with OCR and a local vision model, then builds the day's accounting ledger and exports it to Excel.</p>
               <ul class="tags"><li>Python</li><li>OCR</li><li>Ollama</li><li>Excel</li></ul>
               <div class="card-links">
-                <a href="./public/html/ingresos.html"><i class="fa-solid fa-book-open"></i> Case study</a>
-                <a href="https://github.com/soushiki/ingresos-app" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Code</a>
+                <a href="./public/html/ingresos.html"><i class="fa-solid fa-book-open"></i> <span data-i18n="l.case">Case study</span></a>
+                <a href="https://github.com/soushiki/ingresos-app" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> <span data-i18n="l.code">Code</span></a>
               </div>
             </div>
           </article>
 
           <article class="card">
-            <a class="card-media media-placeholder media-formato" href="./public/html/formato-medico.html" aria-label="Formato Médico case study">
+            <a class="card-media media-placeholder media-formato" href="./public/html/formato-medico.html" aria-label="Formato Médico case study" data-i18n-attr="aria-label:a.formato">
               <i class="fa-solid fa-file-medical"></i>
             </a>
             <div class="card-body">
               <h3>Formato Médico</h3>
-              <p>Fills a physician's lab orders, prescriptions and certificates as PDFs that match the printed form, with an offline ICD-10 search. One React codebase for web and Android.</p>
+              <p data-i18n="c.formato">Fills a physician's lab orders, prescriptions and certificates as PDFs that match the printed form, with an offline ICD-10 search. One React codebase for web and Android.</p>
               <ul class="tags"><li>React</li><li>jsPDF</li><li>Capacitor</li><li>Android</li></ul>
               <div class="card-links">
-                <a href="./public/html/formato-medico.html"><i class="fa-solid fa-book-open"></i> Case study</a>
+                <a href="./public/html/formato-medico.html"><i class="fa-solid fa-book-open"></i> <span data-i18n="l.case">Case study</span></a>
               </div>
             </div>
           </article>
@@ -120,82 +175,82 @@
 
       <section class="section" id="more">
         <div class="section-head">
-          <h2>More projects</h2>
-          <p>React apps from my learning path, plus a few smaller experiments.</p>
+          <h2 data-i18n="more.h">More projects</h2>
+          <p data-i18n="more.sub">React apps from my learning path, plus a few smaller experiments.</p>
         </div>
 
         <div class="grid">
           <article class="card">
-            <a class="card-media media-placeholder media-gacha" href="./public/html/cat-gacha.html" aria-label="Play Whisker Gacha">
+            <a class="card-media media-placeholder media-gacha" href="./public/html/cat-gacha.html" aria-label="Play Whisker Gacha" data-i18n-attr="aria-label:a.gacha">
               <i class="fa-solid fa-cat"></i>
             </a>
             <div class="card-body">
               <h3>Whisker Gacha</h3>
-              <p>Capsule-machine gacha game with 21 cats with powers: soft and hard pity, a 50/50 rate-up system, a treat jar and daily challenges, and an animated Mythic reveal.</p>
+              <p data-i18n="c.gacha">Capsule-machine gacha game with 21 cats with powers: soft and hard pity, a 50/50 rate-up system, a treat jar and daily challenges, and an animated Mythic reveal.</p>
               <ul class="tags"><li>JavaScript</li><li>CSS animation</li><li>SVG</li><li>Web Audio</li></ul>
               <div class="card-links">
-                <a href="./public/html/cat-gacha.html"><i class="fa-solid fa-arrow-up-right-from-square"></i> Play</a>
-                <a href="https://github.com/soushiki/portfolio/blob/main/public/html/cat-gacha.html" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Code</a>
+                <a href="./public/html/cat-gacha.html"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="l.play">Play</span></a>
+                <a href="https://github.com/soushiki/portfolio/blob/main/public/html/cat-gacha.html" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> <span data-i18n="l.code">Code</span></a>
               </div>
             </div>
           </article>
 
           <article class="card">
             <a class="card-media" href="https://davincidiary.netlify.app/" target="_blank" rel="noopener">
-              <img src="./assets/images/notes-app.png" alt="Da Vinci Diary preview" loading="lazy" />
+              <img src="./assets/images/notes-app.png" alt="Da Vinci Diary preview" data-i18n-attr="alt:i.davinci" loading="lazy" />
             </a>
             <div class="card-body">
               <h3>Da Vinci Diary</h3>
-              <p>Markdown notes app with login and a Firebase database.</p>
+              <p data-i18n="c.davinci">Markdown notes app with login and a Firebase database.</p>
               <ul class="tags"><li>React</li><li>Next.js</li><li>Firebase</li></ul>
               <div class="card-links">
-                <a href="https://davincidiary.netlify.app/" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live</a>
-                <a href="https://github.com/soushiki/notes-app" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Code</a>
+                <a href="https://davincidiary.netlify.app/" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="l.live">Live</span></a>
+                <a href="https://github.com/soushiki/notes-app" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> <span data-i18n="l.code">Code</span></a>
               </div>
             </div>
           </article>
 
           <article class="card">
             <a class="card-media" href="https://apod-nasa-herrera.netlify.app/" target="_blank" rel="noopener">
-              <img src="./assets/images/APOD.png" alt="NASA APOD app preview" loading="lazy" />
+              <img src="./assets/images/APOD.png" alt="NASA APOD app preview" data-i18n-attr="alt:i.apod" loading="lazy" />
             </a>
             <div class="card-body">
               <h3>NASA APOD</h3>
-              <p>Shows NASA's Astronomy Picture of the Day from the APOD API, with responses cached in local storage.</p>
+              <p data-i18n="c.apod">Shows NASA's Astronomy Picture of the Day from the APOD API, with responses cached in local storage.</p>
               <ul class="tags"><li>React</li><li>Vite</li><li>REST API</li></ul>
               <div class="card-links">
-                <a href="https://apod-nasa-herrera.netlify.app/" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live</a>
-                <a href="https://github.com/soushiki/nasa-app" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Code</a>
+                <a href="https://apod-nasa-herrera.netlify.app/" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="l.live">Live</span></a>
+                <a href="https://github.com/soushiki/nasa-app" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> <span data-i18n="l.code">Code</span></a>
               </div>
             </div>
           </article>
 
           <article class="card">
             <a class="card-media" href="https://swollymolly.netlify.app/" target="_blank" rel="noopener">
-              <img src="./assets/images/gym-routine-app.png" alt="Gym routine app preview" loading="lazy" />
+              <img src="./assets/images/gym-routine-app.png" alt="Gym routine app preview" data-i18n-attr="alt:i.gym" loading="lazy" />
             </a>
             <div class="card-body">
               <h3>Gym Routine Generator</h3>
-              <p>Generates a random workout based on your goals. Routine data courtesy of @smoljames.</p>
+              <p data-i18n="c.gym">Generates a random workout based on your goals. Routine data courtesy of @smoljames.</p>
               <ul class="tags"><li>React</li><li>Tailwind CSS</li></ul>
               <div class="card-links">
-                <a href="https://swollymolly.netlify.app/" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live</a>
-                <a href="https://github.com/soushiki/gym-app" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Code</a>
+                <a href="https://swollymolly.netlify.app/" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="l.live">Live</span></a>
+                <a href="https://github.com/soushiki/gym-app" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> <span data-i18n="l.code">Code</span></a>
               </div>
             </div>
           </article>
 
           <article class="card">
             <a class="card-media" href="https://bruh-todo-app.netlify.app/" target="_blank" rel="noopener">
-              <img src="./assets/images/todo-app.png" alt="Todo app preview" loading="lazy" />
+              <img src="./assets/images/todo-app.png" alt="Todo app preview" data-i18n-attr="alt:i.todo" loading="lazy" />
             </a>
             <div class="card-body">
               <h3>Todo App</h3>
-              <p>CRUD todo list built with React hooks.</p>
+              <p data-i18n="c.todo">CRUD todo list built with React hooks.</p>
               <ul class="tags"><li>React</li><li>Vite</li></ul>
               <div class="card-links">
-                <a href="https://bruh-todo-app.netlify.app/" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live</a>
-                <a href="https://github.com/soushiki/todo-list" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Code</a>
+                <a href="https://bruh-todo-app.netlify.app/" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="l.live">Live</span></a>
+                <a href="https://github.com/soushiki/todo-list" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> <span data-i18n="l.code">Code</span></a>
               </div>
             </div>
           </article>
@@ -206,10 +261,10 @@
             </div>
             <div class="card-body">
               <h3>Reddit Plus</h3>
-              <p>Reddit client built on the Reddit API, with state managed in Redux.</p>
+              <p data-i18n="c.reddit">Reddit client built on the Reddit API, with state managed in Redux.</p>
               <ul class="tags"><li>React</li><li>Redux</li><li>REST API</li></ul>
               <div class="card-links">
-                <a href="https://github.com/soushiki/reddit-plus" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Code</a>
+                <a href="https://github.com/soushiki/reddit-plus" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> <span data-i18n="l.code">Code</span></a>
               </div>
             </div>
           </article>
@@ -220,10 +275,10 @@
             </div>
             <div class="card-body">
               <h3>Jammming</h3>
-              <p>Search Spotify and build playlists using the Spotify Web API.</p>
+              <p data-i18n="c.jammming">Search Spotify and build playlists using the Spotify Web API.</p>
               <ul class="tags"><li>React</li><li>Spotify API</li><li>OAuth</li></ul>
               <div class="card-links">
-                <a href="https://github.com/soushiki/Jammming" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Code</a>
+                <a href="https://github.com/soushiki/Jammming" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> <span data-i18n="l.code">Code</span></a>
               </div>
             </div>
           </article>
@@ -232,7 +287,7 @@
 
       <section class="section" id="skills">
         <div class="section-head">
-          <h2>Skills</h2>
+          <h2 data-i18n="sk.h">Skills</h2>
         </div>
         <div class="skills">
           <div>
@@ -240,19 +295,19 @@
             <ul class="tags tags-lg"><li>JavaScript</li><li>React</li><li>Next.js</li><li>Redux</li><li>Angular</li><li>HTML &amp; CSS</li><li>Tailwind CSS</li><li>Vite</li></ul>
           </div>
           <div>
-            <h3>Backend &amp; data</h3>
-            <ul class="tags tags-lg"><li>Node.js</li><li>Python</li><li>Java / Spring Boot</li><li>MySQL</li><li>Firebase</li><li>REST APIs</li></ul>
+            <h3 data-i18n="sk.back">Backend &amp; data</h3>
+            <ul class="tags tags-lg"><li>Node.js</li><li>Python</li><li>Java / Spring Boot</li><li>MySQL</li><li>Firebase</li><li data-i18n="sk.rest">REST APIs</li></ul>
           </div>
           <div>
-            <h3>Tools</h3>
-            <ul class="tags tags-lg"><li>Git &amp; GitHub</li><li>Docker</li><li>Netlify</li><li>Vitest</li><li>OCR / local LLMs</li></ul>
+            <h3 data-i18n="sk.tools">Tools</h3>
+            <ul class="tags tags-lg"><li>Git &amp; GitHub</li><li>Docker</li><li>Netlify</li><li>Vitest</li><li data-i18n="sk.ocr">OCR / local LLMs</li></ul>
           </div>
         </div>
       </section>
 
       <section class="section contact" id="contact">
-        <h2>Let's talk</h2>
-        <p>Open to junior frontend and full-stack roles. The quickest way to reach me is LinkedIn.</p>
+        <h2 data-i18n="ct.h">Let's talk</h2>
+        <p data-i18n="ct.p">Open to junior frontend and full-stack roles. The quickest way to reach me is LinkedIn.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="https://www.linkedin.com/in/sebastian-herrera-claro-23a0af/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
           <a class="btn" href="https://github.com/soushiki" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>

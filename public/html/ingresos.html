@@ -11,59 +11,102 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../../styles.css" />
     <link rel="stylesheet" href="../css/case-study.css" />
+    <script>window.I18N_ES = {
+      "meta.title": "Ingresos App · Sebastian Herrera",
+      "meta.description": "Ingresos App: una plantilla contable con IA local para restaurantes que convierte fotos y PDF de recibos en un libro contable de partida doble balanceado y un libro de Excel.",
+      "nav.projects": "Proyectos",
+      "nav.resume": "Hoja de vida",
+      "url.resume": "./spanish.html",
+      "back": "Todos los proyectos",
+      "eyebrow": "Caso de estudio · Python · IA local <span class=\"cs-badge\">Plantilla</span>",
+      "ft.portfolio": "Portafolio",
+      "h1": "Ingresos App: entran recibos, salen asientos contables",
+      "lead": "Una plantilla contable para restaurantes. Sube los documentos del día (cierres de caja del POS, recibos de venta, facturas de gastos) como fotos o PDF y obtén asientos contables de partida doble balanceados y un libro de Excel mensual. La lectura se hace con un modelo de visión local, así que ningún documento sale del computador.",
+      "l.code": "Código",
+      "f1.s": "suites de pruebas automáticas aprobadas",
+      "f2.s": "registros de decisiones de arquitectura",
+      "f3.s": "documentos enviados a la nube",
+      "f4.b": "1.245",
+      "f4.s": "celdas de Excel verificadas como idénticas, motor del navegador vs. motor de escritorio",
+      "how.h": "Cómo funciona",
+      "how.p": "Un día en un restaurante genera una pila de papeles. La app convierte esa pila en contabilidad que un contador puede aprobar.",
+      "s0": "Sube los papeles del día",
+      "s1": "Fotos o PDF, uno por uno o como carpeta del día. Detecta automáticamente cierres, recibos y gastos, y separa las cargas de varios días según la fecha impresa en cada documento.",
+      "s2": "Limpia los escaneos",
+      "s3": "Gira automáticamente las páginas de lado (Tesseract), recorta márgenes y separa en documentos distintos las hojas con 3 o 4 recibos.",
+      "s4": "Lee en local",
+      "s5": "Los PDF digitales se leen como texto, al instante y con exactitud. Los escaneos y las fotos pasan a un modelo de visión local (Qwen2.5-VL con Ollama). Todos los campos siguen siendo editables.",
+      "s6": "Contabiliza y exporta",
+      "s7": "Genera los asientos de partida doble, verifica que el débito sea igual al crédito y exporta un libro de Excel mensual con fórmulas y una hoja de resultados.",
+      "more.h": "Lo que lo hace más que un OCR",
+      "c0": "Una conciliación que encuentra el papel que falta",
+      "c1": "El cierre del POS lista el rango de recibos, el número de transacciones y los totales por medio de pago. La app los compara con los recibos que leyó y señala cuál recibo específico falta, para que el día no se cierre descuadrado sin que nadie lo note.",
+      "c2": "Reglas contables, no solo extracción",
+      "c3": "Los pagos con tarjeta cubren primero el consumo, luego el domicilio y por último la propina. Solo el efectivo va al bloque de caja. Un vale de caja menor escrito a mano y su copia impresa se reconocen como el mismo gasto y se cuentan una sola vez.",
+      "c4": "Aprende los códigos de cuenta",
+      "c5": "A cada gasto se le asigna una cuenta contable según las elecciones anteriores del usuario, el historial del proveedor o reglas por palabras clave. Las dudosas se resaltan y cada corrección se recuerda.",
+      "c6": "Construida como software de producción",
+      "c7": "30 suites de pruebas automáticas, más pruebas de ataque (archivos gigantes, archivos comprimidos anidados, inyección de scripts)",
+      "c8": "Dependencias fijadas y auditadas con pip-audit",
+      "c9": "Una versión web ejecuta el mismo motor de Python mediante Pyodide, verificada celda por celda contra la versión de escritorio",
+      "c10": "Despliegues versionados e inmutables, con 28 decisiones de arquitectura documentadas",
+      "note": "Esta es una <b>plantilla</b> pensada para adaptarse a cualquier restaurante que la necesite. Los documentos de ejemplo del repositorio son datos de prueba ilustrativos, no la contabilidad de ningún cliente.",
+      "stack": "Stack"
+    };</script>
+    <script src="../js/i18n.js" defer></script>
 </head>
 <body>
     <nav class="nav">
         <a class="nav-brand" href="../../index.html">sebherr<span>.</span></a>
         <ul class="nav-links">
-            <li><a href="../../index.html#projects">Projects</a></li>
-            <li><a href="./english.html">Resume</a></li>
+            <li><a href="../../index.html#projects" data-i18n="nav.projects">Projects</a></li>
+            <li><a href="./english.html" data-i18n="nav.resume" data-i18n-attr="href:url.resume">Resume</a></li>
         </ul>
     </nav>
 
     <header class="cs-hero">
-        <a class="back" href="../../index.html#projects"><i class="fa-solid fa-arrow-left"></i> All projects</a>
-        <p class="eyebrow">Case study · Python · Local AI <span class="cs-badge">Template</span></p>
-        <h1>Ingresos App: receipts in, ledger out</h1>
-        <p class="lead">A bookkeeping template for restaurants. Drop in the day's paperwork (POS cash-closing reports, sales receipts, expense invoices) as photos or PDFs, and get balanced double-entry ledger entries and a monthly Excel workbook. Reading happens with a local vision model, so no document ever leaves the computer.</p>
+        <a class="back" href="../../index.html#projects"><i class="fa-solid fa-arrow-left"></i> <span data-i18n="back">All projects</span></a>
+        <p class="eyebrow" data-i18n-html="eyebrow">Case study · Python · Local AI <span class="cs-badge">Template</span></p>
+        <h1 data-i18n="h1">Ingresos App: receipts in, ledger out</h1>
+        <p class="lead" data-i18n="lead">A bookkeeping template for restaurants. Drop in the day's paperwork (POS cash-closing reports, sales receipts, expense invoices) as photos or PDFs, and get balanced double-entry ledger entries and a monthly Excel workbook. Reading happens with a local vision model, so no document ever leaves the computer.</p>
         <div class="cs-actions">
-            <a class="btn btn-primary" href="https://github.com/soushiki/ingresos-app" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Code</a>
+            <a class="btn btn-primary" href="https://github.com/soushiki/ingresos-app" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> <span data-i18n="l.code">Code</span></a>
         </div>
         <div class="cs-facts">
-            <div><b>30 / 30</b><span>automated test suites passing</span></div>
-            <div><b>28</b><span>architecture decision records</span></div>
-            <div><b>0</b><span>documents sent to the cloud</span></div>
-            <div><b>1,245</b><span>Excel cells checked identical, browser vs. desktop engine</span></div>
+            <div><b>30 / 30</b><span data-i18n="f1.s">automated test suites passing</span></div>
+            <div><b>28</b><span data-i18n="f2.s">architecture decision records</span></div>
+            <div><b>0</b><span data-i18n="f3.s">documents sent to the cloud</span></div>
+            <div><b data-i18n="f4.b">1,245</b><span data-i18n="f4.s">Excel cells checked identical, browser vs. desktop engine</span></div>
         </div>
     </header>
 
     <section class="cs-section">
-        <h2>How it works</h2>
-        <p>A restaurant's day produces a pile of paper. The app turns that pile into accounting a bookkeeper can sign off on.</p>
+        <h2 data-i18n="how.h">How it works</h2>
+        <p data-i18n="how.p">A restaurant's day produces a pile of paper. The app turns that pile into accounting a bookkeeper can sign off on.</p>
         <ol class="flow" style="--steps:4">
-            <li><b>Drop the day's papers</b><p>Photos or PDFs, one at a time or as a day folder. It auto-detects closings, receipts and expenses, and splits multi-day uploads by the date printed on each document.</p></li>
-            <li><b>Clean the scans</b><p>Auto-rotates sideways pages (Tesseract), crops margins, and cuts sheets with 3–4 receipts into separate documents.</p></li>
-            <li><b>Read locally</b><p>Digital PDFs are read as text, instantly and exactly. Scans and photos go to a local vision model (Qwen2.5-VL via Ollama). Every field stays editable.</p></li>
-            <li><b>Book and export</b><p>Generates double-entry entries, checks that debit equals credit, and exports a monthly Excel workbook with formulas and a results sheet.</p></li>
+            <li><b data-i18n="s0">Drop the day's papers</b><p data-i18n="s1">Photos or PDFs, one at a time or as a day folder. It auto-detects closings, receipts and expenses, and splits multi-day uploads by the date printed on each document.</p></li>
+            <li><b data-i18n="s2">Clean the scans</b><p data-i18n="s3">Auto-rotates sideways pages (Tesseract), crops margins, and cuts sheets with 3–4 receipts into separate documents.</p></li>
+            <li><b data-i18n="s4">Read locally</b><p data-i18n="s5">Digital PDFs are read as text, instantly and exactly. Scans and photos go to a local vision model (Qwen2.5-VL via Ollama). Every field stays editable.</p></li>
+            <li><b data-i18n="s6">Book and export</b><p data-i18n="s7">Generates double-entry entries, checks that debit equals credit, and exports a monthly Excel workbook with formulas and a results sheet.</p></li>
         </ol>
     </section>
 
     <section class="cs-section">
-        <h2>What makes it more than OCR</h2>
+        <h2 data-i18n="more.h">What makes it more than OCR</h2>
         <div class="cs-grid">
-            <div class="cs-card"><h3>Reconciliation that finds missing paper</h3><p>The POS closing lists the receipt range, the transaction count and the totals by payment method. The app compares these against the receipts it read and names the specific receipt that's missing, so the day can't be closed silently out of balance.</p></div>
-            <div class="cs-card"><h3>Accounting rules, not just extraction</h3><p>Card payments cover consumption first, then delivery, then tip. Only cash goes to the cash block. A handwritten petty-cash slip and its printed twin are recognized as the same expense and counted once.</p></div>
-            <div class="cs-card"><h3>Learns account codes</h3><p>Each expense gets a ledger account from the user's past choices, the supplier's history, or keyword rules. Uncertain ones are highlighted, and every correction is remembered.</p></div>
-            <div class="cs-card"><h3>Engineered like production software</h3><ul><li>30 automated test suites, plus attack tests (oversized files, nested archives, script injection)</li><li>Dependencies pinned and audited with pip-audit</li><li>A browser version runs the same Python engine through Pyodide, verified cell-for-cell against the desktop version</li><li>Versioned, immutable deploys, with 28 documented architecture decisions</li></ul></div>
+            <div class="cs-card"><h3 data-i18n="c0">Reconciliation that finds missing paper</h3><p data-i18n="c1">The POS closing lists the receipt range, the transaction count and the totals by payment method. The app compares these against the receipts it read and names the specific receipt that's missing, so the day can't be closed silently out of balance.</p></div>
+            <div class="cs-card"><h3 data-i18n="c2">Accounting rules, not just extraction</h3><p data-i18n="c3">Card payments cover consumption first, then delivery, then tip. Only cash goes to the cash block. A handwritten petty-cash slip and its printed twin are recognized as the same expense and counted once.</p></div>
+            <div class="cs-card"><h3 data-i18n="c4">Learns account codes</h3><p data-i18n="c5">Each expense gets a ledger account from the user's past choices, the supplier's history, or keyword rules. Uncertain ones are highlighted, and every correction is remembered.</p></div>
+            <div class="cs-card"><h3 data-i18n="c6">Engineered like production software</h3><ul><li data-i18n="c7">30 automated test suites, plus attack tests (oversized files, nested archives, script injection)</li><li data-i18n="c8">Dependencies pinned and audited with pip-audit</li><li data-i18n="c9">A browser version runs the same Python engine through Pyodide, verified cell-for-cell against the desktop version</li><li data-i18n="c10">Versioned, immutable deploys, with 28 documented architecture decisions</li></ul></div>
         </div>
-        <p class="cs-note">This is a <b>template</b> built to be adapted for any restaurant that needs it. The sample documents in the repository are illustrative test data, not a client's books.</p>
+        <p class="cs-note" data-i18n-html="note">This is a <b>template</b> built to be adapted for any restaurant that needs it. The sample documents in the repository are illustrative test data, not a client's books.</p>
     </section>
 
     <section class="cs-section">
-        <h2>Stack</h2>
+        <h2 data-i18n="stack">Stack</h2>
         <ul class="tags"><li>Python</li><li>Flask</li><li>Ollama · Qwen2.5-VL</li><li>Tesseract OCR</li><li>PyMuPDF</li><li>openpyxl</li><li>Pyodide</li><li>Netlify</li></ul>
     </section>
 
-    <footer class="cs-footer">Sebastian Herrera Claro · <a href="../../index.html">Portfolio</a> · <a href="./english.html">Resume</a></footer>
+    <footer class="cs-footer">Sebastian Herrera Claro · <a href="../../index.html" data-i18n="ft.portfolio">Portfolio</a> · <a href="./english.html" data-i18n="nav.resume" data-i18n-attr="href:url.resume">Resume</a></footer>
 </body>
 </html>

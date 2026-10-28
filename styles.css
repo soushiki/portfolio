@@ -223,3 +223,10 @@ a.media-placeholder:hover { text-decoration: none; }
     .hero { padding-top: 3rem; }
     .drive-cta { flex-direction: column; text-align: center; padding: 1rem; }
 }
+
+/* Language toggle (EN | ES) */
+.lang-toggle { display: inline-flex; border: 1px solid var(--border); border-radius: 999px; overflow: hidden; background: transparent; padding: 0; cursor: pointer; font: inherit; font-size: 0.8rem; color: var(--muted); }
+.lang-toggle span { padding: 0.2rem 0.55rem; }
+.lang-toggle span.is-active { background: var(--accent); color: var(--bg); font-weight: 600; }
+.lang-toggle:hover { border-color: var(--accent); }
+.lang-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
