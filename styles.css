@@ -142,7 +142,7 @@ img { max-width: 100%; display: block; }
 a.media-placeholder:hover { text-decoration: none; }
 .media-minoscreto { background: linear-gradient(135deg, #4A4E69, #22223B); }
 .media-ingresos   { background: linear-gradient(135deg, #2F6F5E, #1D3B34); }
-.media-stockroom  { background: linear-gradient(135deg, #8A5A51, #4A2F2A); }
+.media-formato    { background: linear-gradient(135deg, #3E6A8A, #1F3447); }
 .media-reddit     { background: linear-gradient(135deg, #D9572B, #7A2C12); }
 .media-jammming   { background: linear-gradient(135deg, #1DB954, #125F2E); }
 .media-gacha      { background: linear-gradient(135deg, #FF6FA3, #8A4FD8); }

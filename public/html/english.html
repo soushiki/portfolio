@@ -174,6 +174,10 @@
             font-style: italic;
         }
 
+        .contact-info a, .date a, .description a {
+            color: inherit;
+        }
+
         .download-btn {
             position: fixed;
             top: 20px;
@@ -229,14 +233,15 @@
         <div class="contact-info">
             Email: sebastianherrerajr@gmail.com • Phone: +57 (318) 802-2279<br>
             Location: Cartagena de Indias, Colombia<br>
-            LinkedIn: linkedin.com/in/sebastian-herrera-claro-23a0af/
+            LinkedIn: linkedin.com/in/sebastian-herrera-claro-23a0af/<br>
+            Portfolio: <a href="https://sebherr.netlify.app">sebherr.netlify.app</a> • GitHub: <a href="https://github.com/soushiki">github.com/soushiki</a>
         </div>
     </div>
 
     <div class="section">
         <div class="section-title">Professional Summary</div>
         <p class="summary-text">
-            Systems Engineer with hands-on experience in React.js development and frontend web applications. Proficient in JavaScript ES6+, React components, API integration, and responsive design. Demonstrated expertise in building user-centered web applications with modern development practices including Git version control and agile methodologies. Experience with UI/UX design and WordPress development. Passionate about creating efficient, scalable frontend solutions and delivering exceptional user experiences.
+            Systems Engineer and React developer who builds practical tools for real workflows: a browser-only document anonymizer for safe AI use, a medical-forms app shipped to web and Android, and a local-AI bookkeeping template that turns receipt photos into a balanced ledger. Professional frontend experience in UI/UX and React, now extending into Python backends, OCR and local AI models, and mobile packaging. Works with tests, documented architecture decisions and pinned, audited dependencies.
         </p>
     </div>
 
@@ -273,7 +278,7 @@
             </div>
             <div class="skill-category">
                 <strong>Tools & Technologies:</strong>
-                <span class="skill-list">Git, npm, RESTful APIs, JSON, Chrome DevTools, Node.js, MySQL, NextJS, Prisma, Firebase, Docker, PostgreSQL, MongoDB, WordPress</span>
+                <span class="skill-list">Git, GitHub Actions, npm, Vite, Vitest, RESTful APIs, Node.js, Flask, NextJS, Capacitor (Android), jsPDF, Ollama / OCR, Prisma, Firebase, Docker, MySQL, PostgreSQL, MongoDB, WordPress</span>
             </div>
             <div class="skill-category">
                 <strong>Programming Languages:</strong>
@@ -299,7 +304,7 @@
             </div>
             <div class="language-item">
                 <span class="language-name">English</span>
-                <span class="language-level">C1 (Advanced)</span>
+                <span class="language-level">C2 (Proficient)</span>
             </div>
         </div>
     </div>
@@ -310,45 +315,56 @@
         <div class="subsection">
             <div class="project-header">
                 <div>
-                    <div class="project-title">Grade System "Take-a-Note" - React Web Application</div>
-                    <div class="company">Universidad de Cartagena</div>
+                    <div class="project-title">Minoscreto - Document Anonymizer for AI</div>
+                    <div class="company">React 19, Vite, Vitest, pdf.js, JSZip</div>
                 </div>
+                <div class="date"><a href="https://minoscreto.netlify.app/">Live</a> • <a href="https://sebherr.netlify.app/public/html/minoscreto.html">Case study</a></div>
             </div>
             <ul class="description">
-                <li>Built responsive web application using React.js and modern JavaScript ES6+ for university grade management system</li>
-                <li>Integrated Google Classroom API for real-time data fetching and implemented asynchronous data handling with JSON processing</li>
-                <li>Developed reusable React components with state management and implemented user authentication features</li>
-                <li>Utilized Git version control for project management and deployed responsive UI components with CSS3 and HTML5</li>
+                <li>Replaces names and sensitive entities in Word and PDF documents before they go to an AI tool, then restores the real names in the AI's answer, entirely in the browser with no uploads</li>
+                <li>MVVM architecture (pure model logic, view-model hooks, presentational views) with Vitest and Testing Library tests, shipped as a single self-contained HTML file</li>
             </ul>
         </div>
 
         <div class="subsection">
             <div class="project-header">
                 <div>
-                    <div class="project-title">PET AID - Frontend Web Application Development</div>
-                    <div class="company">Universidad de Cartagena</div>
+                    <div class="project-title">Formato Médico - Medical Forms App (Web + Android)</div>
+                    <div class="company">React, Vite, jsPDF, Capacitor, GitHub Actions</div>
                 </div>
+                <div class="date"><a href="https://sebherr.netlify.app/public/html/formato-medico.html">Case study</a></div>
             </div>
             <ul class="description">
-                <li>Designed and prototyped responsive user interfaces using HTML5, CSS3, and JavaScript for pet adoption platform</li>
-                <li>Created interactive wireframes and implemented user experience flows with focus on mobile-first responsive design</li>
-                <li>Developed component architecture planning and established Git workflow for collaborative development</li>
-                <li>Applied modern frontend development practices including semantic HTML and CSS Grid/Flexbox layouts</li>
+                <li>Generates a physician's lab orders, prescriptions, certificates, sick-leave and imaging forms as PDFs that match the original printed layout, ready to print or share by WhatsApp</li>
+                <li>Bundled an offline ICD-10 search (~10,700 codes in Spanish), because the public lookup site offers no API, and packaged the same React codebase as an Android APK built by CI on every push</li>
             </ul>
         </div>
 
         <div class="subsection">
             <div class="project-header">
                 <div>
-                    <div class="project-title">E-Commerce Cashier Application - Full-Stack Development</div>
-                    <div class="company">Universidad de Cartagena</div>
+                    <div class="project-title">Ingresos App - Local-AI Bookkeeping Template for Restaurants</div>
+                    <div class="company">Python, Flask, Ollama (Qwen2.5-VL), Tesseract, PyMuPDF, openpyxl, Pyodide</div>
                 </div>
+                <div class="date"><a href="https://sebherr.netlify.app/public/html/ingresos.html">Case study</a> • <a href="https://github.com/soushiki/ingresos-app">Code</a></div>
             </div>
             <ul class="description">
-                <li>Developed object-oriented JavaScript application with React-like component structure for retail point-of-sale system</li>
-                <li>Implemented dynamic receipt generation with template rendering and real-time calculations using modern JavaScript</li>
-                <li>Created responsive user interface components and integrated local data management with JSON handling</li>
-                <li>Applied Git version control and collaborative development practices throughout project lifecycle</li>
+                <li>Reads photos and PDFs of POS closings, receipts and invoices with a local vision model and OCR, then produces balanced double-entry ledger entries and a monthly Excel workbook with formulas</li>
+                <li>Reconciles the POS closing against the receipts to name any missing document. Backed by 30 automated test suites, attack tests, audited dependencies and 28 architecture decision records</li>
+            </ul>
+        </div>
+
+        <div class="subsection">
+            <div class="project-header">
+                <div>
+                    <div class="project-title">React &amp; API Applications</div>
+                    <div class="company">React, Redux Toolkit, Next.js, Firebase, Three.js, TailwindCSS</div>
+                </div>
+                <div class="date"><a href="https://sebherr.netlify.app/#more">Portfolio</a></div>
+            </div>
+            <ul class="description">
+                <li>Reddit client with Redux Toolkit, Spotify playlist builder, Markdown notes app with Next.js and Firebase, NASA APOD viewer, gym routine generator, and a 3D driving portfolio with Three.js and Rapier physics</li>
+                <li>Also: a <a href="https://soushiki.github.io/data-science/">data science portfolio</a> (forecasting, A/B testing, machine learning on live public data)</li>
             </ul>
         </div>
     </div>

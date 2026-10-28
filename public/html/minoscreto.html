@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Minoscreto · Sebastian Herrera</title>
+    <meta name="description" content="Minoscreto: anonymize Word and PDF documents in the browser before using AI, then restore the real names in the answer." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Mozilla+Headline:wght@200..700&family=Outfit:wght@100..900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../../styles.css" />
+    <link rel="stylesheet" href="../css/case-study.css" />
+</head>
+<body>
+    <nav class="nav">
+        <a class="nav-brand" href="../../index.html">sebherr<span>.</span></a>
+        <ul class="nav-links">
+            <li><a href="../../index.html#projects">Projects</a></li>
+            <li><a href="./english.html">Resume</a></li>
+        </ul>
+    </nav>
+
+    <header class="cs-hero">
+        <a class="back" href="../../index.html#projects"><i class="fa-solid fa-arrow-left"></i> All projects</a>
+        <p class="eyebrow">Case study · React · Privacy</p>
+        <h1>Minoscreto: use AI without handing over names</h1>
+        <p class="lead">Lawyers, doctors and accountants want AI help with documents full of personal data. Minoscreto swaps every name and sensitive entity for a placeholder before the text goes to the AI, then puts the real names back into the AI's answer. It all runs in the browser, so nothing is uploaded anywhere.</p>
+        <div class="cs-actions">
+            <a class="btn btn-primary" href="https://minoscreto.netlify.app/" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> Try it live</a>
+            <a class="btn" href="https://github.com/soushiki/minoscreto" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Code</a>
+        </div>
+        <div class="cs-facts">
+            <div><b>100%</b><span>in-browser: no server, no upload</span></div>
+            <div><b>.docx + PDF</b><span>Word files and long PDF case files</span></div>
+            <div><b>MVVM</b><span>model logic separated from React views</span></div>
+            <div><b>1 file</b><span>ships as a single self-contained HTML</span></div>
+        </div>
+    </header>
+
+    <section class="cs-section">
+        <h2>How it works</h2>
+        <ol class="flow" style="--steps:4">
+            <li><b>Load a document</b><p>A Word file, or a long PDF or Word case file in "expediente" mode. The file is parsed locally (JSZip for .docx, pdf.js for PDFs).</p></li>
+            <li><b>Detect entities</b><p>Names and other sensitive entities are detected and shown for review before anything is replaced.</p></li>
+            <li><b>Protect and download</b><p>One click downloads the protected document plus its dictionary (placeholder → real value), together, so the dictionary can't be forgotten.</p></li>
+            <li><b>Restore the answer</b><p>Paste the AI's response back in, and the dictionary restores the real names, so the final text is ready to use.</p></li>
+        </ol>
+    </section>
+
+    <section class="cs-section">
+        <h2>Engineering</h2>
+        <div class="cs-grid">
+            <div class="cs-card"><h3>Architecture</h3><ul><li><b>Model:</b> pure logic with no React, covering detection, entities, the dictionary and .docx handling</li><li><b>View-models:</b> hooks (<code>useAnonymizer</code>, <code>useRestorer</code>) plus a reducer for state</li><li><b>Views:</b> presentational components that only receive the view-model as props</li></ul></div>
+            <div class="cs-card"><h3>Quality</h3><ul><li>Vitest + Testing Library tests for both the model and the UI</li><li>An end-to-end benchmark on a generated 600-page case file, with a ground-truth answer key</li><li>Built with Vite into one self-contained HTML file, which can be sent and opened offline</li></ul></div>
+        </div>
+    </section>
+
+    <section class="cs-section">
+        <h2>Stack</h2>
+        <ul class="tags"><li>React 19</li><li>Vite</li><li>Vitest</li><li>Testing Library</li><li>pdf.js</li><li>JSZip</li><li>Netlify</li></ul>
+    </section>
+
+    <footer class="cs-footer">Sebastian Herrera Claro · <a href="../../index.html">Portfolio</a> · <a href="./english.html">Resume</a></footer>
+</body>
+</html>

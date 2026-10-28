@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ingresos App · Sebastian Herrera</title>
+    <meta name="description" content="Ingresos App: a local-AI bookkeeping template for restaurants that turns receipt photos and PDFs into a balanced double-entry ledger and Excel workbook." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Mozilla+Headline:wght@200..700&family=Outfit:wght@100..900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../../styles.css" />
+    <link rel="stylesheet" href="../css/case-study.css" />
+</head>
+<body>
+    <nav class="nav">
+        <a class="nav-brand" href="../../index.html">sebherr<span>.</span></a>
+        <ul class="nav-links">
+            <li><a href="../../index.html#projects">Projects</a></li>
+            <li><a href="./english.html">Resume</a></li>
+        </ul>
+    </nav>
+
+    <header class="cs-hero">
+        <a class="back" href="../../index.html#projects"><i class="fa-solid fa-arrow-left"></i> All projects</a>
+        <p class="eyebrow">Case study · Python · Local AI <span class="cs-badge">Template</span></p>
+        <h1>Ingresos App: receipts in, ledger out</h1>
+        <p class="lead">A bookkeeping template for restaurants. Drop in the day's paperwork (POS cash-closing reports, sales receipts, expense invoices) as photos or PDFs, and get balanced double-entry ledger entries and a monthly Excel workbook. Reading happens with a local vision model, so no document ever leaves the computer.</p>
+        <div class="cs-actions">
+            <a class="btn btn-primary" href="https://github.com/soushiki/ingresos-app" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Code</a>
+        </div>
+        <div class="cs-facts">
+            <div><b>30 / 30</b><span>automated test suites passing</span></div>
+            <div><b>28</b><span>architecture decision records</span></div>
+            <div><b>0</b><span>documents sent to the cloud</span></div>
+            <div><b>1,245</b><span>Excel cells checked identical, browser vs. desktop engine</span></div>
+        </div>
+    </header>
+
+    <section class="cs-section">
+        <h2>How it works</h2>
+        <p>A restaurant's day produces a pile of paper. The app turns that pile into accounting a bookkeeper can sign off on.</p>
+        <ol class="flow" style="--steps:4">
+            <li><b>Drop the day's papers</b><p>Photos or PDFs, one at a time or as a day folder. It auto-detects closings, receipts and expenses, and splits multi-day uploads by the date printed on each document.</p></li>
+            <li><b>Clean the scans</b><p>Auto-rotates sideways pages (Tesseract), crops margins, and cuts sheets with 3–4 receipts into separate documents.</p></li>
+            <li><b>Read locally</b><p>Digital PDFs are read as text, instantly and exactly. Scans and photos go to a local vision model (Qwen2.5-VL via Ollama). Every field stays editable.</p></li>
+            <li><b>Book and export</b><p>Generates double-entry entries, checks that debit equals credit, and exports a monthly Excel workbook with formulas and a results sheet.</p></li>
+        </ol>
+    </section>
+
+    <section class="cs-section">
+        <h2>What makes it more than OCR</h2>
+        <div class="cs-grid">
+            <div class="cs-card"><h3>Reconciliation that finds missing paper</h3><p>The POS closing lists the receipt range, the transaction count and the totals by payment method. The app compares these against the receipts it read and names the specific receipt that's missing, so the day can't be closed silently out of balance.</p></div>
+            <div class="cs-card"><h3>Accounting rules, not just extraction</h3><p>Card payments cover consumption first, then delivery, then tip. Only cash goes to the cash block. A handwritten petty-cash slip and its printed twin are recognized as the same expense and counted once.</p></div>
+            <div class="cs-card"><h3>Learns account codes</h3><p>Each expense gets a ledger account from the user's past choices, the supplier's history, or keyword rules. Uncertain ones are highlighted, and every correction is remembered.</p></div>
+            <div class="cs-card"><h3>Engineered like production software</h3><ul><li>30 automated test suites, plus attack tests (oversized files, nested archives, script injection)</li><li>Dependencies pinned and audited with pip-audit</li><li>A browser version runs the same Python engine through Pyodide, verified cell-for-cell against the desktop version</li><li>Versioned, immutable deploys, with 28 documented architecture decisions</li></ul></div>
+        </div>
+        <p class="cs-note">This is a <b>template</b> built to be adapted for any restaurant that needs it. The sample documents in the repository are illustrative test data, not a client's books.</p>
+    </section>
+
+    <section class="cs-section">
+        <h2>Stack</h2>
+        <ul class="tags"><li>Python</li><li>Flask</li><li>Ollama · Qwen2.5-VL</li><li>Tesseract OCR</li><li>PyMuPDF</li><li>openpyxl</li><li>Pyodide</li><li>Netlify</li></ul>
+    </section>
+
+    <footer class="cs-footer">Sebastian Herrera Claro · <a href="../../index.html">Portfolio</a> · <a href="./english.html">Resume</a></footer>
+</body>
+</html>
