@@ -95,6 +95,35 @@ img { max-width: 100%; display: block; }
 .btn-primary { background: var(--accent); border-color: var(--accent); color: var(--bg); }
 .btn-primary:hover { background: var(--text); border-color: var(--text); }
 
+/* 3D portfolio call-to-action */
+.drive-cta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    max-width: 640px;
+    margin: 2rem auto 0;
+    padding: 0.75rem 0.75rem 0.75rem 1.25rem;
+    text-align: left;
+    background: var(--surface);
+    border: 1px dashed var(--accent);
+    border-radius: var(--radius);
+}
+.drive-cta p { margin: 0; color: var(--muted); font-size: 0.95rem; line-height: 1.45; }
+.drive-cta strong { color: var(--text); }
+.drive-cta .btn { flex-shrink: 0; }
+.drive-car { font-size: 1.6rem; color: var(--accent); animation: drive-bob 2.4s ease-in-out infinite; }
+@keyframes drive-bob {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(4px) translateY(-1px); }
+}
+@media (prefers-reduced-motion: reduce) { .drive-car { animation: none; } }
+.nav-3d {
+    padding: 0.2rem 0.65rem;
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+}
+.nav-3d:hover { background: var(--accent); color: var(--bg); text-decoration: none; }
+
 /* Sections */
 .section {
     max-width: var(--max);
@@ -192,4 +221,5 @@ a.media-placeholder:hover { text-decoration: none; }
     .nav-links { gap: 0.9rem; }
     .nav-links li:nth-child(2) { display: none; }
     .hero { padding-top: 3rem; }
+    .drive-cta { flex-direction: column; text-align: center; padding: 1rem; }
 }
