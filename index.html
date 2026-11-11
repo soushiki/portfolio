@@ -37,6 +37,16 @@
       "url3d": "https://sebherr-3d.netlify.app/?lang=es",
       "nav.3dtitle": "Recorre mi portafolio en 3D",
       "hero.avatar": "Avatar de GitHub de Sebastian",
+      "hero.pill.s": "Busco roles junior de QA · datos · desarrollo",
+      "hero.lead.s": "Desarrollador React y Python en Colombia.",
+      "chip1.n": "160",
+      "chip1.l": "pruebas",
+      "chip2.n": "3",
+      "chip2.l": "proyectos de datos",
+      "chip3.n": "Web + Android",
+      "chip3.l": "app",
+      "more.btn": "Más",
+      "less.btn": "Menos",
       "hero.eyebrow": "Hola, soy Sebastian Herrera",
       "hero.pill": "Busco roles junior de QA, datos y desarrollo · remoto",
       "hero.h1": "Construyo herramientas probadas para problemas reales, y reviso mi propio trabajo.",
@@ -91,6 +101,7 @@
       "ct.p": "Busco roles junior de QA, datos y desarrollo, remotos o en Colombia. La forma más rápida de contactarme es LinkedIn."
     };</script>
     <script src="./public/js/i18n.js" defer></script>
+    <script src="./public/js/more.js" defer></script>
   </head>
 
   <body>
@@ -110,14 +121,19 @@
 
     <header class="hero" id="top">
       <img class="avatar" src="https://avatars.githubusercontent.com/u/79419348?v=4" alt="Sebastian's GitHub avatar" data-i18n-attr="alt:hero.avatar" width="112" height="112" />
-      <p class="status-pill" data-i18n="hero.pill">Open to junior QA, data and developer roles · remote</p>
+      <p class="status-pill"><span class="long" data-i18n="hero.pill">Open to junior QA, data and developer roles · remote</span><span class="short" data-i18n="hero.pill.s">Open to junior QA · data · dev</span></p>
       <p class="eyebrow" data-i18n="hero.eyebrow">Hi, I'm Sebastian Herrera</p>
       <h1 data-i18n="hero.h1">I build tested tools for real problems, and I check my own work.</h1>
-      <p class="lead" data-i18n="hero.lead">
+      <p class="lead"><span class="long" data-i18n="hero.lead">
         Systems engineering graduate in Colombia. I build browser tools, data projects and full-stack prototypes with React and Python:
         document anonymizers, OCR for accounting, and forecasts on public data. I love cats.
-      </p>
+      </span><span class="short" data-i18n="hero.lead.s">React and Python developer in Colombia.</span></p>
       <p class="proof" data-i18n="hero.proof">160 automated tests in Minoscreto · 3 data science projects · a web + Android app</p>
+      <ul class="chips" aria-label="Summary" data-i18n-attr="aria-label:strip.aria">
+        <li><b data-i18n="chip1.n">160</b><span data-i18n="chip1.l">tests</span></li>
+        <li><b data-i18n="chip2.n">3</b><span data-i18n="chip2.l">data projects</span></li>
+        <li><b data-i18n="chip3.n">Web + Android</b><span data-i18n="chip3.l">app</span></li>
+      </ul>
       <div class="hero-actions">
         <a class="btn btn-primary" href="./public/resume/Sebastian-Herrera-resume-en.pdf" data-i18n-attr="href:url.resume" target="_blank" rel="noopener"><i class="fa-solid fa-file-pdf" aria-hidden="true"></i> <span data-i18n="btn.resume">Resume (PDF)</span></a>
         <a class="btn" href="#projects" data-i18n="hero.see">See my work</a>
