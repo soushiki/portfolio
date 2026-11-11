@@ -17,11 +17,30 @@
 .demo-shot img { display: block; max-width: 100%; height: auto; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
 .demo-why { max-width: 70ch; color: var(--muted); margin-top: 1rem; }
 .demo-end { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1rem; }
+@media (max-width: 600px) {
+    .cs-hero { padding: var(--s4) var(--s3) var(--s4); }
+    .cs-hero .back { margin-bottom: var(--s3); }
+    .cs-hero h1 { font-size: clamp(1.5rem, 7vw, 1.9rem); line-height: 1.1; margin: var(--s1) 0 var(--s2); }
+    .cs-hero .lead { font-size: 1rem; line-height: 1.5; }
+    .demo-step { display: flex; flex-direction: column; margin: 0 var(--s3) var(--s4); padding: var(--s3); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); max-width: none; }
+    .demo-step h2 { order: 0; font-size: 1.15rem; margin: 0 0 var(--s2); }
+    .demo-step .demo-shot { order: 1; margin: 0 0 var(--s2); }
+    .demo-step .demo-shot img { border-radius: 10px; }
+    .demo-step > p:not(.demo-why) { order: 2; margin: 0 0 var(--s1); font-size: 0.95rem; }
+    .demo-step .more-btn { order: 3; }
+    .demo-step .demo-why + .more-btn { order: 5; }
+    .demo-step .demo-why { order: 4; margin: var(--s1) 0 0; padding-top: var(--s2); border-top: 1px solid var(--border); font-size: 0.85rem; }
+    .demo-why b { display: block; color: var(--accent); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; }
+    .cs-section:last-of-type { border-top: 0; padding: var(--s4) var(--s3) var(--s5); }
+    .demo-end .btn { width: 100%; justify-content: center; min-height: 44px; }
+}
     </style>
     <script>window.I18N_ES = {
       "meta.title": "Ingresos App: así funciona · Sebastian Herrera",
       "meta.description": "Una demo en capturas de Ingresos App con un restaurante inventado: de los papeles del día a un libro contable balanceado y un libro de Excel.",
       "nav.projects": "Proyectos",
+      "more.btn": "Más",
+      "less.btn": "Menos",
       "nav.resume": "Hoja de vida",
       "url.resume": "./spanish.html",
       "back": "Caso de estudio",
@@ -71,6 +90,7 @@
       "09.a": "Tabla resumen de seis archivos de prueba con 225 comprobaciones aprobadas y 0 fallos"
 };</script>
     <script src="../js/i18n.js" defer></script>
+    <script src="../js/more.js" defer></script>
 </head>
 <body>
     <nav class="nav">
