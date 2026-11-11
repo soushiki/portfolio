@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ingresos App: see it working · Sebastian Herrera</title>
+    <meta name="description" content="A screenshot demo of Ingresos App on an invented restaurant: from the day&#39;s papers to a balanced ledger and an Excel workbook." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Mozilla+Headline:wght@200..700&family=Outfit:wght@100..900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../../styles.css" />
+    <link rel="stylesheet" href="../css/case-study.css" />
+    <style>
+.demo-num { color: var(--accent); font-size: 0.8em; letter-spacing: 0.08em; margin-right: 0.35rem; }
+.demo-shot { margin: 1.25rem 0 0; }
+.demo-shot img { display: block; max-width: 100%; height: auto; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+.demo-why { max-width: 70ch; color: var(--muted); margin-top: 1rem; }
+.demo-end { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1rem; }
+    </style>
+    <script>window.I18N_ES = {
+      "meta.title": "Ingresos App: así funciona · Sebastian Herrera",
+      "meta.description": "Una demo en capturas de Ingresos App con un restaurante inventado: de los papeles del día a un libro contable balanceado y un libro de Excel.",
+      "nav.projects": "Proyectos",
+      "nav.resume": "Hoja de vida",
+      "url.resume": "./spanish.html",
+      "back": "Caso de estudio",
+      "ft.portfolio": "Portafolio",
+      "eyebrow": "Demo · Python · IA local",
+      "h1": "Ingresos App: así funciona",
+      "lead": "Todos los documentos que ves aquí son inventados: un restaurante ficticio con datos de prueba, no la contabilidad de ningún cliente.",
+      "end.h": "Siguientes pasos",
+      "end.case": "Volver al caso de estudio",
+      "end.proj": "Ver los demás proyectos",
+      "end.contact": "Contacto en LinkedIn",
+      "01.t": "Sube los papeles del día",
+      "01.d": "Los 12 archivos del día (un cierre del POS, 7 recibos de venta, papeles de gastos) entran como PDF o fotos. La app los separa sola en cierre, recibos y gastos.",
+      "01.w": "<b>Por qué importa:</b> Nadie ordena a mano una pila de papeles, y el día queda organizado antes de leer una sola cifra.",
+      "01.a": "Captura de la app con 12 documentos del día agrupados en cierre, recibos y gastos",
+      "02.t": "Limpia los escaneos",
+      "02.d": "Una foto de lado de una hoja con cuatro recibos se gira, se recorta y se endereza, y luego se corta en cuatro recibos separados.",
+      "02.w": "<b>Por qué importa:</b> Las fotos tomadas con el celular a las carreras igual se vuelven documentos legibles, uno por recibo.",
+      "02.a": "Antes y después de una foto de recibos de lado: girada, recortada y separada en cuatro recibos",
+      "03.t": "Lee en local",
+      "03.d": "Los PDF digitales se leen como texto, con exactitud; las fotos pasan a un modelo de visión que corre en el mismo computador. El texto leído aparece junto al recibo y cada campo se puede editar.",
+      "03.w": "<b>Por qué importa:</b> Nada sale del computador, y una persona corrige un campo mal leído en segundos.",
+      "03.a": "El recibo 7004 abierto junto al texto que la app leyó, con campos editables",
+      "04.t": "Encuentra el recibo que falta",
+      "04.d": "El cierre del POS cuenta 8 recibos y 27.300 más en ventas en efectivo de lo que muestran los papeles. La app nombra el hueco: falta el recibo 7005, y deja la diferencia en una cuenta puente.",
+      "04.w": "<b>Por qué importa:</b> El día no se puede cerrar descuadrado sin que nadie lo note.",
+      "04.a": "Comparación del cierre del POS contra los recibos, con el recibo 7005 señalado como faltante",
+      "05.t": "Reparte bien los pagos",
+      "05.d": "El recibo 7004 se pagó una parte en efectivo y otra con tarjeta, con propina y domicilio. Cada valor cae en su propia columna, y cada medio de pago se cuenta una sola vez.",
+      "05.w": "<b>Por qué importa:</b> Los pagos mixtos son donde suelen fallar las cuentas llevadas a mano.",
+      "05.a": "Tabla de recibos con columnas de consumo, propina, domicilio, efectivo, tarjeta y transferencia",
+      "06.t": "Atrapa los duplicados",
+      "06.d": "Un vale de caja menor escrito a mano y el gasto de caja impreso 301 son el mismo gasto de transporte. La copia aparece tachada y se cuenta una sola vez.",
+      "06.w": "<b>Por qué importa:</b> Contar un gasto dos veces reduciría la ganancia sin que nadie lo vea.",
+      "06.a": "Lista de gastos con el vale manuscrito tachado como duplicado del gasto de caja 301",
+      "07.t": "Sugiere los códigos de cuenta",
+      "07.d": "Cada papel se vuelve asientos de partida doble balanceados, con un código de cuenta sugerido según el proveedor y las elecciones anteriores. Total del día: débito 889.800 y crédito 889.800.",
+      "07.w": "<b>Por qué importa:</b> El contador revisa sugerencias en vez de digitar cada línea.",
+      "07.a": "Los asientos del día con códigos de cuenta, débito igual a crédito en 889.800",
+      "08.t": "Contabiliza y exporta",
+      "08.d": "El día confirmado entra al libro del mes y sale a un libro de Excel. La mitad inferior de la imagen es una vista de la hoja MOVIMIENTOS exportada, con los mismos totales.",
+      "08.w": "<b>Por qué importa:</b> El contador recibe un archivo con el que ya sabe trabajar.",
+      "08.a": "El libro mensual en la app y debajo una vista de la hoja de Excel exportada con los mismos totales",
+      "09.t": "Probada como producción",
+      "09.d": "Los archivos de prueba de la propia app revisan los lectores, el libro, los recibos faltantes y los medios de pago: 225 comprobaciones aprobadas en 6 archivos de prueba, 0 fallos.",
+      "09.w": "<b>Por qué importa:</b> Un cambio en las reglas no puede romper la aritmética sin que se note.",
+      "09.a": "Tabla resumen de seis archivos de prueba con 225 comprobaciones aprobadas y 0 fallos"
+};</script>
+    <script src="../js/i18n.js" defer></script>
+</head>
+<body>
+    <nav class="nav">
+        <a class="nav-brand" href="../../index.html">sebherr<span>.</span></a>
+        <ul class="nav-links">
+            <li><a href="../../index.html#projects" data-i18n="nav.projects">Projects</a></li>
+            <li><a href="./english.html" data-i18n="nav.resume" data-i18n-attr="href:url.resume">Resume</a></li>
+        </ul>
+    </nav>
+
+    <header class="cs-hero">
+        <a class="back" href="./ingresos.html"><i class="fa-solid fa-arrow-left"></i> <span data-i18n="back">Case study</span></a>
+        <p class="eyebrow" data-i18n="eyebrow">Demo · Python · Local AI</p>
+        <h1 data-i18n="h1">Ingresos App: see it working</h1>
+        <p class="lead" data-i18n="lead">Every document shown here is invented: a made-up restaurant with test data, not any client's books.</p>
+    </header>
+
+    <section class="cs-section demo-step">
+        <h2><span class="demo-num">01</span> <span data-i18n="01.t">Drop the day&#x27;s papers</span></h2>
+        <p data-i18n="01.d">The day&#x27;s 12 files (a POS closing, 7 sales receipts, expense papers) go in as PDFs or photos. The app sorts them into closing, receipts and expenses on its own.</p>
+        <figure class="demo-shot"><img src="../../assets/images/ingresos-demo/01-upload.jpg" width="1440" height="1190" loading="lazy" decoding="async" alt="Screenshot of the Ingresos App day view listing 12 uploaded documents grouped as closing, receipts and expenses" data-i18n-attr="alt:01.a" /></figure>
+        <p class="demo-why" data-i18n-html="01.w"><b>Why it matters:</b> Nobody sorts a pile of paper by hand, and the day is organised before anyone reads a number.</p>
+    </section>
+    <section class="cs-section demo-step">
+        <h2><span class="demo-num">02</span> <span data-i18n="02.t">Clean the scans</span></h2>
+        <p data-i18n="02.d">A sideways photo of a sheet with four receipts is rotated, cropped and straightened, then cut into four separate receipts.</p>
+        <figure class="demo-shot"><img src="../../assets/images/ingresos-demo/02-clean.jpg" width="1440" height="1111" loading="lazy" decoding="async" alt="Before and after of a sideways receipt photo: rotated, cropped and split into four receipts" data-i18n-attr="alt:02.a" /></figure>
+        <p class="demo-why" data-i18n-html="02.w"><b>Why it matters:</b> Phone photos taken in a hurry still become readable documents, one per receipt.</p>
+    </section>
+    <section class="cs-section demo-step">
+        <h2><span class="demo-num">03</span> <span data-i18n="03.t">Read locally</span></h2>
+        <p data-i18n="03.d">Digital PDFs are read as text, exactly; photos go to a vision model running on the same computer. The text it read sits next to the receipt, and every field can be edited.</p>
+        <figure class="demo-shot"><img src="../../assets/images/ingresos-demo/03-read.jpg" width="1440" height="900" loading="lazy" decoding="async" alt="Receipt 7004 opened beside the text the app read from it, with editable fields" data-i18n-attr="alt:03.a" /></figure>
+        <p class="demo-why" data-i18n-html="03.w"><b>Why it matters:</b> Nothing leaves the computer, and a person can fix a misread field in seconds.</p>
+    </section>
+    <section class="cs-section demo-step">
+        <h2><span class="demo-num">04</span> <span data-i18n="04.t">Find the missing receipt</span></h2>
+        <p data-i18n="04.d">The POS closing counts 8 receipts and 27,300 more in cash sales than the papers show. The app names the gap: receipt 7005 is missing, and it parks the difference in a bridge account.</p>
+        <figure class="demo-shot"><img src="../../assets/images/ingresos-demo/04-missing.jpg" width="1440" height="560" loading="lazy" decoding="async" alt="Comparison of the POS closing against the receipts, flagging receipt 7005 as missing" data-i18n-attr="alt:04.a" /></figure>
+        <p class="demo-why" data-i18n-html="04.w"><b>Why it matters:</b> The day cannot be closed out of balance without anyone noticing.</p>
+    </section>
+    <section class="cs-section demo-step">
+        <h2><span class="demo-num">05</span> <span data-i18n="05.t">Split payments correctly</span></h2>
+        <p data-i18n="05.d">Receipt 7004 was paid part in cash and part by card, with a tip and a delivery fee. Each amount lands in its own column, so every payment method is counted once.</p>
+        <figure class="demo-shot"><img src="../../assets/images/ingresos-demo/05-split.jpg" width="1440" height="480" loading="lazy" decoding="async" alt="Table of receipts with consumption, tip, delivery, cash, card and transfer columns" data-i18n-attr="alt:05.a" /></figure>
+        <p class="demo-why" data-i18n-html="05.w"><b>Why it matters:</b> Mixed payments are where hand-kept books usually go wrong.</p>
+    </section>
+    <section class="cs-section demo-step">
+        <h2><span class="demo-num">06</span> <span data-i18n="06.t">Catch duplicates</span></h2>
+        <p data-i18n="06.d">A handwritten petty-cash slip and the printed cash expense 301 are the same transport expense. The copy is struck through and counted once.</p>
+        <figure class="demo-shot"><img src="../../assets/images/ingresos-demo/06-duplicates.jpg" width="1440" height="260" loading="lazy" decoding="async" alt="Expense list where the handwritten slip is struck through as a duplicate of cash expense 301" data-i18n-attr="alt:06.a" /></figure>
+        <p class="demo-why" data-i18n-html="06.w"><b>Why it matters:</b> Counting an expense twice would quietly understate the profit.</p>
+    </section>
+    <section class="cs-section demo-step">
+        <h2><span class="demo-num">07</span> <span data-i18n="07.t">Suggest account codes</span></h2>
+        <p data-i18n="07.d">Each paper becomes balanced double-entry lines with an account code suggested from the supplier and past choices. The day&#x27;s total: debit 889,800 and credit 889,800.</p>
+        <figure class="demo-shot"><img src="../../assets/images/ingresos-demo/07-codes.jpg" width="1440" height="750" loading="lazy" decoding="async" alt="The day&#x27;s ledger entries with account codes, debit equal to credit at 889,800" data-i18n-attr="alt:07.a" /></figure>
+        <p class="demo-why" data-i18n-html="07.w"><b>Why it matters:</b> A bookkeeper reviews suggestions instead of typing every line.</p>
+    </section>
+    <section class="cs-section demo-step">
+        <h2><span class="demo-num">08</span> <span data-i18n="08.t">Book and export</span></h2>
+        <p data-i18n="08.d">The confirmed day goes into the monthly ledger and out to an Excel workbook. The lower half of the image is a rendering of the exported MOVIMIENTOS sheet, showing the same totals.</p>
+        <figure class="demo-shot"><img src="../../assets/images/ingresos-demo/08-export.jpg" width="1440" height="1596" loading="lazy" decoding="async" alt="The monthly ledger in the app and below it a rendering of the exported Excel sheet with matching totals" data-i18n-attr="alt:08.a" /></figure>
+        <p class="demo-why" data-i18n-html="08.w"><b>Why it matters:</b> The accountant gets a file they already know how to work with.</p>
+    </section>
+    <section class="cs-section demo-step">
+        <h2><span class="demo-num">09</span> <span data-i18n="09.t">Tested like production</span></h2>
+        <p data-i18n="09.d">The app&#x27;s own test files check the readers, the ledger, missing receipts and payment methods: 225 checks passed across 6 test files, 0 failures.</p>
+        <figure class="demo-shot"><img src="../../assets/images/ingresos-demo/09-tests.jpg" width="1440" height="430" loading="lazy" decoding="async" alt="Summary table of six test files with 225 checks passed and 0 failures" data-i18n-attr="alt:09.a" /></figure>
+        <p class="demo-why" data-i18n-html="09.w"><b>Why it matters:</b> Changes to the rules cannot silently break the arithmetic.</p>
+    </section>
+
+    <section class="cs-section">
+        <h2 data-i18n="end.h">Next</h2>
+        <div class="demo-end">
+            <a class="btn btn-primary" href="./ingresos.html"><i class="fa-solid fa-book-open"></i> <span data-i18n="end.case">Back to the case study</span></a>
+            <a class="btn" href="../../index.html#projects"><i class="fa-solid fa-folder-open"></i> <span data-i18n="end.proj">See the other projects</span></a>
+            <a class="btn" href="https://www.linkedin.com/in/sebastian-herrera-claro-23a0af/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> <span data-i18n="end.contact">Contact on LinkedIn</span></a>
+        </div>
+    </section>
+
+    <footer class="cs-footer">Sebastian Herrera Claro · <a href="../../index.html" data-i18n="ft.portfolio">Portfolio</a> · <a href="./english.html" data-i18n="nav.resume" data-i18n-attr="href:url.resume">Resume</a></footer>
+</body>
+</html>
