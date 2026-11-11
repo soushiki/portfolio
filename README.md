@@ -6,9 +6,9 @@ My main portfolio as a junior developer in Colombia (QA, data and web developmen
 
 ## What's on the page
 
-- **Hero:** who I am, with links to my work, GitHub and my resume (English or Spanish).
-- **Featured projects:** cards with a short description, the stack, and Live / Case study / Code links. The case studies live in `public/html/`.
-- **More projects:** smaller React apps from my learning path.
+- **Hero:** the roles I'm open to, who I am, one proof line, and buttons for my resume (PDF, English or Spanish), my work and LinkedIn.
+- **Featured projects:** Minoscreto, Ingresos App, Formato Médico and my data science projects, as cards with a short description, the stack, and Live / Case study / Code links. The case studies live in `public/html/`.
+- **Earlier builds:** a folded list of 8 smaller projects (React apps from my learning path, Whisker Gacha, the Brasa website prototype).
 - **Skills:** grouped as Frontend, Backend & data, and Tools. Each one is backed by a project; Spring Boot, Angular, PostgreSQL and Docker are used in [Stockroom](https://github.com/soushiki/stockroom).
 - **Contact:** LinkedIn and GitHub.
 - **3D tour:** a link to [Planets of Code](https://github.com/soushiki/portfolio-3d), a guided Three.js tour of the same projects.
