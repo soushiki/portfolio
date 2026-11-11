@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Remove this noindex line once Sebastian approves the page and prices. -->
+    <meta name="robots" content="noindex" />
+    <meta name="description" content="Websites and English-Spanish translation for small businesses. Fixed prices and written updates." />
+    <title>Services · Sebastian Herrera</title>
+    <script>document.documentElement.className += ' js';</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Mozilla+Headline:wght@200..700&family=Outfit:wght@100..900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./public/css/services.css" />
+    <script>window.I18N_ES = {
+      "meta.title": "Servicios · Sebastian Herrera",
+      "meta.description": "Sitios web y traducción inglés-español para pequeños negocios. Precios fijos y avances por escrito.",
+      "skip": "Saltar al contenido",
+      "nav.work": "Proyectos",
+      "nav.services": "Servicios",
+      "nav.contact": "Contacto",
+      "hero.pill": "Disponible para proyectos freelance",
+      "hero.h1": "Sitios web y traducción inglés ↔ español para pequeños negocios",
+      "hero.promise": "Precios fijos y avances por escrito. Sin llamadas.",
+      "hero.quote": "Pedir cotización",
+      "hero.examples": "Ver ejemplos",
+      "hero.alt": "Página de Brasa, un restaurante de ejemplo, en un navegador",
+      "hero.cap": "Brasa: landing page de ejemplo para un restaurante",
+      "tabs.label": "Qué ofrezco",
+      "tab.web": "Sitios web",
+      "tab.tr": "Traducción",
+      "tab.tools": "Herramientas",
+      "web.h": "Sitios web",
+      "o.land.h": "Landing page",
+      "o.land.p": "1 página, pensada primero para el celular, con formulario de contacto y hosting configurado.",
+      "o.small.h": "Sitio para negocio",
+      "o.small.p": "Hasta 4 páginas, menú o catálogo, bilingüe.",
+      "from": "desde",
+      "t.week1": "alrededor de 1 semana",
+      "t.week2": "alrededor de 2 semanas",
+      "tr.h": "Traducción",
+      "o.tr.h": "Inglés ↔ español",
+      "o.tr.p": "Traducida por un hablante nativo de español: menús, sitios web, documentos y correos.",
+      "tr.price": "USD 0,04 por palabra",
+      "tr.time": "cotización en menos de un día",
+      "tools.h": "Herramientas pequeñas",
+      "o.tools.h": "Automatización de tareas repetitivas de oficina",
+      "o.tools.p": "Por ejemplo, convertir recibos en una hoja de cálculo.",
+      "tools.price": "cotización por proyecto",
+      "ex.h": "Ejemplos",
+      "ex.sub": "Dos proyectos reales que puedes abrir y probar.",
+      "ex.brasa": "Landing page de un restaurante: menú, sedes y pedidos, pensada primero para el celular.",
+      "ex.mino": "Herramienta que corre en el navegador y anonimiza documentos de Word antes de usar una IA.",
+      "ex.open": "Abrir el sitio",
+      "how.h": "Cómo funciona",
+      "s1.h": "Resumen por escrito",
+      "s1.p": "Me cuentas lo que necesitas en un mensaje corto.",
+      "s2.h": "Cotización fija",
+      "s2.p": "Recibes el precio y la fecha de entrega por escrito.",
+      "s3.h": "Entrega",
+      "s3.p": "Sitio publicado o documento listo, con una ronda de cambios.",
+      "ct.h": "Pide tu cotización",
+      "ct.p": "Escríbeme por LinkedIn con un par de líneas sobre lo que necesitas y te respondo con un precio fijo.",
+      "ct.btn": "Escribir por LinkedIn",
+      "job.text": "¿Buscas contratarme para un empleo? Mira mis proyectos y hoja de vida",
+      "job.link": "Ir a la página de empleo"
+    };</script>
+    <script src="./public/js/i18n.js" defer></script>
+  </head>
+  <body>
+    <a class="svc-skip" href="#main" data-i18n="skip">Skip to content</a>
+    <nav class="nav">
+      <a class="nav-brand" href="./index.html">sebherr<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="./index.html#projects" data-i18n="nav.work">Work</a></li>
+        <li><a href="#top" aria-current="page" data-i18n="nav.services">Services</a></li>
+        <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <header class="svc-hero" id="top">
+      <div class="wrap">
+        <div>
+          <p class="pill" data-i18n="hero.pill">Available for freelance projects</p>
+          <h1 data-i18n="hero.h1">Websites and English ↔ Spanish translation for small businesses</h1>
+          <p class="promise" data-i18n="hero.promise">Fixed prices and written updates. No calls needed.</p>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="#contact" data-i18n="hero.quote">Get a quote</a>
+            <a class="btn" href="#examples" data-i18n="hero.examples">See examples</a>
+          </div>
+        </div>
+        <figure class="hero-shot">
+          <a href="https://protorest.netlify.app/" target="_blank" rel="noopener">
+            <img src="./assets/images/brasa-screenshot.jpg" alt="Brasa restaurant landing page in a browser" width="941" height="340" data-i18n-attr="alt:hero.alt" />
+          </a>
+          <figcaption data-i18n="hero.cap">Brasa: example landing page for a restaurant</figcaption>
+        </figure>
+      </div>
+    </header>
+
+    <!-- PRICES: every price below sits in an element with class "price-item". Prices are not final.
+         To hide them all in one edit, add class="no-prices" to the <main> tag. -->
+    <main id="main" tabindex="-1">
+      <section class="section" id="services" aria-labelledby="svc-h">
+        <div class="wrap">
+          <h2 id="svc-h" class="sr-only" data-i18n="tabs.label">What I offer</h2>
+          <div class="tabs" role="tablist" aria-label="What I offer" data-i18n-attr="aria-label:tabs.label">
+            <button type="button" class="tab" role="tab" id="tab-web" aria-controls="panel-web" aria-selected="true" tabindex="0" data-i18n="tab.web">Websites</button>
+            <button type="button" class="tab" role="tab" id="tab-tr" aria-controls="panel-tr" aria-selected="false" tabindex="-1" data-i18n="tab.tr">Translation</button>
+            <button type="button" class="tab" role="tab" id="tab-tools" aria-controls="panel-tools" aria-selected="false" tabindex="-1" data-i18n="tab.tools">Small tools</button>
+          </div>
+
+          <div class="tabpanel" role="tabpanel" id="panel-web" aria-labelledby="tab-web">
+            <h3 class="panel-title" data-i18n="web.h">Websites</h3>
+            <div class="offers">
+              <article class="offer">
+                <h4 data-i18n="o.land.h">Landing page</h4>
+                <p data-i18n="o.land.p">1 page, mobile-first, contact form, hosting set up.</p>
+                <ul class="meta">
+                  <li class="price-item"><span data-i18n="from">from</span> <span class="price">USD 180</span></li>
+                  <li data-i18n="t.week1">about 1 week</li>
+                </ul>
+              </article>
+              <article class="offer">
+                <h4 data-i18n="o.small.h">Small business site</h4>
+                <p data-i18n="o.small.p">Up to 4 pages, menu or catalogue, bilingual.</p>
+                <ul class="meta">
+                  <li class="price-item"><span data-i18n="from">from</span> <span class="price">USD 300</span></li>
+                  <li data-i18n="t.week2">about 2 weeks</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+
+          <div class="tabpanel" role="tabpanel" id="panel-tr" aria-labelledby="tab-tr">
+            <h3 class="panel-title" data-i18n="tr.h">Translation</h3>
+            <div class="offers">
+              <article class="offer">
+                <h4 data-i18n="o.tr.h">English ↔ Spanish</h4>
+                <p data-i18n="o.tr.p">Translated by a native Spanish speaker: menus, websites, documents and emails.</p>
+                <ul class="meta">
+                  <li class="price-item price" data-i18n="tr.price">USD 0.04 per word</li>
+                  <li data-i18n="tr.time">quote within a day</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+
+          <div class="tabpanel" role="tabpanel" id="panel-tools" aria-labelledby="tab-tools">
+            <h3 class="panel-title" data-i18n="tools.h">Small tools</h3>
+            <div class="offers">
+              <article class="offer">
+                <h4 data-i18n="o.tools.h">Automating repetitive office tasks</h4>
+                <p data-i18n="o.tools.p">For example, turning receipts into a spreadsheet.</p>
+                <ul class="meta">
+                  <li class="price-item price" data-i18n="tools.price">quote per project</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="examples" aria-labelledby="ex-h">
+        <div class="wrap">
+          <h2 id="ex-h" data-i18n="ex.h">Examples</h2>
+          <p class="section-sub" data-i18n="ex.sub">Two real projects you can open and try.</p>
+          <div class="examples">
+            <article class="example">
+              <h3>Brasa</h3>
+              <p data-i18n="ex.brasa">Restaurant landing page: menu, locations and ordering, built for phones first.</p>
+              <a class="btn" href="https://protorest.netlify.app/" target="_blank" rel="noopener" data-i18n="ex.open">Open the site</a>
+            </article>
+            <article class="example">
+              <h3>Minoscreto</h3>
+              <p data-i18n="ex.mino">A browser-only tool that anonymizes Word documents before you paste them into an AI.</p>
+              <a class="btn" href="https://minoscreto.netlify.app/" target="_blank" rel="noopener" data-i18n="ex.open">Open the site</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="how" aria-labelledby="how-h">
+        <div class="wrap">
+          <h2 id="how-h" data-i18n="how.h">How it works</h2>
+          <ol class="steps">
+            <li><strong data-i18n="s1.h">Brief in writing</strong><span data-i18n="s1.p">You tell me what you need in a short message.</span></li>
+            <li><strong data-i18n="s2.h">Fixed quote</strong><span data-i18n="s2.p">You get the price and the date in writing.</span></li>
+            <li><strong data-i18n="s3.h">Delivered</strong><span data-i18n="s3.p">Live site or finished document, with one round of changes.</span></li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section" id="contact" aria-labelledby="ct-h">
+        <div class="wrap">
+          <h2 id="ct-h" data-i18n="ct.h">Get a quote</h2>
+          <div class="contact-box">
+            <p data-i18n="ct.p">Message me on LinkedIn with a few lines about what you need and I will reply with a fixed price.</p>
+            <!-- TODO Sebastian: client email or WhatsApp -->
+            <a class="btn btn-primary" href="https://www.linkedin.com/in/sebastian-herrera-claro-23a0af/" target="_blank" rel="noopener" data-i18n="ct.btn">Message me on LinkedIn</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="job-line">
+      <div class="wrap">
+        <span data-i18n="job.text">Looking to hire me for a job instead? See my projects and resume</span>
+        <br /><a href="./index.html" data-i18n="job.link">Go to the job page</a>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        var tabs = Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
+        function show(t, focus) {
+          tabs.forEach(function (x) {
+            var on = x === t;
+            x.setAttribute('aria-selected', on ? 'true' : 'false');
+            x.tabIndex = on ? 0 : -1;
+            document.getElementById(x.getAttribute('aria-controls')).hidden = !on;
+          });
+          if (focus) t.focus();
+        }
+        tabs.forEach(function (t, i) {
+          t.addEventListener('click', function () { show(t); });
+          t.addEventListener('keydown', function (e) {
+            var n = null;
+            if (e.key === 'ArrowRight') n = tabs[(i + 1) % tabs.length];
+            else if (e.key === 'ArrowLeft') n = tabs[(i - 1 + tabs.length) % tabs.length];
+            else if (e.key === 'Home') n = tabs[0];
+            else if (e.key === 'End') n = tabs[tabs.length - 1];
+            if (n) { e.preventDefault(); show(n, true); }
+          });
+        });
+        show(tabs[0]);
+      })();
+    </script>
+  </body>
+</html>
