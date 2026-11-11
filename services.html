@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-default-lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -63,6 +63,20 @@
       "ct.h": "Pide tu cotización",
       "ct.p": "Escríbeme por LinkedIn con un par de líneas sobre lo que necesitas y te respondo con un precio fijo.",
       "ct.btn": "Escribir por LinkedIn",
+      "price.btn": "Ver precios",
+      "price.btn.hide": "Ocultar precios",
+      "price.h": "Precios",
+      "price.land": "Landing page",
+      "price.small": "Sitio para negocio",
+      "price.tr": "Traducción inglés ↔ español",
+      "price.land.v": "desde USD 180, alrededor de 1 semana",
+      "price.small.v": "desde USD 300, alrededor de 2 semanas",
+      "price.tr.v": "USD 0,04 por palabra",
+      "price.req": "Pedir cotización",
+      "ct.email": "Correo",
+      "ct.wa": "WhatsApp",
+      "ct.pending": "[pendiente]",
+      "fl.link": "Perfil en Freelancer.com",
       "job.text": "¿Buscas contratarme para un empleo? Mira mis proyectos y hoja de vida",
       "job.link": "Ir a la página de empleo"
     };</script>
@@ -86,7 +100,7 @@
           <h1 data-i18n="hero.h1">Websites and English ↔ Spanish translation for small businesses</h1>
           <p class="promise" data-i18n="hero.promise">Fixed prices and written updates. No calls needed.</p>
           <div class="btn-row">
-            <a class="btn btn-primary" href="#contact" data-i18n="hero.quote">Get a quote</a>
+            <a class="btn btn-primary" id="hero-quote" href="#contact" data-i18n="hero.quote">Get a quote</a>
             <a class="btn" href="#examples" data-i18n="hero.examples">See examples</a>
           </div>
         </div>
@@ -99,8 +113,6 @@
       </div>
     </header>
 
-    <!-- PRICES: every price below sits in an element with class "price-item". Prices are not final.
-         To hide them all in one edit, add class="no-prices" to the <main> tag. -->
     <main id="main" tabindex="-1">
       <section class="section" id="services" aria-labelledby="svc-h">
         <div class="wrap">
@@ -118,7 +130,6 @@
                 <h4 data-i18n="o.land.h">Landing page</h4>
                 <p data-i18n="o.land.p">1 page, mobile-first, contact form, hosting set up.</p>
                 <ul class="meta">
-                  <li class="price-item"><span data-i18n="from">from</span> <span class="price">USD 180</span></li>
                   <li data-i18n="t.week1">about 1 week</li>
                 </ul>
               </article>
@@ -126,7 +137,6 @@
                 <h4 data-i18n="o.small.h">Small business site</h4>
                 <p data-i18n="o.small.p">Up to 4 pages, menu or catalogue, bilingual.</p>
                 <ul class="meta">
-                  <li class="price-item"><span data-i18n="from">from</span> <span class="price">USD 300</span></li>
                   <li data-i18n="t.week2">about 2 weeks</li>
                 </ul>
               </article>
@@ -140,7 +150,6 @@
                 <h4 data-i18n="o.tr.h">English ↔ Spanish</h4>
                 <p data-i18n="o.tr.p">Translated by a native Spanish speaker: menus, websites, documents and emails.</p>
                 <ul class="meta">
-                  <li class="price-item price" data-i18n="tr.price">USD 0.04 per word</li>
                   <li data-i18n="tr.time">quote within a day</li>
                 </ul>
               </article>
@@ -153,11 +162,23 @@
               <article class="offer">
                 <h4 data-i18n="o.tools.h">Automating repetitive office tasks</h4>
                 <p data-i18n="o.tools.p">For example, turning receipts into a spreadsheet.</p>
-                <ul class="meta">
-                  <li class="price-item price" data-i18n="tools.price">quote per project</li>
-                </ul>
               </article>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="prices-section" aria-labelledby="price-h">
+        <div class="wrap">
+          <h2 id="price-h" class="sr-only" data-i18n="price.h">Prices</h2>
+          <button type="button" class="btn btn-primary price-toggle" id="price-toggle" aria-expanded="false" aria-controls="price-list" data-i18n="price.btn">See prices</button>
+          <div class="price-list" id="price-list" role="region" aria-labelledby="price-h" tabindex="-1">
+            <dl>
+              <div><dt data-i18n="price.land">Landing page</dt><dd data-i18n="price.land.v">from USD 180, about 1 week</dd></div>
+              <div><dt data-i18n="price.small">Small business site</dt><dd data-i18n="price.small.v">from USD 300, about 2 weeks</dd></div>
+              <div><dt data-i18n="price.tr">Translation EN ↔ ES</dt><dd data-i18n="price.tr.v">USD 0.04 per word</dd></div>
+            </dl>
+            <a href="#contact" data-i18n="price.req">Request a quote</a>
           </div>
         </div>
       </section>
@@ -197,7 +218,14 @@
           <h2 id="ct-h" data-i18n="ct.h">Get a quote</h2>
           <div class="contact-box">
             <p data-i18n="ct.p">Message me on LinkedIn with a few lines about what you need and I will reply with a fixed price.</p>
-            <!-- TODO Sebastian: client email or WhatsApp -->
+            <ul class="contact-list">
+              <!-- TODO Sebastian: email -->
+              <li><span data-i18n="ct.email">Email</span>: <span class="pending" data-i18n="ct.pending">[pending]</span></li>
+              <!-- TODO Sebastian: WhatsApp number for wa.me (international format, digits only) -->
+              <li><span data-i18n="ct.wa">WhatsApp</span>: <a href="https://wa.me/[PENDING]" class="pending" aria-disabled="true" data-i18n="ct.pending">[pending]</a></li>
+              <!-- TODO Sebastian: Freelancer.com profile URL -->
+              <li><a href="#" class="pending" aria-disabled="true" data-i18n="fl.link">Freelancer.com profile</a></li>
+            </ul>
             <a class="btn btn-primary" href="https://www.linkedin.com/in/sebastian-herrera-claro-23a0af/" target="_blank" rel="noopener" data-i18n="ct.btn">Message me on LinkedIn</a>
           </div>
         </div>
@@ -235,6 +263,31 @@
           });
         });
         show(tabs[0]);
+
+        var btn = document.getElementById('price-toggle');
+        var list = document.getElementById('price-list');
+        function label() {
+          var on = btn.getAttribute('aria-expanded') === 'true';
+          var es = window.I18N && window.I18N.lang === 'es';
+          btn.removeAttribute('data-i18n');
+          btn.textContent = es ? (on ? 'Ocultar precios' : 'Ver precios') : (on ? 'Hide prices' : 'See prices');
+        }
+        function setOpen(on) {
+          btn.setAttribute('aria-expanded', on ? 'true' : 'false');
+          list.classList.toggle('is-open', on);
+          label();
+        }
+        btn.addEventListener('click', function () { setOpen(btn.getAttribute('aria-expanded') !== 'true'); });
+        document.getElementById('hero-quote').addEventListener('click', function (e) {
+          e.preventDefault();
+          setOpen(true);
+          btn.scrollIntoView({ block: 'center' });
+          list.focus({ preventScroll: true });
+        });
+        if (window.I18N) window.I18N.onChange(label);
+        document.querySelectorAll('a[aria-disabled="true"]').forEach(function (a) {
+          a.addEventListener('click', function (e) { e.preventDefault(); });
+        });
       })();
     </script>
   </body>

@@ -43,8 +43,6 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outlin
 .offer p { margin: 0 0 1rem; color: var(--muted); }
 .meta { display: flex; flex-wrap: wrap; gap: .5rem 1rem; margin: 0; padding: 0; list-style: none; font-size: .95rem; }
 .price { font-weight: 700; color: var(--accent); }
-/* One edit hides every price: add class="no-prices" to <main>. */
-.no-prices .price-item { display: none; }
 
 /* Examples */
 .examples { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
@@ -86,3 +84,15 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outlin
 @media (max-width: 420px) { .nav-brand { display: none; } }
 @media (max-height: 500px) { .svc-hero { padding: 1.5rem 0; } .nav { position: static; } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; animation: none !important; } }
+
+/* Prices: always in the HTML; hidden only when JS is running and the list is closed. */
+.price-list { margin-top: 1rem; padding: 1rem 1.25rem; border: 1px solid currentColor; border-radius: 12px; }
+.js .price-list:not(.is-open) { display: none; }
+.price-list dl { margin: 0 0 .75rem; }
+.price-list dl > div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .25rem 1rem; padding: .4rem 0; }
+.price-list dt { font-weight: 600; }
+.price-list dd { margin: 0; }
+.price-list:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.contact-list { list-style: none; padding: 0; margin: 0 0 1rem; display: grid; gap: .4rem; }
+.pending { opacity: .65; font-style: italic; }
+a.pending[aria-disabled="true"] { cursor: not-allowed; text-decoration: line-through; }
