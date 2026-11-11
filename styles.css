@@ -365,7 +365,8 @@ main:focus { outline: none; }
     .hero .avatar { display: none; }
     .status-pill { margin: 0 0 var(--s2); font-size: 0.8rem; padding: 0.25rem 0.75rem; white-space: nowrap; }
     .eyebrow { margin: 0 0 var(--s1); }
-    .hero h1 { font-size: clamp(1.45rem, 6.6vw, 1.9rem); line-height: 1.1; margin: 0 0 var(--s2); text-wrap: balance; }
+    .hero h1 { font-size: clamp(1.3rem, 6vw, 1.9rem); line-height: 1.1; margin: 0 0 var(--s2); text-wrap: balance; }
+    html[lang="es"] .hero h1 { font-size: clamp(1.15rem, 5.3vw, 1.7rem); }
     .lead { margin: 0 0 var(--s3); font-size: 1rem; line-height: 1.5; }
     .proof { display: none; }
     .chips { display: flex; flex-wrap: wrap; gap: var(--s2); list-style: none; margin: 0 0 var(--s4); padding: 0; }
@@ -419,7 +420,6 @@ main:focus { outline: none; }
     .earlier-list { list-style: none; padding: 0 var(--s3) var(--s3); gap: var(--s3); }
     .earlier-list li { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; padding-top: var(--s3); border-top: 1px solid var(--border); }
     .earlier-list strong { display: block; }
-    .earlier-list li > span:not(.earlier-links) { display: block; }
     .earlier-links a { display: inline-flex; align-items: center; min-height: 44px; }
 
     /* Skills */

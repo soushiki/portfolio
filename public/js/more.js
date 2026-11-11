@@ -5,7 +5,7 @@
   var SEL = ['.card-body > p', '.drive-cta p', '.contact > p', '.skills-proof', '.earlier-list li > span:not(.earlier-links)',
     '.offer p', '.example p', '.steps span', '.contact-box > p', '.section-sub', '.promise', '.lead',
     '.demo-step > p', '.demo-why', '.cs-hero .lead'].join(',');
-  var mq = window.matchMedia('(max-width: 600px)');
+  var mq = window.matchMedia('(max-width: 600px), (max-height: 500px) and (max-width: 900px)');
   var lastW = -1, n = 0, timer;
   function t(k, f) { return window.I18N ? window.I18N.t(k, f) : f; }
   function build() {
