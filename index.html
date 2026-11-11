@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Sebastian Herrera Claro, systems engineer in Colombia, open to junior QA, data and developer roles. Tested tools, data projects and web apps." data-i18n-attr="content:meta.description" />
     <title>Sebastian Herrera · Portfolio</title>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Sebastian Herrera · Portfolio" />
+    <meta property="og:description" content="Tested tools, data projects and web apps by a systems engineer in Colombia. Open to junior QA, data and developer roles." />
+    <meta property="og:image" content="https://sebherr.netlify.app/assets/images/brasa-screenshot.jpg" />
+    <meta property="og:url" content="https://sebherr.netlify.app/" />
+    <meta name="twitter:card" content="summary_large_image" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Mozilla+Headline:wght@200..700&family=Outfit:wght@100..900&display=swap" rel="stylesheet" />
@@ -17,6 +23,17 @@
       "nav.more": "Anteriores",
       "nav.skills": "Habilidades",
       "nav.contact": "Contacto",
+      "nav.services": "Servicios",
+      "nav.menu": "Menú",
+      "door1.h": "¿Contratas para un puesto?",
+      "door1.p": "Proyectos y hoja de vida, todo en esta página.",
+      "door2.h": "¿Necesitas una página web o una traducción?",
+      "door2.p": "Servicios, precios y ejemplos.",
+      "strip.aria": "Resumen",
+      "strip.1": "160 pruebas automáticas",
+      "strip.2": "3 proyectos de datos con paneles en vivo",
+      "strip.3": "App web + Android",
+      "strip.4": "Español nativo, inglés para trabajar",
       "url3d": "https://sebherr-3d.netlify.app/?lang=es",
       "nav.3dtitle": "Recorre mi portafolio en 3D",
       "hero.avatar": "Avatar de GitHub de Sebastian",
@@ -77,13 +94,15 @@
 
   <body>
     <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
-    <nav class="nav">
+    <nav class="nav" aria-label="Main">
       <a class="nav-brand" href="#top">sebherr<span>.</span></a>
-      <ul class="nav-links">
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Menu" data-i18n-attr="aria-label:nav.menu"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
+      <ul class="nav-links" id="nav-links">
         <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
         <li><a href="#more" data-i18n="nav.more">Earlier</a></li>
         <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
         <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+        <li><a href="services.html" data-i18n="nav.services">Services</a></li>
         <li><a class="nav-3d" href="https://sebherr-3d.netlify.app" target="_blank" rel="noopener" title="Tour my portfolio in 3D" data-i18n-attr="href:url3d;title:nav.3dtitle"><i class="fa-solid fa-rocket" aria-hidden="true"></i> 3D</a></li>
       </ul>
     </nav>
@@ -108,6 +127,22 @@
     </header>
 
     <main id="main" tabindex="-1">
+      <section class="doors" aria-label="Choose your path">
+        <a class="door" href="#projects">
+          <strong data-i18n="door1.h">Hiring for a role?</strong>
+          <span data-i18n="door1.p">Projects and resume, all on this page.</span>
+        </a>
+        <a class="door" href="services.html">
+          <strong data-i18n="door2.h">Need a website or translation?</strong>
+          <span data-i18n="door2.p">Services, prices and examples.</span>
+        </a>
+      </section>
+      <ul class="strip" aria-label="Summary" data-i18n-attr="aria-label:strip.aria">
+        <li data-i18n="strip.1">160 automated tests</li>
+        <li data-i18n="strip.2">3 data projects with live dashboards</li>
+        <li data-i18n="strip.3">Web + Android app</li>
+        <li data-i18n="strip.4">Spanish native, English for work</li>
+      </ul>
       <section class="section" id="projects">
         <div class="section-head">
           <h2 data-i18n="proj.h">Featured projects</h2>
@@ -244,5 +279,17 @@
         <a href="https://www.linkedin.com/in/sebastian-herrera-claro-23a0af/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
       </div>
     </footer>
+  <script>
+    (function () {
+      var b = document.querySelector('.nav-toggle'), l = document.getElementById('nav-links');
+      if (!b || !l) return;
+      function set(o) { b.setAttribute('aria-expanded', o ? 'true' : 'false'); l.classList.toggle('open', o); }
+      b.addEventListener('click', function () { set(b.getAttribute('aria-expanded') !== 'true'); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && b.getAttribute('aria-expanded') === 'true') { set(false); b.focus(); }
+      });
+      l.addEventListener('click', function (e) { if (e.target.closest('a')) set(false); });
+    })();
+    </script>
   </body>
 </html>
