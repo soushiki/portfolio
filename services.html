@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Mozilla+Headline:wght@200..700&family=Outfit:wght@100..900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="./styles.css" />
     <link rel="stylesheet" href="./public/css/services.css" />
     <script>window.I18N_ES = {
@@ -22,6 +23,7 @@
       "nav.work": "Proyectos",
       "nav.services": "Servicios",
       "nav.contact": "Contacto",
+      "nav.menu": "Menú",
       "hero.pill": "Disponible para proyectos freelance",
       "hero.h1": "Sitios web y traducción inglés ↔ español para pequeños negocios",
       "hero.promise": "Precios fijos y avances por escrito. Sin llamadas.",
@@ -89,7 +91,8 @@
     <a class="svc-skip" href="#main" data-i18n="skip">Skip to content</a>
     <nav class="nav">
       <a class="nav-brand" href="./index.html">sebherr<span>.</span></a>
-      <ul class="nav-links">
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Menu" data-i18n-attr="aria-label:nav.menu"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
+      <ul class="nav-links" id="nav-links">
         <li><a href="./index.html#projects" data-i18n="nav.work">Work</a></li>
         <li><a href="#top" aria-current="page" data-i18n="nav.services">Services</a></li>
         <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
@@ -293,5 +296,17 @@
         });
       })();
     </script>
-  </body>
+    <script>
+    (function () {
+      var b = document.querySelector('.nav-toggle'), l = document.getElementById('nav-links');
+      if (!b || !l) return;
+      function set(o) { b.setAttribute('aria-expanded', o ? 'true' : 'false'); l.classList.toggle('open', o); }
+      b.addEventListener('click', function () { set(b.getAttribute('aria-expanded') !== 'true'); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && b.getAttribute('aria-expanded') === 'true') { set(false); b.focus(); }
+      });
+      l.addEventListener('click', function (e) { if (e.target.closest('a')) set(false); });
+    })();
+  </script>
+</body>
 </html>

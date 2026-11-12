@@ -81,7 +81,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outlin
     .nav-links { gap: .25rem; flex-wrap: nowrap; }
     .nav-links a { padding: 0 .4rem; font-size: .9rem; }
 }
-@media (max-width: 420px) { .nav-brand { display: none; } }
+/* The brand stays visible on phones; the links sit behind the shared menu button (styles.css). */
 @media (max-height: 500px) { .svc-hero { padding: 1.5rem 0; } .nav { position: static; } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; animation: none !important; } }
 
