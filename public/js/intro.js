@@ -1,4 +1,6 @@
-/* Intro panels: reveal fallback (IntersectionObserver), count-up on the Proof panel, progress dots. */
+/* Intro panels: reveal fallback (IntersectionObserver), count-up on the Proof panel, progress dots,
+   and slide-to-next: when a native scroll ends between intro panels, finish the move in the
+   direction the visitor was going (never intercepts wheel or touch input). */
 (function () {
   'use strict';
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -46,4 +48,36 @@
     });
   }, { rootMargin: '-45% 0px -45% 0px' });
   secs.forEach(function (s) { if (s) dio.observe(s); });
+
+  // Slide to the next/previous panel when a scroll ends between intro panels.
+  // CSS snapping snapped short wheel steps and trackpad/touch swipes back to the panel the
+  // visitor was leaving, so scrolling looked like it did nothing (Sebastian, 2026-11-11).
+  var stops = Array.prototype.slice.call(panels).concat([document.getElementById('projects')]).filter(Boolean);
+  var navH = function () { return parseFloat(getComputedStyle(root).scrollPaddingTop) || 0; };
+  var tops = function () { return stops.map(function (el) { return Math.round(el.getBoundingClientRect().top + scrollY - navH()); }); };
+  var startY = scrollY, settling = false, timer = 0;
+  function settle() {
+    if (settling || reduce.matches) return;
+    var t = tops(), y = scrollY, last = t[t.length - 1];
+    if (y <= t[0] - 4 || y >= last - 4) { startY = y; return; } // outside the intro: free scrolling
+    for (var i = 0; i < t.length; i++) if (Math.abs(y - t[i]) < 6) { startY = y; return; } // already on a panel
+    var below = 0; while (below < t.length - 1 && t[below + 1] <= y) below++;
+    var moved = y - startY, target;
+    if (moved > 40) target = t[below + 1];
+    else if (moved < -40) target = t[below];
+    else target = Math.abs(y - t[below]) < Math.abs(t[below + 1] - y) ? t[below] : t[below + 1];
+    settling = true;
+    window.scrollTo({ top: target, behavior: 'smooth' });
+    setTimeout(function () { settling = false; startY = scrollY; }, 700);
+  }
+  var hasScrollEnd = 'onscrollend' in window;
+  window.addEventListener('scroll', function () {
+    if (settling) return;
+    if (!hasScrollEnd) { clearTimeout(timer); timer = setTimeout(settle, 140); }
+  }, { passive: true });
+  if (hasScrollEnd) window.addEventListener('scrollend', settle);
+  // A new gesture starts from where the page rests.
+  ['wheel', 'touchstart', 'keydown'].forEach(function (ev) {
+    window.addEventListener(ev, function () { if (!settling && !window.__introGesture) { window.__introGesture = true; startY = scrollY; setTimeout(function () { window.__introGesture = false; }, 400); } }, { passive: true });
+  });
 })();
