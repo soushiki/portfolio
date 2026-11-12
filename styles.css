@@ -444,9 +444,15 @@ html.motion-calm .dots a::before { transition: background 0.2s; }
 
 /* ---------- Intro as three panels (Who / What I build / Proof) ---------- */
 :root { --nav-h: 58px; }
-/* No CSS snapping: it snapped short scrolls back to the panel being left. public/js/intro.js finishes
-   a scroll that ends between intro panels in the direction of travel; below the intro it's free. */
+/* No CSS snapping with a mouse/trackpad because it snapped short scrolls back; on touch screens native
+   mandatory snapping is used because the browser would not let JS stop the swipe. */
 html { scroll-padding-top: var(--nav-h); scroll-behavior: smooth; } /* intro.js glides with behavior:'instant' per frame */
+@media (pointer: coarse) and (min-height: 501px) {
+  html { scroll-snap-type: y mandatory; }
+  #intro, #build, #proof, #projects, #more, #skills, #contact { scroll-snap-align: start; }
+  #intro, #build, #proof { scroll-snap-stop: always; }
+  .footer { scroll-snap-align: end; }
+}
 .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 .panel:focus, main:focus { outline: none; }
 

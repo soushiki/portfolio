@@ -1,7 +1,8 @@
 /* Intro panels: reveal (IntersectionObserver), count-up on the Proof panel, progress dots, and a
    full-page-slider snap: wheel, swipe and keys switch section at once (450 ms glide, one flick = one section)
    from the top of #intro to the top of #projects. A panel taller than the screen scrolls freely inside itself.
-   Off for short landscape (height <= 500); hash links and focus scrolling stay native. */
+   Off for short landscape (height <= 500); hash links and focus scrolling stay native.
+   On touch screens (pointer: coarse) the touch handlers do nothing: CSS native mandatory snapping does the swipe. */
 (function () {
   'use strict';
   var root = document.documentElement;
@@ -76,6 +77,7 @@
     return out;
   }
   window.__introSnap = { stops: function () { return flat(layout()); } };
+  var coarse = window.matchMedia('(pointer: coarse) and (min-height: 501px)');
   function off() { return innerHeight <= 500; }
   function active(st, y, dir) {
     var pt = st[lastI].top;
@@ -148,6 +150,7 @@
   }, { passive: true });
   window.addEventListener('touchmove', function (e) {
     if (!touch || !e.touches.length) return;
+    if (coarse.matches) { touch.mode = 'native'; return; }
     var y = e.touches[0].clientY, dy = y - touch.y0;
     touch.last = y;
     if (!touch.mode) {
@@ -164,7 +167,7 @@
   }, { passive: false });
   window.addEventListener('touchend', function () {
     var t = touch; touch = null;
-    if (!t) return;
+    if (!t || coarse.matches) return;
     if (t.mode === 'snap') {
       var dy = t.last - t.y0;
       if (Math.abs(dy) >= 40 && !off()) {
@@ -175,10 +178,11 @@
   }, { passive: true });
   window.addEventListener('touchcancel', function () {
     var t = touch; touch = null;
-    if (t && t.mode === 'free') pendingPanel = t.panel;
+    if (t && !coarse.matches && t.mode === 'free') pendingPanel = t.panel;
   }, { passive: true });
   // After a free scroll inside a tall panel: if momentum carried it past an edge, glide back to that edge.
   function settleEdge() {
+    if (coarse.matches) { pendingPanel = -1; return; }
     if (pendingPanel < 0 || gliding || touch) return;
     var st = layout(), p = st[pendingPanel], y = scrollY;
     pendingPanel = -1;
