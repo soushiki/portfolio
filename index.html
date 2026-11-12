@@ -104,16 +104,37 @@
       "drive.text": "<strong>¿Prefieres explorar?</strong> Recorre mi portafolio en 3D: un tour guiado por planetas, con un proyecto en cada parada y 13 gatos secretos por encontrar.",
       "drive.btn": "Recórrelo en 3D",
       "proj.h": "Proyectos destacados",
-      "proj.sub": "Trabajo reciente, desde herramientas de privacidad que corren solo en el navegador hasta prototipos full-stack.",
+      "proj.sub": "Qué resuelve cada uno y para quién.",
+      "case.p": "Problema",
+      "case.s": "Solución",
+      "case.v": "Qué cambia",
+      "m.p": "Pegar un documento en un chat de IA expone los nombres reales que contiene.",
+      "m.s": "Cambia los nombres por marcadores en tu navegador y después devuelve los nombres reales a la respuesta de la IA.",
+      "m.v": "Puedes usar IA con documentos reales sin que los nombres salgan de tu computador. 160 pruebas automatizadas.",
+      "i.p": "Un restaurante pasaba a mano sus recibos y cierres de caja del POS a la contabilidad.",
+      "i.s": "Hecha para ese restaurante: lee fotos y PDF con OCR y un modelo de visión local y arma el libro del día en Excel.",
+      "i.v": "Los papeles del mes quedan como un libro listo para el contador, con el cierre de caja cuadrado contra los recibos.",
+      "f.p": "Las órdenes de laboratorio, recetas y certificados de un médico deben coincidir exactamente con su formato impreso.",
+      "f.s": "Hecha para ese médico: los llena como PDF idénticos al formato, con buscador CIE-10 sin internet, en web y Android.",
+      "f.v": "Cada documento sale listo para imprimir o enviar desde el celular.",
+      "d.p": "Entidades y negocios necesitan saber qué atender primero y qué demanda esperar.",
+      "d.s": "Tres proyectos con datos públicos reales: qué quejas del 311 de Nueva York se van a atrasar, el pronóstico de demanda eléctrica de Gran Bretaña frente al operador de la red y una prueba A/B de correos.",
+      "d.v": "Cada uno dice qué ganó, qué perdió y contra qué línea base, para poder decidir con eso.",
+      "how.h": "Cómo funciona",
+      "s1.h": "Resumen por escrito",
+      "s1.p": "Me cuentas lo que necesitas en un mensaje corto.",
+      "s2.h": "Cotización fija",
+      "s2.p": "Recibes el precio y la fecha de entrega por escrito.",
+      "s3.h": "Entrega",
+      "s3.p": "Sitio publicado o documento listo, con una ronda de cambios.",
+      "how.cta": "¿Tienes una idea o un proceso de tu negocio que te gustaría mejorar? Conversemos.",
+      "how.svc": "Ver servicios y precios",
+      "btn.email": "Correo",
       "more.h": "Proyectos anteriores",
       "more.sub": "8 proyectos más pequeños: apps en React de mi ruta de aprendizaje, un juego y un prototipo de sitio web.",
       "t.data": "Proyectos de ciencia de datos",
-      "c.data": "Tres proyectos de punta a punta con datos públicos reales: qué quejas del 311 de NYC se van a retrasar, pronósticos de demanda eléctrica de Gran Bretaña comparados con el operador de la red, y una prueba A/B de correos. Cada uno dice qué ganó, qué perdió y contra qué línea base.",
       "a.data": "Abrir el portafolio de ciencia de datos",
-      "c.minoscreto": "Anonimiza documentos de Word antes de pegarlos en una IA y luego restaura los nombres reales en la respuesta. Todo corre en el navegador, así que nada sale de tu computador.",
       "c.brasa": "Prototipo de landing page para un restaurante de Cartagena: smash burgers, pizza al horno de leña y costillas, con secciones de menú, sedes y pedidos.",
-      "c.ingresos": "Plantilla contable para restaurantes: lee fotos y PDF de recibos y de cierres de caja del POS con OCR y un modelo de visión local, arma el libro contable del día y lo exporta a Excel.",
-      "c.formato": "Llena las órdenes de laboratorio, fórmulas y certificados de un médico como PDF idénticos al formato impreso, con búsqueda CIE-10 sin conexión. Un solo código React para web y Android.",
       "c.gacha": "Juego gacha de máquina de cápsulas con 21 gatos con poderes: pity suave y duro, sistema 50/50 de probabilidad aumentada, un frasco de premios, retos diarios y una revelación Mítica animada.",
       "c.davinci": "App de notas en Markdown con inicio de sesión y base de datos en Firebase.",
       "c.apod": "Muestra la Imagen Astronómica del Día de la NASA desde la API de APOD, con las respuestas guardadas en el almacenamiento local.",
@@ -143,7 +164,7 @@
       "sk.ocr": "OCR / LLM locales",
       "sk.proof": "Java / Spring Boot, Angular, PostgreSQL y Docker Compose: los uso en <a href=\"https://github.com/soushiki/stockroom\" target=\"_blank\" rel=\"noopener\">Stockroom</a>, un prototipo de inventario y contabilidad.",
       "ct.h": "Hablemos",
-      "ct.p": "Busco roles junior de QA, datos y desarrollo, remotos o en Colombia. La forma más rápida de contactarme es LinkedIn."
+      "ct.p": "Para un proyecto: WhatsApp o correo. Para un empleo: LinkedIn o mi hoja de vida.",
     };</script>
     <script src="./public/js/i18n.js" defer></script>
     <script src="./public/js/more.js" defer></script>
@@ -254,7 +275,7 @@
       <section class="section" id="projects" tabindex="-1">
         <div class="section-head">
           <h2 data-i18n="proj.h">Featured projects</h2>
-          <p data-i18n="proj.sub">Recent work, from browser-only privacy tools to full-stack prototypes.</p>
+          <p data-i18n="proj.sub">What each one solves, and for whom.</p>
         </div>
 
         <div class="grid grid-featured">
@@ -264,7 +285,11 @@
             </a>
             <div class="card-body">
               <h3>Minoscreto</h3>
-              <p data-i18n="c.minoscreto">Anonymizes Word documents before you paste them into an AI, then restores the real names in the answer. Everything runs in the browser, so nothing leaves your computer.</p>
+              <dl class="case">
+                <div><dt data-i18n="case.p">Problem</dt><dd data-i18n="m.p">Pasting a document into an AI chat exposes the real names in it.</dd></div>
+                <div><dt data-i18n="case.s">Solution</dt><dd data-i18n="m.s">Swaps names for placeholders in your browser, then puts the real names back into the AI's answer.</dd></div>
+                <div><dt data-i18n="case.v">What it changes</dt><dd data-i18n="m.v">You can use AI on real documents and the names never leave your computer. 160 automated tests.</dd></div>
+              </dl>
               <ul class="tags"><li>React</li><li>Vite</li><li>Vitest</li><li>.docx</li></ul>
               <div class="card-links">
                 <a href="https://minoscreto.netlify.app/" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="l.live">Live</span></a>
@@ -280,7 +305,11 @@
             </a>
             <div class="card-body">
               <h3>Ingresos App</h3>
-              <p data-i18n="c.ingresos">Bookkeeping template for restaurants: reads photos and PDFs of receipts and POS cash-closing reports with OCR and a local vision model, then builds the day's accounting ledger and exports it to Excel.</p>
+              <dl class="case">
+                <div><dt data-i18n="case.p">Problem</dt><dd data-i18n="i.p">A restaurant typed its receipts and POS cash-closing reports into the books by hand.</dd></div>
+                <div><dt data-i18n="case.s">Solution</dt><dd data-i18n="i.s">Built for that restaurant: reads photos and PDFs with OCR and a local vision model and builds the day's ledger in Excel.</dd></div>
+                <div><dt data-i18n="case.v">What it changes</dt><dd data-i18n="i.v">The month's papers become a ledger ready for the accountant, with the cash closing checked against the receipts.</dd></div>
+              </dl>
               <ul class="tags"><li>Python</li><li>OCR</li><li>Ollama</li><li>Excel</li></ul>
               <div class="card-links">
                 <a href="./public/html/ingresos.html"><i class="fa-solid fa-book-open"></i> <span data-i18n="l.case">Case study</span></a>
@@ -295,7 +324,11 @@
             </a>
             <div class="card-body">
               <h3>Formato Médico</h3>
-              <p data-i18n="c.formato">Fills a physician's lab orders, prescriptions and certificates as PDFs that match the printed form, with an offline ICD-10 search. One React codebase for web and Android.</p>
+              <dl class="case">
+                <div><dt data-i18n="case.p">Problem</dt><dd data-i18n="f.p">A doctor's lab orders, prescriptions and certificates have to match his printed form exactly.</dd></div>
+                <div><dt data-i18n="case.s">Solution</dt><dd data-i18n="f.s">Built for that doctor: fills them as PDFs identical to the form, with an offline ICD-10 search, on web and Android.</dd></div>
+                <div><dt data-i18n="case.v">What it changes</dt><dd data-i18n="f.v">Each document comes out ready to print or send from the phone.</dd></div>
+              </dl>
               <ul class="tags"><li>React</li><li>jsPDF</li><li>Capacitor</li><li>Android</li></ul>
               <div class="card-links">
                 <a href="./public/html/formato-medico.html"><i class="fa-solid fa-book-open"></i> <span data-i18n="l.case">Case study</span></a>
@@ -309,7 +342,11 @@
             </a>
             <div class="card-body">
               <h3 data-i18n="t.data">Data science projects</h3>
-              <p data-i18n="c.data">Three end-to-end projects on real public data: which NYC 311 complaints will fall behind, forecasting Britain's electricity demand against the grid operator, and an email A/B uplift test. Each says what won, what lost and against which baseline.</p>
+              <dl class="case">
+                <div><dt data-i18n="case.p">Problem</dt><dd data-i18n="d.p">Agencies and businesses need to know what to fix first and what demand to expect.</dd></div>
+                <div><dt data-i18n="case.s">Solution</dt><dd data-i18n="d.s">Three projects on real public data: which NYC 311 complaints will fall behind, Britain's electricity demand forecast against the grid operator, and an email A/B uplift test.</dd></div>
+                <div><dt data-i18n="case.v">What it changes</dt><dd data-i18n="d.v">Each one says what won, what lost and against which baseline, so a decision can rest on it.</dd></div>
+              </dl>
               <ul class="tags"><li>Python</li><li>pandas</li><li>scikit-learn</li><li>Time series</li></ul>
               <div class="card-links">
                 <a href="https://soushiki.github.io/data-science/" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="l.live">Live</span></a>
@@ -329,6 +366,19 @@
         <a class="btn btn-primary" href="https://sebherr-3d.netlify.app" data-i18n-attr="href:url3d" target="_blank" rel="noopener"><span data-i18n="drive.btn">Take the tour</span> <i class="fa-solid fa-arrow-right"></i></a>
       </div>
       </div>
+
+      <section class="section" id="how" aria-labelledby="how-h-home">
+        <div>
+          <h2 id="how-h-home" data-i18n="how.h">How it works</h2>
+          <ol class="steps">
+            <li><strong data-i18n="s1.h">Brief in writing</strong><span data-i18n="s1.p">You tell me what you need in a short message.</span></li>
+            <li><strong data-i18n="s2.h">Fixed quote</strong><span data-i18n="s2.p">You get the price and the date in writing.</span></li>
+            <li><strong data-i18n="s3.h">Delivered</strong><span data-i18n="s3.p">Live site or finished document, with one round of changes.</span></li>
+          </ol>
+          <p class="how-cta" data-i18n="how.cta">Have an idea or a business process you'd like to improve? Let's talk about it.</p>
+          <p class="how-link"><a href="./services.html" data-i18n="how.svc">See services and prices</a></p>
+        </div>
+      </section>
 
       <section class="section" id="more">
         <details class="earlier">
@@ -373,9 +423,11 @@
 
       <section class="section contact" id="contact">
         <h2 data-i18n="ct.h">Let's talk</h2>
-        <p data-i18n="ct.p">Open to junior QA, data and developer roles, remote or in Colombia. The quickest way to reach me is LinkedIn.</p>
+        <p data-i18n="ct.p">For a project: WhatsApp or email. For a job: LinkedIn or my resume.</p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="https://www.linkedin.com/in/sebastian-herrera-claro-23a0af/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+          <a class="btn btn-primary btn-discuss" href="https://wa.me/573188022279?text=Hi%20Sebastian%21%20I%27m%20interested%20in%20discussing%20a%20digital%20project%20for%20my%20business." data-i18n-attr="href:url.discuss" target="_blank" rel="noopener"><svg class="wa-icon" viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12.04 2a9.9 9.9 0 0 0-8.49 14.96L2 22l5.2-1.52A9.9 9.9 0 1 0 12.04 2zm0 1.8a8.1 8.1 0 1 1-4.3 14.98l-.3-.19-3.08.9.92-3-.2-.31A8.1 8.1 0 0 1 12.04 3.8zM8.6 7.3c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.07 3.3 5.1 4.5 2.52 1 3.03.8 3.57.75.55-.05 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.27-.47-2.42-1.5-.9-.8-1.5-1.78-1.67-2.08-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57z"/></svg> <span data-i18n="btn.discuss">Let's discuss your project</span></a>
+          <a class="btn" href="mailto:sebastianherrerajr@gmail.com"><i class="fa-solid fa-envelope" aria-hidden="true"></i> <span data-i18n="btn.email">Email</span></a>
+          <a class="btn" href="https://www.linkedin.com/in/sebastian-herrera-claro-23a0af/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
           <a class="btn" href="https://github.com/soushiki" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>
         </div>
       </section>
