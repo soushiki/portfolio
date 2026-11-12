@@ -394,7 +394,7 @@ html.motion-calm .dots a::before { transition: background 0.2s; }
     /* Sections as bands */
     .section { padding: var(--s5) var(--s3); }
     .section-tight { padding-top: var(--s5); padding-bottom: var(--s5); }
-    #projects, #skills, .section-tight { background: var(--bg); }
+    #projects, #how, #skills, .section-tight { background: var(--bg); }
     #more, #contact { background: var(--surface); }
     .contact p { color: var(--muted-on-surface); }
     .section-head { margin-bottom: var(--s4); }
@@ -402,7 +402,7 @@ html.motion-calm .dots a::before { transition: background 0.2s; }
     .section-head p { display: none; }
     .contact { text-align: left; }
     .contact p { margin-bottom: var(--s3); }
-    .contact .hero-actions { grid-template-columns: 1fr; }
+    .contact .hero-actions { grid-template-columns: 1fr 1fr; }
     #contact .btn-primary { background: var(--accent); }
 
     /* Cards */
@@ -449,7 +449,7 @@ html.motion-calm .dots a::before { transition: background 0.2s; }
 html { scroll-padding-top: var(--nav-h); scroll-behavior: smooth; } /* intro.js glides with behavior:'instant' per frame */
 @media (pointer: coarse) and (min-height: 501px) {
   html { scroll-snap-type: y mandatory; }
-  #intro, #build, #proof, #projects, #more, #skills, #contact { scroll-snap-align: start; }
+  #intro, #build, #proof, #projects, #how, #more, #skills, #contact { scroll-snap-align: start; }
   #intro, #build, #proof { scroll-snap-stop: always; }
   .footer { scroll-snap-align: end; }
 }
@@ -579,6 +579,27 @@ html:not(.js) .dots { display: none; }
 .hero-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; margin: 0 0 1.1rem; }
 .panel-who .hero-pills .status-pill { margin: 0; }
 .btn-discuss .wa-icon { flex: none; }
+
+/* Featured cards: problem / solution / what it changes */
+.case { display: flex; flex-direction: column; gap: 0.6rem; margin: 0; }
+.case dt { color: var(--text); font-weight: 700; font-size: 0.85rem; }
+.case dd { margin: 0; color: var(--muted-on-surface); }
+
+/* How I work (home) */
+#how h2 { font-size: 2rem; margin: 0 0 1rem; }
+#how .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; list-style: none; margin: 0; padding: 0; counter-reset: s; }
+#how .steps li { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius, 12px); padding: 1.4rem; counter-increment: s; }
+#how .steps li::before { content: counter(s); display: grid; place-items: center; width: 2rem; height: 2rem; border-radius: 50%; background: var(--accent); color: var(--bg); font-weight: 700; margin-bottom: 0.6rem; }
+#how .steps strong { display: block; font-family: 'Mozilla Headline', sans-serif; margin-bottom: 0.25rem; }
+#how .steps span { color: var(--muted-on-surface); }
+#how .how-cta { margin: 1.5rem 0 0.5rem; }
+#how .how-link { margin: 0; }
+#how .how-link a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; }
+@media (max-width: 600px) {
+  #how h2 { font-size: 1.6rem; margin-bottom: var(--s3); }
+  #how .steps { grid-template-columns: 1fr; gap: var(--s3); }
+  #how .steps li { padding: var(--s3); }
+}
 @media (max-width: 600px) {
   .hero-pills { margin-bottom: var(--s3, 16px); }
 }
