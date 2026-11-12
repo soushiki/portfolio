@@ -381,7 +381,7 @@ main:focus { outline: none; }
     .doors { gap: var(--s3); padding: 0 var(--s3); }
     .door { padding: var(--s3); }
     .strip { flex-direction: row; flex-wrap: wrap; justify-content: flex-start; margin: var(--s4) 0 0; padding: 0 var(--s3); font-size: 0.85rem; }
-    .strip li + li::before { content: " b7"; margin: 0 0.5rem; }
+    .strip li + li::before { content: "\00b7"; margin: 0 0.5rem; }
 
     /* Sections as bands */
     .section { padding: var(--s5) var(--s3); }
@@ -539,3 +539,10 @@ html { scroll-padding-top: var(--nav-h); scroll-snap-type: y proximity; }
     .next-link i { animation: none; }
 }
 @media (min-width: 601px) and (max-width: 900px) { .nav { gap: 0.6rem; } .nav-links { flex-wrap: wrap; gap: 0.25rem 0.75rem; justify-content: flex-end; min-width: 0; } .nav-resume { flex-shrink: 0; } }
+
+/* Fable review fixes: dots need JS to track the section, so hide them without it;
+   on phones the intro panels start at the top instead of centring in the screen. */
+html:not(.js) .dots { display: none; }
+@media (max-width: 600px) {
+  #intro, #build, #proof { justify-content: flex-start; padding-top: var(--s5, 40px); }
+}
