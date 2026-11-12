@@ -1,11 +1,11 @@
 /* Intro panels: reveal (IntersectionObserver), count-up on the Proof panel, progress dots, and a
    full-page-slider snap: wheel, swipe and keys switch section at once (450 ms glide, one flick = one section)
    from the top of #intro to the top of #projects. A panel taller than the screen scrolls freely inside itself.
-   Off for prefers-reduced-motion and short landscape (height <= 500); hash links and focus scrolling stay native. */
+   Off for short landscape (height <= 500); hash links and focus scrolling stay native. */
 (function () {
   'use strict';
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
   var root = document.documentElement;
+  function calm() { return root.classList.contains('motion-calm'); }
   var panels = document.querySelectorAll('.panel');
   if (!('IntersectionObserver' in window)) { panels.forEach(function (p) { p.classList.add('is-in'); }); return; }
 
@@ -23,7 +23,7 @@
     var cio = new IntersectionObserver(function (es) {
       if (done || !es.some(function (e) { return e.isIntersecting; })) return;
       done = true; cio.disconnect();
-      if (reduce.matches) return;
+      if (calm()) return;
       var t0 = performance.now(), dur = 800;
       counts.forEach(function (c) { c.textContent = '0'; });
       (function tick(now) {
@@ -76,7 +76,7 @@
     return out;
   }
   window.__introSnap = { stops: function () { return flat(layout()); } };
-  function off() { return reduce.matches || innerHeight <= 500; }
+  function off() { return innerHeight <= 500; }
   function active(st, y, dir) {
     var pt = st[lastI].top;
     return y < pt - 2 || (dir < 0 && Math.abs(y - pt) <= 2);
@@ -98,11 +98,11 @@
   function cancelGlide() { if (gliding) { cancelAnimationFrame(raf); gliding = false; } }
   function glide(target) {
     cancelGlide();
-    var from = scrollY, t0 = performance.now(), dur = 450;
+    var from = scrollY, t0 = performance.now(), dur = calm() ? 600 : 450;
     if (Math.abs(target - from) < 1) return;
     gliding = true; acc = 0;
     (function step(now) {
-      var k = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+      var k = Math.min(1, (now - t0) / dur), e = calm() ? (k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2) : 1 - Math.pow(1 - k, 3);
       window.scrollTo({ top: from + (target - from) * e, behavior: 'instant' });
       if (k < 1) raf = requestAnimationFrame(step);
       else { gliding = false; lockUntil = performance.now() + 200; }
