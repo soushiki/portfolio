@@ -432,3 +432,110 @@ main:focus { outline: none; }
 @media (max-width: 600px) and (max-width: 359px) {
     .status-pill { font-size: 0.74rem; padding: 0.25rem 0.6rem; }
 }
+
+/* ---------- Intro as three panels (Who / What I build / Proof) ---------- */
+:root { --nav-h: 58px; }
+html { scroll-padding-top: var(--nav-h); scroll-snap-type: y proximity; }
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.panel:focus, main:focus { outline: none; }
+
+.panel {
+    --pw: 820px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: calc(100svh - var(--nav-h));
+    padding: 3rem max(1rem, calc((100% - var(--pw)) / 2));
+    scroll-snap-align: start;
+}
+.panel-wide { --pw: var(--max); }
+#projects { scroll-snap-align: start; scroll-margin-top: 0; }
+.panel-who { align-items: center; text-align: center; }
+.panel-who .eyebrow { display: inline-flex; align-items: center; gap: 0.75rem; }
+.panel-who .avatar { width: 48px; height: 48px; margin: 0; border-width: 2px; }
+.panel-who h1 { font-size: clamp(2rem, 5vw, 3.2rem); margin: 0 0 1.25rem; text-wrap: balance; }
+.panel-who .lead { margin: 0 auto 2rem; }
+.panel-head { margin-bottom: 2rem; }
+.panel-head h2 { font-size: clamp(1.75rem, 4vw, 2.6rem); margin: 0 0 0.4rem; text-wrap: balance; }
+.panel-head p { margin: 0; color: var(--muted); font-size: 1.1rem; }
+
+.next-link { display: inline-flex; align-items: center; gap: 0.5rem; align-self: center; min-height: 44px; margin-top: 2.5rem; padding: 0 0.5rem; font-weight: 600; color: var(--accent); text-decoration: underline; text-underline-offset: 4px; }
+.next-link i { animation: next-bob 2s ease-in-out infinite; }
+@keyframes next-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+
+.kinds { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.kind { display: flex; flex-direction: column; align-items: flex-start; gap: 0.6rem; padding: 1.5rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
+.kind > i { font-size: 1.8rem; color: var(--accent); }
+.kind h3 { margin: 0.25rem 0 0; font-size: 1.3rem; }
+.kind p { margin: 0; color: var(--muted); }
+.kind a { display: inline-flex; align-items: center; gap: 0.4rem; min-height: 44px; margin-top: auto; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; list-style: none; margin: 0 0 2.5rem; padding: 0; }
+.stats li { display: flex; flex-direction: column; gap: 0.35rem; padding: 1.75rem 1.5rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
+.stats b { font-family: 'Mozilla Headline', sans-serif; font-size: clamp(2.8rem, 6vw, 4.5rem); line-height: 1; color: var(--accent); font-variant-numeric: tabular-nums; }
+.stats span { color: var(--muted); }
+.panel .doors { max-width: none; width: 100%; padding: 0; margin: 0; }
+
+/* Progress dots */
+.dots { position: fixed; right: 14px; top: 50%; transform: translateY(-50%); z-index: 9; }
+.dots ul { display: flex; flex-direction: column; list-style: none; margin: 0; padding: 0; }
+.dots a { display: grid; place-items: center; width: 28px; height: 28px; }
+.dots a::before { content: ""; width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--accent); background: transparent; transition: background 0.2s, transform 0.2s; }
+.dots a[aria-current="true"]::before { background: var(--accent); transform: scale(1.25); }
+.dots a:hover::before { background: var(--accent); }
+
+/* Persistent Resume in the nav */
+.nav-resume { order: 3; padding: 0.3rem 0.95rem; font-size: 0.9rem; white-space: nowrap; min-height: 36px; }
+.nav-links { order: 2; }
+.nav .nav-resume:hover { text-decoration: none; }
+
+/* Reveal: scroll-driven where supported, IntersectionObserver otherwise (JS adds .io) */
+@keyframes panel-rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+@supports (animation-timeline: view()) {
+    .js .panel > * { animation: panel-rise linear both; animation-timeline: view(); animation-range: entry calc(var(--i, 0) * 4%) cover 30%; }
+}
+.js.io .panel > * { opacity: 0; transform: translateY(24px); transition: opacity 0.5s ease-out, transform 0.5s ease-out; transition-delay: calc(var(--i, 0) * 60ms); }
+.js.io .panel.is-in > * { opacity: 1; transform: none; }
+.panel > :nth-child(2) { --i: 1; } .panel > :nth-child(3) { --i: 2; } .panel > :nth-child(4) { --i: 3; } .panel > :nth-child(5) { --i: 4; } .panel > :nth-child(6) { --i: 5; } .panel > :nth-child(7) { --i: 6; }
+
+@media (max-width: 1024px) { .kinds, .stats { gap: 1rem; } }
+@media (max-width: 800px) { .kinds { grid-template-columns: 1fr; } }
+
+@media (max-width: 600px) {
+    :root { --nav-h: 74px; }
+    .dots { display: none; }
+    .nav-resume { margin-left: auto; order: 0; min-height: 44px; display: inline-flex; align-items: center; }
+    .nav-toggle { margin-left: 0; }
+    .panel { padding: var(--s4) var(--s3); }
+    .panel-who { align-items: flex-start; text-align: left; }
+    .panel-who h1 { font-size: clamp(1.4rem, 6.6vw, 1.9rem); line-height: 1.1; margin-bottom: var(--s2); }
+    html[lang="es"] .panel-who h1 { font-size: clamp(1.25rem, 5.8vw, 1.7rem); }
+    .panel-who .lead { margin: 0 0 var(--s3); }
+    .panel-who .eyebrow { gap: var(--s2); }
+    .panel-who .avatar { display: block; width: 40px; height: 40px; }
+    .panel-who .hero-actions { width: 100%; }
+    .next-link { align-self: flex-start; margin-top: var(--s3); padding: 0; }
+    .panel-head { margin-bottom: var(--s3); }
+    .panel-head h2 { font-size: 1.6rem; }
+    .panel-head p { font-size: 1rem; }
+    .kinds { gap: var(--s3); }
+    .kind { padding: var(--s3); }
+    .stats { gap: var(--s2); margin-bottom: var(--s4); }
+    .stats li { padding: var(--s3) 10px; }
+    .stats b { font-size: 1.9rem; }
+    .stats span { font-size: 0.78rem; line-height: 1.25; }
+}
+@media (max-width: 600px) and (max-height: 699px) { .panel { min-height: 0; } }
+@media (max-height: 500px) {
+    :root { --nav-h: 0px; }
+    .panel { min-height: 0; padding: 2rem 1rem; }
+    .dots { right: 6px; }
+}
+
+/* Reduced motion: nothing moves, content fully visible, no snapping */
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-snap-type: none; }
+    .js .panel > *, .js.io .panel > * { animation: none !important; opacity: 1 !important; transform: none !important; transition: none !important; }
+    .next-link i { animation: none; }
+}
+@media (min-width: 601px) and (max-width: 900px) { .nav { gap: 0.6rem; } .nav-links { flex-wrap: wrap; gap: 0.25rem 0.75rem; justify-content: flex-end; min-width: 0; } .nav-resume { flex-shrink: 0; } }

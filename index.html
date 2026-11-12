@@ -15,6 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Mozilla+Headline:wght@200..700&family=Outfit:wght@100..900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script>document.documentElement.classList.add("js")</script>
     <link rel="stylesheet" href="./styles.css" />
       <script>window.I18N_ES = {
       "meta.title": "Sebastian Herrera · Portafolio",
@@ -47,12 +48,36 @@
       "chip3.l": "app",
       "more.btn": "Más",
       "less.btn": "Menos",
+      "hero.h1": "Construyo herramientas probadas para problemas reales.",
+      "hero.lead": "Desarrollador React y Python en Colombia.",
+      "next.build": "Lo que construyo",
+      "next.proof": "La prueba",
+      "next.projects": "Proyectos destacados",
+      "nav.resume": "Hoja de vida",
+      "dots.aria": "Secciones de la página",
+      "dots.who": "Quién soy",
+      "dots.build": "Lo que construyo",
+      "dots.proof": "Pruebas",
+      "dots.projects": "Proyectos",
+      "build.h": "…y reviso mi propio trabajo.",
+      "build.sub": "Tres tipos de trabajo:",
+      "b1.t": "Herramientas en el navegador",
+      "b1.p": "Herramientas privadas que corren en tu navegador, como Minoscreto.",
+      "b1.a": "Ver Minoscreto",
+      "b2.t": "Proyectos de datos",
+      "b2.p": "Pronósticos, pruebas A/B y paneles con datos públicos reales.",
+      "b2.a": "Ver los proyectos de datos",
+      "b3.t": "Herramientas para negocios",
+      "b3.p": "Papeles convertidos en hojas de cálculo para un restaurante y una clínica.",
+      "b3.a": "Ver Ingresos App",
+      "proof.h": "Pruebas, no promesas",
+      "stat1.l": "pruebas automáticas (Minoscreto)",
+      "stat2.l": "proyectos de ciencia de datos",
+      "stat3.l": "plataformas desde un solo código (web + Android)",
       "hero.eyebrow": "Hola, soy Sebastian Herrera",
       "hero.pill": "Busco roles junior de QA, datos y desarrollo · remoto",
-      "hero.h1": "Construyo herramientas probadas para problemas reales, y reviso mi propio trabajo.",
       "hero.proof": "160 pruebas automáticas en Minoscreto · 3 proyectos de ciencia de datos · una app web y Android",
       "btn.linkedin": "LinkedIn",
-      "hero.lead": "Ingeniero de sistemas en Colombia. Construyo herramientas que corren en el navegador, proyectos de datos y prototipos full-stack con React y Python: anonimizadores de documentos, OCR para contabilidad y pronósticos con datos públicos. Me encantan los gatos.",
       "hero.see": "Ver mi trabajo",
       "btn.resume": "Hoja de vida (PDF)",
       "url.resume": "./public/resume/Sebastian-Herrera-resume-es.pdf",
@@ -102,12 +127,14 @@
     };</script>
     <script src="./public/js/i18n.js" defer></script>
     <script src="./public/js/more.js" defer></script>
+    <script src="./public/js/intro.js" defer></script>
   </head>
 
   <body>
-    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+    <a class="skip-link" href="#projects" data-i18n="skip">Skip to content</a>
     <nav class="nav" aria-label="Main">
       <a class="nav-brand" href="#top">sebherr<span>.</span></a>
+      <a class="btn btn-primary nav-resume" href="./public/resume/Sebastian-Herrera-resume-en.pdf" data-i18n-attr="href:url.resume" target="_blank" rel="noopener"><span data-i18n="nav.resume">Resume</span></a>
       <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Menu" data-i18n-attr="aria-label:nav.menu"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
       <ul class="nav-links" id="nav-links">
         <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
@@ -119,48 +146,81 @@
       </ul>
     </nav>
 
-    <header class="hero" id="top">
-      <img class="avatar" src="https://avatars.githubusercontent.com/u/79419348?v=4" alt="Sebastian's GitHub avatar" data-i18n-attr="alt:hero.avatar" width="112" height="112" />
-      <p class="status-pill"><span class="long" data-i18n="hero.pill">Open to junior QA, data and developer roles · remote</span><span class="short" data-i18n="hero.pill.s">Open to junior QA · data · dev</span></p>
-      <p class="eyebrow" data-i18n="hero.eyebrow">Hi, I'm Sebastian Herrera</p>
-      <h1 data-i18n="hero.h1">I build tested tools for real problems, and I check my own work.</h1>
-      <p class="lead"><span class="long" data-i18n="hero.lead">
-        Systems engineering graduate in Colombia. I build browser tools, data projects and full-stack prototypes with React and Python:
-        document anonymizers, OCR for accounting, and forecasts on public data. I love cats.
-      </span><span class="short" data-i18n="hero.lead.s">React and Python developer in Colombia.</span></p>
-      <p class="proof" data-i18n="hero.proof">160 automated tests in Minoscreto · 3 data science projects · a web + Android app</p>
-      <ul class="chips" aria-label="Summary" data-i18n-attr="aria-label:strip.aria">
-        <li><b data-i18n="chip1.n">160</b><span data-i18n="chip1.l">tests</span></li>
-        <li><b data-i18n="chip2.n">3</b><span data-i18n="chip2.l">data projects</span></li>
-        <li><b data-i18n="chip3.n">Web + Android</b><span data-i18n="chip3.l">app</span></li>
+    <nav class="dots" aria-label="Page sections" data-i18n-attr="aria-label:dots.aria">
+      <ul>
+        <li><a href="#intro" aria-current="true"><span class="sr-only" data-i18n="dots.who">Who I am</span></a></li>
+        <li><a href="#build"><span class="sr-only" data-i18n="dots.build">What I build</span></a></li>
+        <li><a href="#proof"><span class="sr-only" data-i18n="dots.proof">Proof</span></a></li>
+        <li><a href="#projects"><span class="sr-only" data-i18n="dots.projects">Projects</span></a></li>
       </ul>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="./public/resume/Sebastian-Herrera-resume-en.pdf" data-i18n-attr="href:url.resume" target="_blank" rel="noopener"><i class="fa-solid fa-file-pdf" aria-hidden="true"></i> <span data-i18n="btn.resume">Resume (PDF)</span></a>
-        <a class="btn" href="#projects" data-i18n="hero.see">See my work</a>
-        <a class="btn" href="https://www.linkedin.com/in/sebastian-herrera-claro-23a0af/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin" aria-hidden="true"></i> <span data-i18n="btn.linkedin">LinkedIn</span></a>
-      </div>
-
-
-    </header>
+    </nav>
 
     <main id="main" tabindex="-1">
-      <section class="doors" aria-label="Choose your path">
-        <a class="door" href="#projects">
-          <strong data-i18n="door1.h">Hiring for a role?</strong>
-          <span data-i18n="door1.p">Projects and resume, all on this page.</span>
-        </a>
-        <a class="door" href="services.html">
-          <strong data-i18n="door2.h">Need a website or translation?</strong>
-          <span data-i18n="door2.p">Services, prices and examples.</span>
-        </a>
+      <section class="panel panel-who" id="intro" aria-labelledby="intro-h" tabindex="-1">
+        <span id="top"></span>
+        <p class="status-pill"><span class="long" data-i18n="hero.pill">Open to junior QA, data and developer roles · remote</span><span class="short" data-i18n="hero.pill.s">Open to junior QA · data · dev</span></p>
+        <p class="eyebrow"><img class="avatar" src="https://avatars.githubusercontent.com/u/79419348?v=4" alt="Sebastian's GitHub avatar" data-i18n-attr="alt:hero.avatar" width="48" height="48" /><span data-i18n="hero.eyebrow">Hi, I'm Sebastian Herrera</span></p>
+        <h1 id="intro-h" data-i18n="hero.h1">I build tested tools for real problems.</h1>
+        <p class="lead" data-i18n="hero.lead">React and Python developer in Colombia.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="./public/resume/Sebastian-Herrera-resume-en.pdf" data-i18n-attr="href:url.resume" target="_blank" rel="noopener"><i class="fa-solid fa-file-pdf" aria-hidden="true"></i> <span data-i18n="btn.resume">Resume (PDF)</span></a>
+          <a class="btn" href="#projects" data-i18n="hero.see">See my work</a>
+          <a class="btn" href="https://www.linkedin.com/in/sebastian-herrera-claro-23a0af/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin" aria-hidden="true"></i> <span data-i18n="btn.linkedin">LinkedIn</span></a>
+        </div>
+        <a class="next-link" href="#build"><span data-i18n="next.build">What I build</span> <i class="fa-solid fa-arrow-down" aria-hidden="true"></i></a>
       </section>
-      <ul class="strip" aria-label="Summary" data-i18n-attr="aria-label:strip.aria">
-        <li data-i18n="strip.1">160 automated tests</li>
-        <li data-i18n="strip.2">3 data projects with live dashboards</li>
-        <li data-i18n="strip.3">Web + Android app</li>
-        <li data-i18n="strip.4">Spanish native, English for work</li>
-      </ul>
-      <section class="section" id="projects">
+
+      <section class="panel panel-wide" id="build" aria-labelledby="build-h" tabindex="-1">
+        <div class="panel-head">
+          <h2 id="build-h" data-i18n="build.h">…and I check my own work.</h2>
+          <p data-i18n="build.sub">Three kinds of work:</p>
+        </div>
+        <div class="kinds">
+          <article class="kind">
+            <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+            <h3 data-i18n="b1.t">Browser tools</h3>
+            <p data-i18n="b1.p">Private tools that run in your browser, like Minoscreto.</p>
+            <a href="#projects"><span data-i18n="b1.a">See Minoscreto</span> <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+          </article>
+          <article class="kind">
+            <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
+            <h3 data-i18n="b2.t">Data projects</h3>
+            <p data-i18n="b2.p">Forecasts, A/B tests and dashboards on real public data.</p>
+            <a href="https://soushiki.github.io/data-science/" target="_blank" rel="noopener"><span data-i18n="b2.a">See the data projects</span> <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+          </article>
+          <article class="kind">
+            <i class="fa-solid fa-receipt" aria-hidden="true"></i>
+            <h3 data-i18n="b3.t">Business tools</h3>
+            <p data-i18n="b3.p">Paperwork into spreadsheets for a restaurant and a clinic.</p>
+            <a href="./public/html/ingresos-demo.html"><span data-i18n="b3.a">See Ingresos App</span> <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+          </article>
+        </div>
+        <a class="next-link" href="#proof"><span data-i18n="next.proof">The proof</span> <i class="fa-solid fa-arrow-down" aria-hidden="true"></i></a>
+      </section>
+
+      <section class="panel panel-wide" id="proof" aria-labelledby="proof-h" tabindex="-1">
+        <div class="panel-head">
+          <h2 id="proof-h" data-i18n="proof.h">Proof, not promises</h2>
+        </div>
+        <ul class="stats">
+          <li><b class="count" data-count="160">160</b><span data-i18n="stat1.l">automated tests (Minoscreto)</span></li>
+          <li><b class="count" data-count="3">3</b><span data-i18n="stat2.l">data science projects</span></li>
+          <li><b class="count" data-count="2">2</b><span data-i18n="stat3.l">platforms from one codebase (web + Android)</span></li>
+        </ul>
+        <div class="doors" aria-label="Choose your path">
+          <a class="door" href="#projects">
+            <strong data-i18n="door1.h">Hiring for a role?</strong>
+            <span data-i18n="door1.p">Projects and resume, all on this page.</span>
+          </a>
+          <a class="door" href="services.html">
+            <strong data-i18n="door2.h">Need a website or translation?</strong>
+            <span data-i18n="door2.p">Services, prices and examples.</span>
+          </a>
+        </div>
+        <a class="next-link" href="#projects"><span data-i18n="next.projects">Featured projects</span> <i class="fa-solid fa-arrow-down" aria-hidden="true"></i></a>
+      </section>
+
+      <section class="section" id="projects" tabindex="-1">
         <div class="section-head">
           <h2 data-i18n="proj.h">Featured projects</h2>
           <p data-i18n="proj.sub">Recent work, from browser-only privacy tools to full-stack prototypes.</p>
