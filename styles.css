@@ -493,7 +493,8 @@ html { scroll-padding-top: var(--nav-h); scroll-behavior: smooth; } /* intro.js 
 
 /* Reveal: played on a clock once a panel is 20% in view (IntersectionObserver in public/js/intro.js), never scrubbed */
 /* Slide 1 is the first screen: shown at once, never faded in on load. */
-.js .panel:not(#intro) > * { opacity: 0; transform: translateY(24px); transition: opacity 420ms cubic-bezier(0.2, 0.7, 0.2, 1), transform 420ms cubic-bezier(0.2, 0.7, 0.2, 1); transition-delay: calc(var(--i, 0) * 50ms); }
+.js .panel:not(#intro) > * { transition: opacity 420ms cubic-bezier(0.2, 0.7, 0.2, 1), transform 420ms cubic-bezier(0.2, 0.7, 0.2, 1); transition-delay: calc(var(--i, 0) * 50ms); }
+.js .panel:not(#intro):not(.is-in) > * { opacity: 0; transform: translateY(24px); }
 .js .panel.is-in > * { opacity: 1; transform: none; }
 .panel > :nth-child(2) { --i: 1; } .panel > :nth-child(3) { --i: 2; } .panel > :nth-child(4) { --i: 3; } .panel > :nth-child(5) { --i: 4; } .panel > :nth-child(6) { --i: 5; } .panel > :nth-child(7) { --i: 6; }
 
