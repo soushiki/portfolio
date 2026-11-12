@@ -548,3 +548,22 @@ html:not(.js) .dots { display: none; }
 @media (max-width: 600px) {
   #intro, #build, #proof { justify-content: flex-start; padding-top: var(--s5, 40px); }
 }
+
+/* Slide 1 order (Sebastian, 2026-11-11; compared with brittanychiang.com and leerob.com, where the
+   name is the h1 at the top): name as the biggest h1, the headline as a smaller h2, the lead, then
+   the availability tag as a small status line right above the buttons it relates to. */
+.who-head { display: flex; align-items: center; justify-content: center; gap: 1rem; margin: 0 0 0.9rem; }
+.who-head .avatar { width: 56px; height: 56px; margin: 0; border-width: 2px; flex: none; }
+.panel-who h1.who-name { font-size: clamp(2.4rem, 5.6vw, 3.6rem); line-height: 1.05; margin: 0; text-wrap: balance; }
+.panel-who h2.who-role { font-family: 'Mozilla Headline', sans-serif; font-size: clamp(1.25rem, 2.4vw, 1.75rem); font-weight: 600; line-height: 1.25; margin: 0 0 0.75rem; color: var(--text); text-wrap: balance; }
+.panel-who .lead { margin-bottom: 1.25rem; }
+.panel-who .status-pill { margin: 0 0 1.1rem; }
+@media (max-width: 600px) {
+  .who-head { justify-content: flex-start; gap: var(--s2, 12px); margin-bottom: var(--s2, 12px); }
+  .who-head .avatar { width: 44px; height: 44px; }
+  .panel-who h1.who-name { font-size: clamp(1.7rem, 8vw, 2.2rem); }
+  html[lang="es"] .panel-who h1.who-name { font-size: clamp(1.6rem, 7.4vw, 2.1rem); }
+  .panel-who h2.who-role { font-size: clamp(1.05rem, 4.6vw, 1.25rem); margin-bottom: var(--s2, 12px); }
+  .panel-who .lead { margin-bottom: var(--s3, 16px); }
+  .panel-who .status-pill { margin-bottom: var(--s3, 16px); }
+}
