@@ -550,6 +550,31 @@ html { scroll-padding-top: var(--nav-h); scroll-behavior: smooth; } /* intro.js 
 html.motion-calm.js .panel:not(#intro) > * { transition: opacity 300ms ease; transition-delay: 0s; }
 html.motion-calm.js .panel:not(#intro):not(.is-in) > * { transform: none; }
 html.motion-calm .next-link i { animation: none; }
+
+/* #build cards entrance (Fable design, 2026-11-12) */
+.js #build.panel.panel-wide > .kinds { opacity: 1; transform: none; transition: none; }
+#build .kind { --k: 0; --x: 0px; --r: 0deg; --y: -28px; --rx: 18deg; --s: .86; --d: 900ms; }
+#build .kind:nth-child(1) { --k: 0; --x: -20px; --r: -4deg; }
+#build .kind:nth-child(2) { --k: 1; --x: 0px; --r: 0deg; }
+#build .kind:nth-child(3) { --k: 2; --x: 20px; --r: 4deg; }
+@media (max-width: 800px), (max-height: 500px) {
+    #build .kind { --x: 0px; --y: 24px; --rx: 10deg; --s: .95; --d: 700ms; }
+    #build .kind:nth-child(1) { --r: -1.5deg; }
+    #build .kind:nth-child(3) { --r: 1.5deg; }
+}
+@keyframes kind-in {
+    0% { opacity: 0; transform: perspective(900px) translate3d(var(--x), var(--y), 0) rotateX(var(--rx)) scale(var(--s)); }
+    35% { opacity: 1; }
+    100% { opacity: 1; transform: perspective(900px) translate3d(0, 0, 0) rotateX(0) scale(1); }
+}
+@keyframes kind-flat {
+    0%, 40% { rotate: var(--r); }
+    100% { rotate: 0deg; }
+}
+.js #build .kind:not(.is-seen) { opacity: 0; }
+.js #build .kind.is-seen { animation: kind-in var(--d) cubic-bezier(0.16,1,0.3,1) calc(var(--k,0)*70ms) backwards, kind-flat var(--d) cubic-bezier(0.87,0,0.13,1) calc(var(--k,0)*70ms) backwards; }
+html.motion-calm.js #build .kind { transition: opacity 300ms ease, transform 300ms ease; transition-delay: calc(var(--k,0)*40ms); }
+html.motion-calm.js #build .kind:not(.is-seen) { opacity: 0; transform: translateY(8px); }
 @media (min-width: 601px) and (max-width: 900px) { .nav { gap: 0.6rem; } .nav-links { flex-wrap: wrap; gap: 0.25rem 0.75rem; justify-content: flex-end; min-width: 0; } .nav-resume { flex-shrink: 0; } }
 
 /* Fable review fixes: dots need JS to track the section, so hide them without it;

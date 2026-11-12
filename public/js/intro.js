@@ -8,7 +8,21 @@
   var root = document.documentElement;
   function calm() { return root.classList.contains('motion-calm'); }
   var panels = document.querySelectorAll('.panel');
-  if (!('IntersectionObserver' in window)) { panels.forEach(function (p) { p.classList.add('is-in'); }); return; }
+  var kinds = document.querySelectorAll('#build .kind');
+  if (!('IntersectionObserver' in window)) {
+    panels.forEach(function (p) { p.classList.add('is-in'); });
+    kinds.forEach(function (k) { k.classList.add('is-seen'); });
+    return;
+  }
+
+  // #build cards: each card gets .is-seen once from its own observer (CSS plays the entrance); focus also reveals it
+  var kio = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-seen'); kio.unobserve(e.target); } });
+  }, { threshold: 0.25, rootMargin: '0px 0px -8% 0px' });
+  kinds.forEach(function (k) {
+    kio.observe(k);
+    k.addEventListener('focusin', function () { k.classList.add('is-seen'); });
+  });
 
   // Reveal: once a panel is 20% in view its children play the full rise on a clock (CSS transition), once.
   var rev = new IntersectionObserver(function (es) {
