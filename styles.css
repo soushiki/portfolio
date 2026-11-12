@@ -379,6 +379,7 @@ main:focus { outline: none; }
     .hero-actions { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s2); justify-content: stretch; }
     .hero-actions .btn { justify-content: center; min-height: 44px; padding: 0.55rem 0.75rem; text-align: center; }
     .hero-actions .btn-primary:first-child { grid-column: 1 / -1; }
+    .hero-actions .btn-discuss { grid-column: 1 / -1; }
 
     /* Doors + strip */
     .doors { gap: var(--s3); padding: 0 var(--s3); }
@@ -564,4 +565,12 @@ html:not(.js) .dots { display: none; }
   .panel-who h2.who-role { font-size: clamp(1.05rem, 4.6vw, 1.25rem); margin-bottom: var(--s2, 12px); }
   .panel-who .lead { margin-bottom: var(--s3, 16px); }
   .panel-who .status-pill { margin-bottom: var(--s3, 16px); }
+}
+
+/* Hero: two status pills, wrap onto separate lines when they do not fit */
+.hero-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; margin: 0 0 1.1rem; }
+.panel-who .hero-pills .status-pill { margin: 0; }
+.btn-discuss .wa-icon { flex: none; }
+@media (max-width: 600px) {
+  .hero-pills { margin-bottom: var(--s3, 16px); }
 }
