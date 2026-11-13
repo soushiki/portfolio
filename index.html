@@ -120,6 +120,9 @@
       "d.p": "Entidades y negocios necesitan saber qué atender primero y qué demanda esperar.",
       "d.s": "Tres proyectos con datos públicos reales: qué quejas del 311 de Nueva York se van a atrasar, el pronóstico de demanda eléctrica de Gran Bretaña frente al operador de la red y una prueba A/B de correos.",
       "d.v": "Cada uno dice qué ganó, qué perdió y contra qué línea base, para poder decidir con eso.",
+      "q.p": "Las apps que usan una API pública se rompen sin aviso cuando la API cambia su forma de responder.",
+      "q.s": "Un plan de pruebas escrito y 44 pruebas automáticas para la API de datos abiertos 311 de la ciudad de Nueva York: el contrato de respuesta, los filtros y la paginación, y cómo rechaza solicitudes mal hechas.",
+      "q.v": "GitHub las corre en cada cambio y cada mañana, así que un cambio en la API aparece como una prueba fallida el mismo día.",
       "how.h": "Cómo funciona",
       "s1.h": "Resumen por escrito",
       "s1.p": "Me cuentas lo que necesitas en un mensaje corto.",
@@ -134,6 +137,8 @@
       "more.sub": "8 proyectos más pequeños: apps en React de mi ruta de aprendizaje, un juego y un prototipo de sitio web.",
       "t.data": "Proyectos de ciencia de datos",
       "a.data": "Abrir el portafolio de ciencia de datos",
+      "t.apitests": "Pruebas de la API NYC 311",
+      "a.apitests": "Abrir las pruebas de la API NYC 311 en GitHub",
       "c.brasa": "Prototipo de landing page para un restaurante de Cartagena: smash burgers, pizza al horno de leña y costillas, con secciones de menú, sedes y pedidos.",
       "c.gacha": "Juego gacha de máquina de cápsulas con 21 gatos con poderes: pity suave y duro, sistema 50/50 de probabilidad aumentada, un frasco de premios, retos diarios y una revelación Mítica animada.",
       "c.davinci": "App de notas en Markdown con inicio de sesión y base de datos en Firebase.",
@@ -146,6 +151,7 @@
       "l.case": "Caso de estudio",
       "l.demo": "Así funciona",
       "l.code": "Código",
+      "l.plan": "Plan de pruebas",
       "l.play": "Jugar",
       "a.minoscreto": "Abrir Minoscreto",
       "a.ingresos": "Caso de estudio de Ingresos App",
@@ -350,6 +356,25 @@
               <ul class="tags"><li>Python</li><li>pandas</li><li>scikit-learn</li><li>Time series</li></ul>
               <div class="card-links">
                 <a href="https://soushiki.github.io/data-science/" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="l.live">Live</span></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="card">
+            <a class="card-media media-placeholder media-apitests" href="https://github.com/soushiki/api-tests-nyc311" target="_blank" rel="noopener" aria-label="Open the NYC 311 API tests on GitHub" data-i18n-attr="aria-label:a.apitests">
+              <i class="fa-solid fa-vial-circle-check"></i>
+            </a>
+            <div class="card-body">
+              <h3 data-i18n="t.apitests">NYC 311 API tests</h3>
+              <dl class="case">
+                <div><dt data-i18n="case.p">Problem</dt><dd data-i18n="q.p">Apps built on a public API break without warning when the API changes how it answers.</dd></div>
+                <div><dt data-i18n="case.s">Solution</dt><dd data-i18n="q.s">A written test plan and 44 automated tests for New York City's 311 open data API: the response contract, filters and paging, and how it rejects bad requests.</dd></div>
+                <div><dt data-i18n="case.v">What it changes</dt><dd data-i18n="q.v">GitHub runs them on every change and every morning, so a change in the API shows up as a failing test the same day.</dd></div>
+              </dl>
+              <ul class="tags"><li>Python</li><li>pytest</li><li>JSON Schema</li><li>GitHub Actions</li></ul>
+              <div class="card-links">
+                <a href="https://github.com/soushiki/api-tests-nyc311" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> <span data-i18n="l.code">Code</span></a>
+                <a href="https://github.com/soushiki/api-tests-nyc311/blob/main/TEST-PLAN.md" target="_blank" rel="noopener"><i class="fa-solid fa-book-open"></i> <span data-i18n="l.plan">Test plan</span></a>
               </div>
             </div>
           </article>

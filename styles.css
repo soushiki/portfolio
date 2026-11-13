@@ -264,6 +264,7 @@ a.media-placeholder:hover { text-decoration: none; }
 
 /* Data science card */
 .media-data { background: linear-gradient(135deg, #5B4E8A, #2A2447); }
+.media-apitests { background: linear-gradient(135deg, #3E7A5E, #1F3D2F); }
 
 /* 3D box between sections */
 .section-tight { padding-top: 0; padding-bottom: 1rem; }
