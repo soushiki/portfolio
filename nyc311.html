@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en" data-default-lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="An API testing project: 44 automated checks of New York's public 311 complaints data, run by a robot every morning at 06:00 Colombia time." />
+    <title>A robot that calls New York's complaints line every morning · Sebastian Herrera</title>
+    <script>document.documentElement.className += ' js';
+    (function () {
+      var m = /[?&]motion=(calm|full)(?:&|$)/.exec(location.search), mode, source;
+      if (m) { mode = m[1]; source = 'url'; }
+      else {
+        try { var v = localStorage.getItem('p2d-motion'); if (v === 'calm' || v === 'full') { mode = v; source = 'saved'; } } catch (e) {}
+        if (!mode) { source = 'OS'; mode = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'calm' : 'full'; }
+      }
+      if (mode === 'calm') document.documentElement.classList.add('motion-calm');
+      window.__motion = { mode: mode, source: source };
+    })();</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Mozilla+Headline:wght@200..700&family=Outfit:wght@100..900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./public/css/project.css" />
+    <script>window.I18N_ES = {
+      "meta.title": "Un robot que llama cada mañana a la línea de quejas de Nueva York · Sebastian Herrera",
+      "meta.description": "Un proyecto de pruebas de API: 44 verificaciones automáticas de los datos públicos de quejas 311 de Nueva York, ejecutadas por un robot cada mañana a las 06:00 hora de Colombia.",
+      "skip": "Saltar al contenido",
+      "nav.work": "Proyectos",
+      "nav.services": "Servicios",
+      "nav.menu": "Menú",
+      "nav.resume": "Hoja de vida",
+      "url.resume": "./public/resume/Sebastian-Herrera-resume-es.pdf",
+      "steps.aria": "Pasos de la página",
+      "st.q": "La pregunta",
+      "st.1": "1 Por qué",
+      "st.2": "2 Una pregunta, por partes",
+      "st.3": "3 Cinco tipos de prueba",
+      "st.4": "4 Rómpelo tú",
+      "st.5": "5 Lo difícil",
+      "st.6": "6 Cada día",
+      "st.7": "Lo que demuestra",
+      "ev": "Ver la evidencia",
+      "src": "Fuente:",
+      "h.eyebrow": "Proyecto de pruebas de API · Quejas 311 de Nueva York · Python y pytest",
+      "h.h1": "Un robot que llama cada mañana a la línea de quejas de Nueva York",
+      "h.lead": "Cada mañana a las 6:00 un robot llama a la línea de quejas de Nueva York para comprobar que sigue respondiendo igual.",
+      "h.p": "311 es la línea telefónica de Nueva York para quejas de la ciudad. La API es esa misma línea, pero para aplicaciones. El robot la llama a las 06:00 hora de Colombia.",
+      "h.stats.aria": "En cifras: 44 verificaciones, 5 tipos, todos los días a las 06:00 hora de Colombia",
+      "h.s1": "verificaciones",
+      "h.s2": "tipos",
+      "h.s3": "todos los días, hora de Colombia",
+      "h.badge.alt": "Estado de la última ejecución de las pruebas en GitHub Actions",
+      "h.repo": "Código en GitHub",
+      "h.plan": "Plan de pruebas",
+      "h.runs": "Últimas ejecuciones",
+      "h.ev.p": "Los datos son abiertos y públicos. El proyecto no usa ninguna llave privada.",
+      "h.ev.repo": "Repositorio del proyecto",
+      "h.ev.plan": "Plan de pruebas (TEST-PLAN.md)",
+      "h.ev.rep": "Último informe HTML: está en cada ejecución, en el archivo test-report",
+      "w.label": "Paso 1 de 6",
+      "w.h": "Las aplicaciones hechas con datos públicos se rompen sin aviso cuando la fuente cambia su forma de responder.",
+      "w.p": "La API es la línea a la que llaman las aplicaciones para pedir los datos del 311. Si un día contesta distinto, por ejemplo sin una casilla que siempre enviaba, la aplicación se rompe.",
+      "w.ill": "Ilustración",
+      "w.cap": "Dos escenas de ejemplo, no datos reales: una respuesta que se mantiene y una que cambia de forma.",
+      "w.a.h": "Hoy",
+      "w.a.1": "La aplicación pide: 5 quejas de Brooklyn",
+      "w.a.2": "La respuesta trae las casillas de siempre",
+      "w.a.3": "La aplicación muestra la lista",
+      "w.b.h": "Algún día",
+      "w.b.1": "La aplicación pide: 5 quejas de Brooklyn",
+      "w.b.2": "A la respuesta le falta una casilla que siempre estaba",
+      "w.b.3": "La aplicación se rompe",
+      "w.ev.p": "El plan de pruebas fija qué se prueba y qué no.",
+      "w.ev.in": "Dentro: disponibilidad, forma de la respuesta (contrato), parámetros de consulta y respuestas de error ante peticiones inválidas.",
+      "w.ev.out": "Fuera: pruebas de carga, autenticación, otros formatos, otros conjuntos de datos y si los datos de 311 son correctos.",
+      "w.ev.link": "Plan de pruebas completo (TEST-PLAN.md)",
+      "a.label": "Paso 2 de 6",
+      "a.h": "Esta dirección web es una pregunta: dame 5 quejas de Brooklyn.",
+      "a.p": "Toca cada parte de la dirección para ver qué promete y qué prueba la vigila.",
+      "a.c1.h": "El conjunto de datos",
+      "a.c1.p": "Qué lista leer: las solicitudes de servicio 311 de Nueva York. La promesa: la dirección responde con una lista, en formato JSON.",
+      "a.c2.h": "Cuántas: dame 5",
+      "a.c2.p": "La promesa: llegan exactamente 5 filas, ni 4 ni 6.",
+      "a.c3.h": "Cuáles: solo Brooklyn",
+      "a.c3.p": "La promesa: cada fila dice BROOKLYN.",
+      "a.test": "La vigila",
+      "a.test2": "La vigilan",
+      "a.and": "y",
+      "a.c2.t": "(prueba con 1, 5 y 25)",
+      "r.h": "Lo que llega",
+      "r.status": "«200 OK» quiere decir: respondió con normalidad.",
+      "r.f1": "unique_key",
+      "r.f2": "complaint_type",
+      "r.f3": "status",
+      "r.f4": "borough",
+      "r.count": "La API real devuelve 5. Aquí ves los 4 registros de Brooklyn del ejemplo guardado, sin cambios.",
+      "r.aria": "Registros de ejemplo, con 4 campos cada uno",
+      "r.chk": "Lo que se verifica sobre esa respuesta",
+      "r.k1": "Respondió con normalidad (200)",
+      "r.k2": "La respuesta es una lista JSON",
+      "r.k3": "Llegó el número de filas pedido",
+      "r.k4": "Cada fila es de BROOKLYN",
+      "r.k5": "Cada fila trae las 7 casillas prometidas",
+      "r.ok": "Cumple",
+      "r.ev.p": "Esta página nunca llama a la API. El enlace abre la petición real en una pestaña nueva; la respuesta cambia cada día, así que sus valores no serán los mismos.",
+      "r.ev.link": "Abrir la petición real (pestaña nueva)",
+      "r.ev.code": "La prueba que vigila el filtro",
+      "r.ev.plan": "Casos de prueba en el plan (TEST-PLAN.md)",
+      "k.label": "Paso 3 de 6",
+      "k.h": "44 verificaciones en cinco tipos, cada uno responde una pregunta cotidiana.",
+      "k.p": "Cada tipo se explica con una pregunta y un ejemplo real del código.",
+      "k.1.h": "Humo",
+      "k.1.q": "¿Contesta en menos de 5 segundos?",
+      "k.1.e": "La respuesta tarda menos de 5 s.",
+      "k.2.h": "Contrato",
+      "k.2.q": "¿Cada respuesta llena las mismas casillas?",
+      "k.2.e": "created_date se declara como marca de tiempo.",
+      "k.3.h": "Filtros",
+      "k.3.q": "¿Recibí lo que pedí?",
+      "k.3.e": "Con borough=BROOKLYN, todas las filas son de Brooklyn.",
+      "k.4.h": "Negativas",
+      "k.4.q": "Si pregunto una tontería, ¿recibo un «no» claro y nunca datos equivocados?",
+      "k.4.e": "Un $where roto devuelve 400 con el código query.compiler.malformed.",
+      "k.5.h": "Sin conexión",
+      "k.5.q": "¿Puedo comprobar sin internet?",
+      "k.5.e": "El esquema rechaza un registro al que le falta cada una de las 7 casillas obligatorias.",
+      "k.ex": "Ejemplo real:",
+      "k.u1": "pruebas",
+      "k.marks.h": "Las 44 verificaciones, por tipo",
+      "k.marks.aria": "44 marcas agrupadas por tipo: humo 3, contrato 5, filtros 12, negativas 10, sin conexión 14",
+      "k.leg1": "Círculo: llama a la API real (30)",
+      "k.leg2": "Rombo: usa el ejemplo guardado, sin internet (14)",
+      "k.ev.p": "Una prueba real por tipo, tal como está en el repositorio.",
+      "k.ev.schema": "Extracto del esquema: las casillas obligatorias",
+      "k.ev.codes": "Códigos de error que fijan las pruebas negativas",
+      "k.ev.c1": "400 con code = query.compiler.malformed: $where roto, $limit o $offset inválidos",
+      "k.ev.c2": "400 con errorCode = query.soql.no-such-column: columna que no existe en $select o $order",
+      "k.ev.c3": "400 con errorCode = query.soql.type-mismatch: texto comparado con una fecha",
+      "k.ev.c4": "400 con «Unrecognized arguments»: parámetro de consulta desconocido",
+      "k.ev.c5": "404 con code = dataset.missing: conjunto de datos que no existe",
+      "b.label": "Paso 4 de 6",
+      "b.h": "Quita una de las 7 casillas prometidas y mira cómo la verificación lo detecta.",
+      "b.p": "Este es un registro real del ejemplo guardado. Apaga una casilla, como haría una API que deja de enviarla.",
+      "b.rec.aria": "Casillas del registro; apaga una para quitarla",
+      "b.on": "presente",
+      "b.pass": "✓ Pasa",
+      "b.reset": "Devolver todas las casillas",
+      "b.note": "La verificación corre en esta página, sin llamar a ninguna API.",
+      "b.schema": "required del esquema",
+      "b.ev.p": "Aquí la verificación es una comprobación simple de JavaScript: mira que estén las 7 claves obligatorias, igual que la lista required del esquema. Las pruebas del repositorio hacen lo mismo con la biblioteca jsonschema, una vez por casilla (prueba sin conexión).",
+      "b.ev.schema": "Extracto del esquema",
+      "b.ev.l1": "Esquema (service_request.json)",
+      "b.ev.l2": "Ejemplo guardado (sample_10.json)",
+      "p.label": "Paso 5 de 6",
+      "p.h": "Los datos cambian cada día, así que las pruebas comprueban reglas y no valores exactos.",
+      "p.prob": "Problema",
+      "p.dec": "Decisión",
+      "p.1.p": "Los datos cambian a diario y no se pueden fijar valores exactos.",
+      "p.1.d": "Se comprueban propiedades (filtros, orden, tipos). Las pruebas de fechas usan un día ya cerrado, el 2023-01-01.",
+      "p.2.p": "Una caída de la red o del servidor haría fallar pruebas que no son errores del producto.",
+      "p.2.d": "Se reintenta una vez, solo con 429 y 5xx. Los 4xx nunca se reintentan, porque las pruebas negativas los esperan. Una ejecución roja por una caída se repite antes de reportar nada.",
+      "p.3.p": "Los mensajes de error no están documentados y su forma puede cambiar.",
+      "p.3.d": "Las verificaciones salen de respuestas observadas en vivo y quedan fijadas; si la forma cambia, una prueba falla. Hay dos formas de error, con code y con errorCode.",
+      "p.ev.p": "El reintento y una prueba que fija una forma de error, tal como están en el repositorio.",
+      "d.label": "Paso 6 de 6",
+      "d.h": "Nadie tiene que acordarse: corre sola, y también después de cada cambio.",
+      "d.aria": "Franja de 24 horas con una marca a las 06:00 hora de Colombia, que son las 11:00 UTC",
+      "d.lab": "06:00 Colombia · 11:00 UTC",
+      "d.p": "Todos los días a las 11:00 UTC, que son las 06:00 en Colombia, un robot de GitHub corre las 44 verificaciones y guarda un informe HTML, haya pasado o fallado.",
+      "d.ev.p": "El flujo de trabajo corre en cada cambio, en cada solicitud de cambio, cada día y a pedido.",
+      "d.ev.wf": "Flujo de trabajo (CI)",
+      "d.ev.runs": "Ejecuciones recientes",
+      "sk.h": "Lo que esto demuestra que sé hacer",
+      "sk.1.h": "Escribir un plan de pruebas a partir de riesgos",
+      "sk.1.p": "Qué puede fallar, qué se prueba, qué queda fuera y cómo se maneja cada riesgo.",
+      "sk.2.h": "Automatizar pruebas de API",
+      "sk.2.p": "44 verificaciones en cinco tipos, con un esquema que describe la respuesta.",
+      "sk.3.h": "Dejarlas corriendo solas, con informes",
+      "sk.3.p": "Un robot las corre cada día y guarda el informe, aunque falle.",
+      "sk.ev.p": "Todo está abierto en el repositorio.",
+      "sk.repo": "Repositorio",
+      "job.text": "¿Buscas contratarme para un empleo? Mira mis proyectos y hoja de vida",
+      "job.link": "Volver a los proyectos"
+    };</script>
+    <script src="./public/js/i18n.js" defer></script>
+    <script src="./public/js/project.js" defer></script>
+    <script src="./public/js/nyc311.js" defer></script>
+  </head>
+  <body>
+    <a class="pj-skip" href="#main" data-i18n="skip">Skip to content</a>
+    <nav class="nav" aria-label="Main">
+      <a class="nav-brand" href="./index.html">sebherr<span>.</span></a>
+      <a class="btn btn-primary nav-resume" href="./public/resume/Sebastian-Herrera-resume-en.pdf" data-i18n-attr="href:url.resume" target="_blank" rel="noopener"><span data-i18n="nav.resume">Resume</span></a>
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Menu" data-i18n-attr="aria-label:nav.menu"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="./index.html#projects" data-i18n="nav.work">Work</a></li>
+        <li><a href="./services.html" data-i18n="nav.services">Services</a></li>
+      </ul>
+    </nav>
+
+    <header class="pj-hero" id="top">
+      <div class="wrap">
+        <p class="pj-eyebrow" data-i18n="h.eyebrow">API testing project · NYC 311 complaints · Python and pytest</p>
+        <h1 data-i18n="h.h1">A robot that calls New York's complaints line every morning</h1>
+        <p class="pj-lead" data-i18n="h.lead">Every morning at 6:00 a robot calls New York's complaints line to check it still answers the same way.</p>
+        <p class="pj-lead" data-i18n="h.p">311 is New York's phone line for city complaints. The API is that same line, but for apps. The robot calls it at 06:00 Colombia time.</p>
+        <ul class="stats" role="group" aria-label="In numbers: 44 checks, 5 kinds, every day at 06:00 Colombia time" data-i18n-attr="aria-label:h.stats.aria">
+          <li class="stat"><b>44</b><span data-i18n="h.s1">checks</span></li>
+          <li class="stat"><b>5</b><span data-i18n="h.s2">kinds</span></li>
+          <li class="stat"><b>06:00</b><span data-i18n="h.s3">every day, Colombia time</span></li>
+        </ul>
+        <a class="nyc-badge" href="https://github.com/soushiki/api-tests-nyc311/actions" target="_blank" rel="noopener"><img src="https://github.com/soushiki/api-tests-nyc311/actions/workflows/ci.yml/badge.svg" alt="Status of the latest test run on GitHub Actions" data-i18n-attr="alt:h.badge.alt" height="20" /></a>
+        <ul class="pj-hero-links">
+          <li><a class="btn btn-primary" href="https://github.com/soushiki/api-tests-nyc311" target="_blank" rel="noopener"><i class="fa-brands fa-github" aria-hidden="true"></i>&nbsp;<span data-i18n="h.repo">Code on GitHub</span></a></li>
+          <li><a class="btn" href="https://github.com/soushiki/api-tests-nyc311/blob/main/TEST-PLAN.md" target="_blank" rel="noopener" data-i18n="h.plan">Test plan</a></li>
+          <li><a class="btn" href="https://github.com/soushiki/api-tests-nyc311/actions" target="_blank" rel="noopener" data-i18n="h.runs">Latest runs</a></li>
+        </ul>
+        <details class="evidence">
+          <summary data-i18n="ev">Show the evidence</summary>
+          <div class="ev-body">
+            <p data-i18n="h.ev.p">The data is open and public. The project uses no private key.</p>
+            <ul class="ev-links">
+              <li><a href="https://github.com/soushiki/api-tests-nyc311" target="_blank" rel="noopener" data-i18n="h.ev.repo">Project repository</a></li>
+              <li><a href="https://github.com/soushiki/api-tests-nyc311/blob/main/TEST-PLAN.md" target="_blank" rel="noopener" data-i18n="h.ev.plan">Test plan (TEST-PLAN.md)</a></li>
+              <li><a href="https://github.com/soushiki/api-tests-nyc311/actions" target="_blank" rel="noopener" data-i18n="h.ev.rep">Latest HTML report: attached to every run as test-report</a></li>
+            </ul>
+          </div>
+        </details>
+      </div>
+    </header>
+
+    <div class="wrap pj-layout">
+      <nav class="steplist" aria-label="Page steps" data-i18n-attr="aria-label:steps.aria">
+        <ol>
+          <li><a href="#top" data-i18n="st.q">The question</a></li>
+          <li><a href="#why" data-i18n="st.1">1 Why</a></li>
+          <li><a href="#anatomy" data-i18n="st.2">2 One question, taken apart</a></li>
+          <li><a href="#kinds" data-i18n="st.3">3 Five kinds of check</a></li>
+          <li><a href="#break" data-i18n="st.4">4 Break it yourself</a></li>
+          <li><a href="#hard" data-i18n="st.5">5 Hard parts</a></li>
+          <li><a href="#daily" data-i18n="st.6">6 Every day</a></li>
+          <li><a href="#skills" data-i18n="st.7">What this shows</a></li>
+        </ol>
+      </nav>
+
+      <main id="main" tabindex="-1" style="min-width:0">
+
+        <!-- Why -->
+        <section class="pj-step" id="why" aria-labelledby="why-h">
+          <p class="step-label" data-i18n="w.label">Step 1 of 6</p>
+          <h2 id="why-h" data-i18n="w.h">Apps built on public data break without warning when the source changes how it answers.</h2>
+          <p data-i18n="w.p">The API is the line apps call to ask for 311 data. If one day it answers differently, say without a box it always sent, the app breaks.</p>
+          <figure class="ill reveal">
+            <p class="ill-tag" data-i18n="w.ill">Illustration</p>
+            <div class="ill-panels">
+              <div class="ill-panel">
+                <h3 data-i18n="w.a.h">Today</h3>
+                <ol class="ill-flow">
+                  <li data-i18n="w.a.1">The app asks: 5 complaints from Brooklyn</li>
+                  <li class="good" data-i18n="w.a.2">The answer has the usual boxes</li>
+                  <li data-i18n="w.a.3">The app shows the list</li>
+                </ol>
+              </div>
+              <div class="ill-panel is-bad">
+                <h3 data-i18n="w.b.h">Some day</h3>
+                <ol class="ill-flow">
+                  <li data-i18n="w.b.1">The app asks: 5 complaints from Brooklyn</li>
+                  <li class="gone" data-i18n="w.b.2">The answer is missing a box that was always there</li>
+                  <li class="bad"><span aria-hidden="true">&#x2717; </span><span data-i18n="w.b.3">The app breaks</span></li>
+                </ol>
+              </div>
+            </div>
+            <figcaption class="chart-note" data-i18n="w.cap">Two example scenes, not real data: an answer that stays the same and one that changes shape.</figcaption>
+          </figure>
+          <details class="evidence">
+            <summary data-i18n="ev">Show the evidence</summary>
+            <div class="ev-body">
+              <p data-i18n="w.ev.p">The test plan sets what is tested and what is not.</p>
+              <ul>
+                <li data-i18n="w.ev.in">In scope: availability, response shape (contract), query parameters and error responses for invalid requests.</li>
+                <li data-i18n="w.ev.out">Out of scope: load testing, authentication, other formats, other datasets and whether the 311 data itself is correct.</li>
+              </ul>
+              <ul class="ev-links">
+                <li><a href="https://github.com/soushiki/api-tests-nyc311/blob/main/TEST-PLAN.md" target="_blank" rel="noopener" data-i18n="w.ev.link">Full test plan (TEST-PLAN.md)</a></li>
+              </ul>
+            </div>
+          </details>
+        </section>
+
+        <!-- One question, taken apart -->
+        <section class="pj-step" id="anatomy" aria-labelledby="anatomy-h">
+          <p class="step-label" data-i18n="a.label">Step 2 of 6</p>
+          <h2 id="anatomy-h" data-i18n="a.h">This web address is a question: give me 5 complaints from Brooklyn.</h2>
+          <p data-i18n="a.p">Tap each part of the address to see what it promises and which test holds it to that promise.</p>
+          <div class="anat" id="anat">
+            <div class="anat-static"><p><code>https://data.cityofnewyork.us/resource/erm2-nwe9.json?$limit=5&amp;borough=BROOKLYN</code></p></div>
+            <ul class="anat-list">
+              <li data-chip="erm2-nwe9.json">
+                <strong data-i18n="a.c1.h">The dataset</strong>
+                <p data-i18n="a.c1.p">Which list to read: New York's 311 service requests. The promise: the address answers with a list, in JSON format.</p>
+                <p><span data-i18n="a.test2">Held to it by</span> <code>test_status_200</code> <span data-i18n="a.and">and</span> <code>test_content_type_is_json</code></p>
+              </li>
+              <li data-chip="$limit=5">
+                <strong data-i18n="a.c2.h">How many: give me 5</strong>
+                <p data-i18n="a.c2.p">The promise: exactly 5 rows come back, not 4 and not 6.</p>
+                <p><span data-i18n="a.test">Held to it by</span> <code>test_limit_is_honoured</code> <span data-i18n="a.c2.t">(tries 1, 5 and 25)</span></p>
+              </li>
+              <li data-chip="borough=BROOKLYN">
+                <strong data-i18n="a.c3.h">Which ones: only Brooklyn</strong>
+                <p data-i18n="a.c3.p">The promise: every row says BROOKLYN.</p>
+                <p><span data-i18n="a.test">Held to it by</span> <code>test_field_filter_borough</code></p>
+              </li>
+            </ul>
+          </div>
+
+          <article class="card answer reveal">
+            <h3 data-i18n="r.h">What comes back</h3>
+            <p class="answer-status" data-i18n="r.status">"200 OK" means: it answered normally.</p>
+            <ul class="recs" aria-label="Example records, 4 fields each" data-i18n-attr="aria-label:r.aria">
+              <li><dl class="rec"><div><dt data-i18n="r.f1">unique_key</dt><dd>71067867</dd></div><div><dt data-i18n="r.f2">complaint_type</dt><dd>Street Condition</dd></div><div><dt data-i18n="r.f3">status</dt><dd>Open</dd></div><div><dt data-i18n="r.f4">borough</dt><dd>BROOKLYN</dd></div></dl></li>
+              <li><dl class="rec"><div><dt data-i18n="r.f1">unique_key</dt><dd>71070234</dd></div><div><dt data-i18n="r.f2">complaint_type</dt><dd>Noise - Commercial</dd></div><div><dt data-i18n="r.f3">status</dt><dd>In Progress</dd></div><div><dt data-i18n="r.f4">borough</dt><dd>BROOKLYN</dd></div></dl></li>
+              <li><dl class="rec"><div><dt data-i18n="r.f1">unique_key</dt><dd>71070378</dd></div><div><dt data-i18n="r.f2">complaint_type</dt><dd>Noise - Vehicle</dd></div><div><dt data-i18n="r.f3">status</dt><dd>In Progress</dd></div><div><dt data-i18n="r.f4">borough</dt><dd>BROOKLYN</dd></div></dl></li>
+              <li><dl class="rec"><div><dt data-i18n="r.f1">unique_key</dt><dd>71073924</dd></div><div><dt data-i18n="r.f2">complaint_type</dt><dd>Noise - Residential</dd></div><div><dt data-i18n="r.f3">status</dt><dd>In Progress</dd></div><div><dt data-i18n="r.f4">borough</dt><dd>BROOKLYN</dd></div></dl></li>
+            </ul>
+            <p class="answer-count" data-i18n="r.count">The real API returns 5. Here you see the 4 Brooklyn records in the saved sample, unchanged.</p>
+            <h4 style="margin:1rem 0 0" data-i18n="r.chk">What is checked on that answer</h4>
+            <ul class="checks">
+              <li><span class="tick" aria-hidden="true">&#x2713;</span><span class="sr-only" data-i18n="r.ok">Pass</span><span data-i18n="r.k1">It answered normally (200)</span><code>test_status_200</code></li>
+              <li><span class="tick" aria-hidden="true">&#x2713;</span><span class="sr-only" data-i18n="r.ok">Pass</span><span data-i18n="r.k2">The answer is a JSON list</span><code>test_content_type_is_json</code></li>
+              <li><span class="tick" aria-hidden="true">&#x2713;</span><span class="sr-only" data-i18n="r.ok">Pass</span><span data-i18n="r.k3">The number of rows asked for arrived</span><code>test_limit_is_honoured</code></li>
+              <li><span class="tick" aria-hidden="true">&#x2713;</span><span class="sr-only" data-i18n="r.ok">Pass</span><span data-i18n="r.k4">Every row is BROOKLYN</span><code>test_field_filter_borough</code></li>
+              <li><span class="tick" aria-hidden="true">&#x2713;</span><span class="sr-only" data-i18n="r.ok">Pass</span><span data-i18n="r.k5">Every row has the 7 promised boxes</span><code>test_sample_records_match_schema</code></li>
+            </ul>
+          </article>
+
+          <details class="evidence">
+            <summary data-i18n="ev">Show the evidence</summary>
+            <div class="ev-body">
+              <p data-i18n="r.ev.p">This page never calls the API. The link opens the real request in a new tab; the answer changes every day, so its values will not match the ones above.</p>
+              <ul class="ev-links">
+                <li><a href="https://data.cityofnewyork.us/resource/erm2-nwe9.json?$limit=5&amp;borough=BROOKLYN" target="_blank" rel="noopener" data-i18n="r.ev.link">Open the real request (new tab)</a></li>
+                <li><a href="https://github.com/soushiki/api-tests-nyc311/blob/main/TEST-PLAN.md" target="_blank" rel="noopener" data-i18n="r.ev.plan">Test cases in the plan (TEST-PLAN.md)</a></li>
+              </ul>
+              <h4 data-i18n="r.ev.code">The test that holds the filter</h4>
+              <pre><code>def test_field_filter_borough(api):
+    rows = api({"borough": "BROOKLYN", "$limit": 20}).json()
+    assert rows and all(r["borough"] == "BROOKLYN" for r in rows)</code></pre>
+            </div>
+          </details>
+        </section>
+
+        <!-- Five kinds -->
+        <section class="pj-step" id="kinds" aria-labelledby="kinds-h">
+          <p class="step-label" data-i18n="k.label">Step 3 of 6</p>
+          <h2 id="kinds-h" data-i18n="k.h">44 checks in five kinds, each answering an everyday question.</h2>
+          <p data-i18n="k.p">Each kind is explained with a question and one real example from the code.</p>
+          <div class="cards cols-3 reveal">
+            <article class="card">
+              <h3><span data-i18n="k.1.h">Smoke</span> <span class="kind-n">(3)</span></h3>
+              <p class="kind-q" data-i18n="k.1.q">Does it pick up within 5 seconds?</p>
+              <p data-i18n="k.1.e">The answer takes under 5 s.</p>
+              <p class="kind-ex"><span data-i18n="k.ex">Real example:</span> <code>test_response_time_under_budget</code></p>
+            </article>
+            <article class="card">
+              <h3><span data-i18n="k.2.h">Contract</span> <span class="kind-n">(5)</span></h3>
+              <p class="kind-q" data-i18n="k.2.q">Does every answer fill in the same boxes?</p>
+              <p data-i18n="k.2.e">created_date is declared as a timestamp.</p>
+              <p class="kind-ex"><span data-i18n="k.ex">Real example:</span> <code>test_header_types_declare_timestamps</code></p>
+            </article>
+            <article class="card">
+              <h3><span data-i18n="k.3.h">Filters</span> <span class="kind-n">(12)</span></h3>
+              <p class="kind-q" data-i18n="k.3.q">Did I get what I asked for?</p>
+              <p data-i18n="k.3.e">With borough=BROOKLYN, every row is from Brooklyn.</p>
+              <p class="kind-ex"><span data-i18n="k.ex">Real example:</span> <code>test_field_filter_borough</code></p>
+            </article>
+            <article class="card">
+              <h3><span data-i18n="k.4.h">Negative</span> <span class="kind-n">(10)</span></h3>
+              <p class="kind-q" data-i18n="k.4.q">Ask nonsense, get a clear "no", never wrong data.</p>
+              <p data-i18n="k.4.e">A broken $where returns 400 with the code query.compiler.malformed.</p>
+              <p class="kind-ex"><span data-i18n="k.ex">Real example:</span> <code>test_malformed_where_returns_compiler_error</code></p>
+            </article>
+            <article class="card">
+              <h3><span data-i18n="k.5.h">Offline</span> <span class="kind-n">(14)</span></h3>
+              <p class="kind-q" data-i18n="k.5.q">Can I check without internet?</p>
+              <p data-i18n="k.5.e">The schema rejects a record missing each of the 7 required boxes.</p>
+              <p class="kind-ex"><span data-i18n="k.ex">Real example:</span> <code>test_schema_rejects_record_missing_required_field</code></p>
+            </article>
+          </div>
+
+          <h3 data-i18n="k.marks.h">The 44 checks, by kind</h3>
+          <div class="marks reveal" role="img" aria-label="44 marks grouped by kind: smoke 3, contract 5, filters 12, negative 10, offline 14" data-i18n-attr="aria-label:k.marks.aria">
+            <div class="marks-row"><p><span data-i18n="k.1.h">Smoke</span>: 3</p><ul><li><i></i></li><li><i></i></li><li><i></i></li></ul></div>
+            <div class="marks-row"><p><span data-i18n="k.2.h">Contract</span>: 5</p><ul><li><i></i></li><li><i></i></li><li><i></i></li><li><i></i></li><li><i></i></li></ul></div>
+            <div class="marks-row"><p><span data-i18n="k.3.h">Filters</span>: 12</p><ul><li><i></i></li><li><i></i></li><li><i></i></li><li><i></i></li><li><i></i></li><li><i></i></li><li><i></i></li><li><i></i></li><li><i></i></li><li><i></i></li><li><i></i></li><li><i></i></li></ul></div>
+            <div class="marks-row"><p><span data-i18n="k.4.h">Negative</span>: 10</p><ul><li><i></i></li><li><i></i></li><li><i></i></li><li><i></i></li><li><i></i></li><li><i></i></li><li><i></i></li><li><i></i></li><li><i></i></li><li><i></i></li></ul></div>
+            <div class="marks-row is-off"><p><span data-i18n="k.5.h">Offline</span>: 14</p><ul><li><i></i></li><li><i></i></li><li><i></i></li><li><i></i></li><li><i></i></li><li><i></i></li><li><i></i></li><li><i></i></li><li><i></i></li><li><i></i></li><li><i></i></li><li><i></i></li><li><i></i></li><li><i></i></li></ul></div>
+          </div>
+          <ul class="legend kinds-legend">
+            <li><span class="sw amber circ" aria-hidden="true"></span><span data-i18n="k.leg1">Circle: calls the real API (30)</span></li>
+            <li><span class="sw indigo dia" aria-hidden="true"></span><span data-i18n="k.leg2">Diamond: uses the saved sample, no internet (14)</span></li>
+          </ul>
+
+          <details class="evidence">
+            <summary data-i18n="ev">Show the evidence</summary>
+            <div class="ev-body">
+              <p data-i18n="k.ev.p">One real test per kind, as it is in the repository.</p>
+              <pre><code># smoke
+@pytest.mark.perf
+def test_response_time_under_budget(api):
+    r = api({"$limit": 10})
+    assert r.elapsed.total_seconds() &lt; 5
+
+# contract
+def test_header_types_declare_timestamps(api):
+    ...
+    assert declared["created_date"] == "floating_timestamp"
+    assert declared["unique_key"] == "text"
+
+# filters
+def test_field_filter_borough(api):
+    rows = api({"borough": "BROOKLYN", "$limit": 20}).json()
+    assert rows and all(r["borough"] == "BROOKLYN" for r in rows)
+
+# negative
+def test_malformed_where_returns_compiler_error(api):
+    body = assert_error_json(api({"$where": "bogus((", "$limit": 1}))
+    assert body["code"] == "query.compiler.malformed"
+    assert body["error"] is True
+
+# offline
+def test_schema_rejects_record_missing_required_field(fixture_records, schema, field):
+    bad = copy.deepcopy(fixture_records[0])
+    del bad[field]
+    with pytest.raises(jsonschema.ValidationError):
+        jsonschema.validate(bad, schema)</code></pre>
+              <h4 data-i18n="k.ev.schema">Schema excerpt: the required boxes</h4>
+              <pre><code>"required": [
+  "unique_key", "created_date", "agency", "agency_name",
+  "complaint_type", "status", "borough"
+]</code></pre>
+              <h4 data-i18n="k.ev.codes">Error codes the negative tests pin</h4>
+              <ul>
+                <li data-i18n="k.ev.c1">400 with code = query.compiler.malformed: broken $where, invalid $limit or $offset</li>
+                <li data-i18n="k.ev.c2">400 with errorCode = query.soql.no-such-column: a column that does not exist in $select or $order</li>
+                <li data-i18n="k.ev.c3">400 with errorCode = query.soql.type-mismatch: text compared to a date</li>
+                <li data-i18n="k.ev.c4">400 with "Unrecognized arguments": an unknown query parameter</li>
+                <li data-i18n="k.ev.c5">404 with code = dataset.missing: a dataset that does not exist</li>
+              </ul>
+            </div>
+          </details>
+        </section>
+
+        <!-- Break it yourself -->
+        <section class="pj-step" id="break" aria-labelledby="break-h">
+          <p class="step-label" data-i18n="b.label">Step 4 of 6</p>
+          <h2 id="break-h" data-i18n="b.h">Remove one of the 7 promised boxes and watch the check catch it.</h2>
+          <p data-i18n="b.p">This is one real record from the saved sample. Switch a box off, like an API that stops sending it.</p>
+          <div class="brk" id="brk">
+            <ul class="brk-rows" aria-label="Boxes of the record; switch one off to remove it" data-i18n-attr="aria-label:b.rec.aria">
+              <li class="brk-row"><label><input type="checkbox" role="switch" data-f="unique_key" value="71067867" checked disabled /><span class="brk-name"><code>unique_key</code></span><span class="brk-state" data-i18n="b.on">present</span><span class="brk-val">71067867</span></label></li>
+              <li class="brk-row"><label><input type="checkbox" role="switch" data-f="created_date" value="2026-11-11T02:56:07.000" checked disabled /><span class="brk-name"><code>created_date</code></span><span class="brk-state" data-i18n="b.on">present</span><span class="brk-val">2026-11-11T02:56:07.000</span></label></li>
+              <li class="brk-row"><label><input type="checkbox" role="switch" data-f="agency" value="DOT" checked disabled /><span class="brk-name"><code>agency</code></span><span class="brk-state" data-i18n="b.on">present</span><span class="brk-val">DOT</span></label></li>
+              <li class="brk-row"><label><input type="checkbox" role="switch" data-f="agency_name" value="Department of Transportation" checked disabled /><span class="brk-name"><code>agency_name</code></span><span class="brk-state" data-i18n="b.on">present</span><span class="brk-val">Department of Transportation</span></label></li>
+              <li class="brk-row"><label><input type="checkbox" role="switch" data-f="complaint_type" value="Street Condition" checked disabled /><span class="brk-name"><code>complaint_type</code></span><span class="brk-state" data-i18n="b.on">present</span><span class="brk-val">Street Condition</span></label></li>
+              <li class="brk-row"><label><input type="checkbox" role="switch" data-f="status" value="Open" checked disabled /><span class="brk-name"><code>status</code></span><span class="brk-state" data-i18n="b.on">present</span><span class="brk-val">Open</span></label></li>
+              <li class="brk-row"><label><input type="checkbox" role="switch" data-f="borough" value="BROOKLYN" checked disabled /><span class="brk-name"><code>borough</code></span><span class="brk-state" data-i18n="b.on">present</span><span class="brk-val">BROOKLYN</span></label></li>
+            </ul>
+            <p class="brk-verdict is-pass" id="brk-verdict" aria-live="polite" data-i18n="b.pass">&#x2713; Pass</p>
+            <button type="button" class="brk-reset" id="brk-reset" data-i18n="b.reset">Put all boxes back</button>
+            <p class="brk-note" data-i18n="b.note">The check runs on this page, with no API call.</p>
+            <pre class="brk-schema"><code>"required": [
+  "unique_key", "created_date", "agency", "agency_name",
+  "complaint_type", "status", "borough"
+]</code></pre>
+          </div>
+          <details class="evidence">
+            <summary data-i18n="ev">Show the evidence</summary>
+            <div class="ev-body">
+              <p data-i18n="b.ev.p">Here the check is a plain JavaScript test: it looks for the 7 required keys, mirroring the schema's required list. The repo's tests do the same with the jsonschema library, once per box (an offline test).</p>
+              <h4 data-i18n="b.ev.schema">Schema excerpt</h4>
+              <pre><code>"required": [
+  "unique_key", "created_date", "agency", "agency_name",
+  "complaint_type", "status", "borough"
+]</code></pre>
+              <ul class="ev-links">
+                <li><a href="https://github.com/soushiki/api-tests-nyc311/blob/main/schemas/service_request.json" target="_blank" rel="noopener" data-i18n="b.ev.l1">Schema (service_request.json)</a></li>
+                <li><a href="https://github.com/soushiki/api-tests-nyc311/blob/main/tests/fixtures/sample_10.json" target="_blank" rel="noopener" data-i18n="b.ev.l2">Saved sample (sample_10.json)</a></li>
+              </ul>
+            </div>
+          </details>
+        </section>
+
+        <!-- Hard parts -->
+        <section class="pj-step" id="hard" aria-labelledby="hard-h">
+          <p class="step-label" data-i18n="p.label">Step 5 of 6</p>
+          <h2 id="hard-h" data-i18n="p.h">The data changes daily, so the tests check rules, not exact values.</h2>
+          <ul class="pd reveal">
+            <li>
+              <div><h3 data-i18n="p.prob">Problem</h3><p data-i18n="p.1.p">The data changes every day, so exact values cannot be fixed.</p></div>
+              <span class="arrow" aria-hidden="true"></span>
+              <div><h3 data-i18n="p.dec">Decision</h3><p data-i18n="p.1.d">Tests check properties (filters, order, types). Date tests use a day that is already closed, 2023-01-01.</p></div>
+            </li>
+            <li>
+              <div><h3 data-i18n="p.prob">Problem</h3><p data-i18n="p.2.p">A network or server outage would fail tests that are not product bugs.</p></div>
+              <span class="arrow" aria-hidden="true"></span>
+              <div><h3 data-i18n="p.dec">Decision</h3><p data-i18n="p.2.d">One retry, only for 429 and 5xx. 4xx are never retried, because the negative tests expect them. A red run caused by an outage is re-run before anything is reported.</p></div>
+            </li>
+            <li>
+              <div><h3 data-i18n="p.prob">Problem</h3><p data-i18n="p.3.p">Error messages are undocumented and their shape can change.</p></div>
+              <span class="arrow" aria-hidden="true"></span>
+              <div><h3 data-i18n="p.dec">Decision</h3><p data-i18n="p.3.d">Checks come from responses observed live and are pinned; if the shape changes, a test fails. There are two error shapes, one with code and one with errorCode.</p></div>
+            </li>
+          </ul>
+          <details class="evidence">
+            <summary data-i18n="ev">Show the evidence</summary>
+            <div class="ev-body">
+              <p data-i18n="p.ev.p">The retry, and a test that pins an error shape, as they are in the repository.</p>
+              <pre><code># tests/conftest.py
+retry = Retry(
+    total=1,
+    backoff_factor=1.0,
+    status_forcelist=(429, 500, 502, 503, 504),
+    allowed_methods=frozenset({"GET"}),
+    raise_on_status=False,
+)</code></pre>
+              <pre><code># tests/test_negative.py
+def test_unknown_column_in_clause(api, param):
+    # This error uses a different body shape ("errorCode", no "code").
+    body = assert_error_json(api({param: "nocol", "$limit": 1}))
+    assert body["errorCode"] == "query.soql.no-such-column"</code></pre>
+            </div>
+          </details>
+        </section>
+
+        <!-- Daily run -->
+        <section class="pj-step" id="daily" aria-labelledby="daily-h">
+          <p class="step-label" data-i18n="d.label">Step 6 of 6</p>
+          <h2 id="daily-h" data-i18n="d.h">No one has to remember. It runs itself, and after every change.</h2>
+          <div class="day reveal" role="img" aria-label="24-hour strip with a marker at 06:00 Colombia time, which is 11:00 UTC" data-i18n-attr="aria-label:d.aria">
+            <div class="day-bar"><span class="day-mark" style="left:25%"></span></div>
+            <div class="day-axis"><span style="left:0">00:00</span><span style="left:25%">06:00</span><span style="left:50%">12:00</span><span style="left:75%">18:00</span><span style="left:100%">24:00</span></div>
+            <p class="day-lab" data-i18n="d.lab">06:00 Colombia · 11:00 UTC</p>
+          </div>
+          <p data-i18n="d.p">Every day at 11:00 UTC, which is 06:00 in Colombia, a GitHub robot runs the 44 checks and saves an HTML report, whether they passed or failed.</p>
+          <details class="evidence">
+            <summary data-i18n="ev">Show the evidence</summary>
+            <div class="ev-body">
+              <p data-i18n="d.ev.p">The workflow runs on every push, every pull request, every day and on demand.</p>
+              <pre><code>on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "0 11 * * *"   # every day 11:00 UTC = 06:00 Colombia
+  workflow_dispatch:</code></pre>
+              <ul class="ev-links">
+                <li><a href="https://github.com/soushiki/api-tests-nyc311/blob/main/.github/workflows/ci.yml" target="_blank" rel="noopener" data-i18n="d.ev.wf">Workflow (CI)</a></li>
+                <li><a href="https://github.com/soushiki/api-tests-nyc311/actions" target="_blank" rel="noopener" data-i18n="d.ev.runs">Recent runs</a></li>
+              </ul>
+            </div>
+          </details>
+        </section>
+
+        <!-- Skills -->
+        <section class="pj-step" id="skills" aria-labelledby="skills-h">
+          <h2 id="skills-h" data-i18n="sk.h">What this shows I can do</h2>
+          <ul class="skills reveal">
+            <li><h3 style="margin:0 0 .3rem;font-size:1.05rem"><i class="fa-solid fa-clipboard-list" aria-hidden="true"></i><span data-i18n="sk.1.h">Write a test plan from risks</span></h3><p style="margin:0;color:var(--muted-on-surface)" data-i18n="sk.1.p">What can fail, what is tested, what is left out and how each risk is handled.</p></li>
+            <li><h3 style="margin:0 0 .3rem;font-size:1.05rem"><i class="fa-solid fa-plug" aria-hidden="true"></i><span data-i18n="sk.2.h">Automate API checks</span></h3><p style="margin:0;color:var(--muted-on-surface)" data-i18n="sk.2.p">44 checks in five kinds, with a schema that describes the answer.</p></li>
+            <li><h3 style="margin:0 0 .3rem;font-size:1.05rem"><i class="fa-solid fa-clock" aria-hidden="true"></i><span data-i18n="sk.3.h">Run them unattended, with reports</span></h3><p style="margin:0;color:var(--muted-on-surface)" data-i18n="sk.3.p">A robot runs them every day and saves the report, even when they fail.</p></li>
+          </ul>
+          <details class="evidence">
+            <summary data-i18n="ev">Show the evidence</summary>
+            <div class="ev-body">
+              <p data-i18n="sk.ev.p">Everything is open in the repository.</p>
+              <ul class="ev-links">
+                <li><a href="https://github.com/soushiki/api-tests-nyc311" target="_blank" rel="noopener" data-i18n="sk.repo">Repository</a></li>
+                <li><a href="https://github.com/soushiki/api-tests-nyc311/blob/main/TEST-PLAN.md" target="_blank" rel="noopener">TEST-PLAN.md</a></li>
+                <li><a href="https://github.com/soushiki/api-tests-nyc311/actions" target="_blank" rel="noopener" data-i18n="d.ev.runs">Recent runs</a></li>
+              </ul>
+            </div>
+          </details>
+        </section>
+      </main>
+    </div>
+
+    <footer class="job-line">
+      <div class="wrap">
+        <span data-i18n="job.text">Looking to hire me for a job? See my projects and resume</span>
+        <br /><a href="./index.html#projects" data-i18n="job.link">Back to projects</a>
+      </div>
+    </footer>
+
+    <script>
+    (function () {
+      var b = document.querySelector('.nav-toggle'), l = document.getElementById('nav-links');
+      if (!b || !l) return;
+      function set(o) { b.setAttribute('aria-expanded', o ? 'true' : 'false'); l.classList.toggle('open', o); }
+      b.addEventListener('click', function () { set(b.getAttribute('aria-expanded') !== 'true'); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && b.getAttribute('aria-expanded') === 'true') { set(false); b.focus(); }
+      });
+      l.addEventListener('click', function (e) { if (e.target.closest('a')) set(false); });
+    })();
+  </script>
+</body>
+</html>

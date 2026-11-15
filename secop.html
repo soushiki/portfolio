@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en" data-default-lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="A data project on public contracts in Bolívar, Colombia: the official label shows 2.1% of contracts growing in price after signing, the paperwork shows 13.7%." />
+    <title>The number hidden in the fine print · Sebastian Herrera</title>
+    <script>document.documentElement.className += ' js';
+    (function () {
+      var m = /[?&]motion=(calm|full)(?:&|$)/.exec(location.search), mode, source;
+      if (m) { mode = m[1]; source = 'url'; }
+      else {
+        try { var v = localStorage.getItem('p2d-motion'); if (v === 'calm' || v === 'full') { mode = v; source = 'saved'; } } catch (e) {}
+        if (!mode) { source = 'OS'; mode = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'calm' : 'full'; }
+      }
+      if (mode === 'calm') document.documentElement.classList.add('motion-calm');
+      window.__motion = { mode: mode, source: source };
+    })();</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Mozilla+Headline:wght@200..700&family=Outfit:wght@100..900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./public/css/project.css" />
+    <script>window.I18N_ES = {
+      "meta.title": "El número escondido en la letra pequeña · Sebastian Herrera",
+      "meta.description": "Un proyecto de datos sobre contratos públicos en Bolívar, Colombia: la etiqueta oficial muestra 2,1 % de contratos que crecen en precio tras la firma; los documentos muestran 13,7 %.",
+      "skip": "Saltar al contenido",
+      "nav.work": "Proyectos",
+      "nav.services": "Servicios",
+      "nav.menu": "Menú",
+      "nav.resume": "Hoja de vida",
+      "url.resume": "./public/resume/Sebastian-Herrera-resume-es.pdf",
+      "steps.aria": "Pasos de la página",
+      "st.q": "La pregunta",
+      "st.1": "1 Reunir",
+      "st.2": "2 Limpiar",
+      "st.3": "3 Leer la letra pequeña",
+      "st.4": "4 Qué muestra",
+      "st.5": "Y entonces",
+      "st.6": "Se mantiene vigente",
+      "st.7": "Lo que demuestra",
+      "ev": "Ver la evidencia",
+      "tbl": "Ver como tabla",
+      "src": "Fuente:",
+      "h.eyebrow": "Proyecto de datos · SECOP II · Bolívar, Colombia · 2022–2025",
+      "h.h1": "El número escondido en la letra pequeña",
+      "h.lead": "Las etiquetas oficiales dicen que 2 de cada 100 contratos públicos en Bolívar crecieron de precio tras la firma. Los documentos dicen que casi 14.",
+      "h.numsaria": "Dos cifras: 2,1 % según la etiqueta oficial y 13,7 % según el texto, unas 6,5 veces más",
+      "h.a": "según la etiqueta oficial",
+      "h.mid": "≈ 6,5 veces más",
+      "h.b": "leyendo el texto",
+      "h.repo": "Código en GitHub",
+      "h.find": "Hallazgos completos",
+      "h.ev.p": "SECOP II es el sistema en línea donde las entidades públicas de Colombia publican sus contratos. Usé dos conjuntos de datos abiertos, contratos firmados de 2022 a 2025. El informe se actualiza solo cada lunes.",
+      "h.ev.d1": "Contratos de SECOP II (datos.gov.co)",
+      "h.ev.d2": "Adiciones (modificaciones) de SECOP II (datos.gov.co)",
+      "h.ev.repo": "Repositorio del proyecto",
+      "c.label": "Paso 1 de 4",
+      "c.h": "Descargué solo lo que la pregunta necesitaba: 15 columnas y ningún dato personal.",
+      "c.p": "Cada contrato tiene sus modificaciones, que son los cambios hechos después de firmar. Unas y otras se unen por el número del contrato.",
+      "c.s1": "contratos",
+      "c.s2": "entidades públicas",
+      "c.s3": "modificaciones",
+      "c.stataria": "Cifras de la descarga",
+      "c.left": "Lo que dejé fuera",
+      "c.left1": "Nombres de proveedores",
+      "c.left2": "Números de identificación",
+      "c.left3": "Datos bancarios",
+      "c.left.sr": "no se descargó",
+      "c.ev.p": "Estas son las 15 columnas de contratos. De las modificaciones guardo 5 campos; la descripción solo sirve para clasificar y no llega a la base de datos.",
+      "c.ev.join": "Los dos conjuntos se unen por el número de contrato (id_contrato).",
+      "k.label": "Paso 2 de 4",
+      "r.label": "Paso 3 de 4",
+      "c2.t.r1": "Directo",
+      "c2.t.r2": "Competitivo",
+      "k.h": "Una misma oficina escrita de varias formas se cuenta como varias oficinas.",
+      "k.p": "Limpiar es dejar un solo nombre por entidad. Si no, los conteos por entidad salen mal.",
+      "k.a1": "27.963 nombres reescritos",
+      "k.a2": "1.507 NIT con más de un nombre",
+      "k.a3": "Un guion roto, reparado",
+      "k.b1": "Una oficina, un nombre por NIT",
+      "k.before": "Antes",
+      "k.after": "Después",
+      "k.card1": "Quitar el // final y arreglar mayúsculas y espacios",
+      "k.card2": "El NIT es el número de identificación tributaria de la entidad",
+      "k.card3": "Un guion de Windows-1252 se leía como carácter de control",
+      "k.ev.rules": "Reglas de limpieza, con las filas que tocó cada una",
+      "k.ev.r1": "nombre de entidad cambiado (mayúsculas, espacios, // final)",
+      "k.ev.r2": "entidades con más de un nombre para el mismo NIT",
+      "k.ev.r3": "valor cero, negativo o vacío (cuenta, pero no suma valor)",
+      "k.ev.r4": "fecha de fin anterior a la de inicio (marcada, fuera de duraciones)",
+      "k.ev.col1": "Regla",
+      "k.ev.col2": "Filas",
+      "k.ev.tests": "Las reglas están cubiertas por 40 pruebas automáticas.",
+      "k.ev.log": "Registro de limpieza completo",
+      "k.ev.testlink": "Carpeta de pruebas",
+      "r.h": "Las entidades podían marcar una casilla que decía «esto suma dinero». La marcaron el 14 % de las veces.",
+      "r.p": "Eso son 2.609 de 18.670 modificaciones cuyo texto describe una adición de dinero. Escribí reglas que leen el texto. Pruébalas tú.",
+      "r.sort.h": "Clasifícalo tú",
+      "r.sort.p": "Estos son textos reales. Elige a qué clase pertenece cada uno.",
+      "r.a1": "Suma dinero: dice «adicional» junto a «valor».",
+      "r.a2": "Suma dinero: dice que se adiciona y da una suma en pesos.",
+      "r.a3": "No está claro: nombra una adición, pero no dice si es dinero o tiempo.",
+      "r.a4": "Otro: es la falsa alarma que las reglas deben saltar. «Modificaciones adicionales» no es una adición.",
+      "r.sort.aria": "Textos reales de modificaciones para clasificar",
+      "w.h": "De cada 100 modificaciones, unas 18 suman dinero. Casi nadie las marcó así.",
+      "w.aria": "Cuadrícula de 100 cuadros: 74 otras modificaciones, 18 suman dinero (3 con la etiqueta oficial) y 8 no están claras",
+      "w.sum": "Cada cuadro vale unas 1.000 modificaciones, de 101.570. Solo 3 de los 18 cuadros que suman dinero llevan la etiqueta oficial.",
+      "w.l1": "Otras: 74.750",
+      "w.l2": "Suma dinero: 18.670",
+      "w.l3": "Con la etiqueta oficial: 2.609 (3 cuadros con contorno)",
+      "w.l4": "No está claro: 7.755",
+      "w.l5": "Solo tiempo: 395 (menos de un cuadro)",
+      "w.t.cap": "Modificaciones por clase",
+      "w.t.c1": "Clase",
+      "w.t.c2": "Modificaciones",
+      "w.t.r1": "Otras",
+      "w.t.r2": "Suma dinero (en total)",
+      "w.t.r3": "de ellas, con la etiqueta oficial",
+      "w.t.r4": "No está claro",
+      "w.t.r5": "Solo tiempo",
+      "w.t.r6": "Total",
+      "r.ev.rules": "Cómo decide la regla",
+      "r.ev.l1": "Suma dinero: la etiqueta oficial «Adición en el valor», o un texto que nombra una adición junto a palabras de dinero (valor, $, pesos, suma, CDP, presupuesto, recursos).",
+      "r.ev.l2": "Suma dinero también: «adición y prórroga», porque en la contratación colombiana la adición es la parte de dinero.",
+      "r.ev.l3": "No está claro: nombra una adición, pero no dice si es dinero o tiempo. Cuenta solo en el tope de 20,0 %.",
+      "r.ev.l4": "Solo tiempo: «adición en el plazo», meses o días sin palabras de dinero.",
+      "r.ev.l5": "Otro: una negación («sin adición», «no se realizó adición») o «modificaciones adicionales».",
+      "r.ev.false": "La falsa alarma: «No fue necesario realizar modificaciones adicionales» tiene la palabra «adicionales», pero no es una adición. Los casos están fijados en tests/test_clean.py.",
+      "r.ev.link": "Código del clasificador (clean.py)",
+      "s4.label": "Paso 4 de 4",
+      "s4.h": "La mayoría de los contratos se adjudican directamente, pero la mayor parte del dinero pasa por concursos.",
+      "s4.p": "Contratación directa es cuando la entidad elige al proveedor sin competencia. Es legal en casos fijados por la ley.",
+      "c1.sum": "El 82,9 % de los contratos son directos, pero tienen solo el 33,9 % del dinero.",
+      "c1.aria": "Gráfico de mancuerna: participación en contratos y en dinero por modalidad. Directa 82,9 % y 33,9 %; régimen especial 11,1 % y 21,2 %; competitiva 6,0 % y 44,8 %",
+      "c1.r1": "Directa",
+      "c1.r2": "Régimen especial",
+      "c1.r3": "Competitiva",
+      "c1.l1": "Parte de los contratos",
+      "c1.l2": "Parte del dinero",
+      "c1.note": "El 96 % de los contratos directos son contratos de servicios individuales.",
+      "c1.t.cap": "Parte de contratos y de dinero por modalidad",
+      "c1.t.c1": "Modalidad",
+      "c1.t.c2": "% de contratos",
+      "c1.t.c3": "% del dinero",
+      "c2.sum": "Un contrato directo promedio es pequeño. Uno competitivo es unas 18 veces más grande.",
+      "c2.aria": "Bloques: 1 bloque para un contrato directo, unos 60 millones de pesos; 18 bloques para uno competitivo, unos 1.089 millones",
+      "c2.r1": "Directo: unos COP 60 millones",
+      "c2.r2": "Competitivo: unos COP 1.089 millones",
+      "c2.legend": "Cada bloque vale unos COP 60 millones.",
+      "c2.t.cap": "Tamaño promedio por tipo de contrato",
+      "c2.t.c1": "Tipo",
+      "c2.t.c2": "Millones de COP",
+      "c2.t.c3": "Bloques",
+      "c3.sum": "La etiqueta oficial capta el 2,1 % de contratos que crecen. El texto muestra 13,7 %, y hasta 20,0 %.",
+      "c3.aria": "Línea de 0 a 25 %: etiqueta oficial 2,1 %, lectura del texto 13,7 %, hasta 20,0 %. Competitivos 23,2 %, directos 12,5 %",
+      "c3.off": "Etiqueta oficial 2,1 %",
+      "c3.txt": "Leyendo el texto 13,7 %",
+      "c3.gap": "≈ 6,5 veces demasiado bajo",
+      "c3.band": "La zona rayada llega hasta 20,0 %: «podría ser hasta».",
+      "c3.b1": "Contratos competitivos",
+      "c3.b2": "Contratos directos",
+      "c3.t.cap": "Contratos con al menos una adición de valor",
+      "c3.t.c1": "Medida",
+      "c3.t.c2": "% de contratos",
+      "c3.t.r1": "Con la etiqueta oficial",
+      "c3.t.r2": "Leyendo el texto",
+      "c3.t.r3": "Tope (con los textos no claros)",
+      "c3.t.r4": "Competitivos, leyendo el texto",
+      "c3.t.r5": "Directos, leyendo el texto",
+      "c4.sum": "En algunas entidades, más de la mitad de los contratos recibe una adición de valor.",
+      "c4.aria": "Barras de las 10 entidades con más de 300 contratos y más adiciones de valor, de 51,3 % a 26,1 %, con una línea en 13,7 %",
+      "c4.ref": "Línea punteada: 13,7 % de todos los contratos",
+      "c4.note": "Las adiciones y la contratación directa son herramientas legales, no prueba de mala conducta. Una tasa alta es una razón para mirar de cerca.",
+      "c4.t.cap": "Entidades con 300 contratos o más y más adiciones de valor",
+      "c4.t.c1": "Entidad",
+      "c4.t.c2": "Contratos",
+      "c4.t.c3": "Con adición de valor",
+      "u.contracts": "contratos",
+      "s4.ev": "SQL detrás de cada gráfico",
+      "s4.ev.p": "Estas consultas están en la carpeta sql/ del repositorio, recortadas aquí a lo esencial.",
+      "s4.ev.q3": "Gráfico 3: con qué frecuencia crecen los contratos (sql/03_adiciones_por_modalidad.sql)",
+      "s4.ev.q4": "Gráfico 4: entidades con más adiciones (sql/04_adiciones_por_entidad.sql)",
+      "s4.ev.q5": "Nota del gráfico 1: el 96 % de los contratos directos (sql/05_justificacion_directa.sql)",
+      "s4.ev.q2": "Parte del valor adjudicado directamente por entidad (sql/02_directa_participacion_valor.sql)",
+      "s4.ev.all": "Todas las consultas",
+      "s4.ev.find": "Hallazgos con las cifras completas",
+      "so.label": "Y entonces",
+      "so.h": "Colombia Compra Eficiente, la agencia nacional de compras públicas, debería hacer obligatorios el tipo de modificación y el valor adicionado.",
+      "k.n1": "1 NIT → 2 o más nombres",
+      "k.n2": "1 NIT → 1 nombre",
+      "k.bad": "carácter roto",
+      "r.done": "Así clasificaron las reglas las 101.570 modificaciones.",
+      "so.reco": "Recomendación",
+      "so.reco.p": "Hoy, quien mida el crecimiento de los contratos con datos abiertos obtiene una cifra unas seis veces más baja. Un campo obligatorio dejaría la cifra correcta a una consulta de distancia.",
+      "so.lim": "Lo que esto no dice",
+      "so.lim.p": "La contratación directa y las adiciones son herramientas legales, no prueba de mala conducta.",
+      "so.ev.l1": "SECOP I no está incluido: solo SECOP II.",
+      "so.ev.l2": "Los contratos de 2025 han tenido menos tiempo para modificarse; su tasa aún subirá.",
+      "so.ev.l3": "El clasificador usa reglas. La diferencia entre 13,7 % y 20,0 % es lo que no puede decidir.",
+      "so.ev.l4": "La base de modificaciones no trae el valor de cada adición, así que no se puede sumar cuánto crecieron.",
+      "st.label": "Se mantiene vigente",
+      "stay.h": "Si los datos cambian de forma, una prueba falla antes de que el informe se equivoque.",
+      "stay.strip1": "40 pruebas",
+      "stay.strip2": "un robot actualiza los datos cada lunes",
+      "stay.p": "Cada lunes a las 12:00 UTC un robot de GitHub baja los datos de nuevo, corre las pruebas y rehace el informe.",
+      "stay.ev.p": "El flujo de trabajo corre las pruebas en cada cambio y el informe cada lunes.",
+      "stay.wf": "Flujo de trabajo (CI)",
+      "stay.rep": "Informe actual (REPORT.md)",
+      "sk.h": "Lo que esto demuestra que sé hacer",
+      "sk.1.h": "Limpiar datos públicos desordenados",
+      "sk.1.p": "Nombres repetidos, caracteres rotos y valores vacíos, con cada regla anotada y probada.",
+      "sk.2.h": "Convertir una pregunta en SQL y gráficos",
+      "sk.2.p": "De una duda en palabras a consultas que se pueden revisar y a gráficos que se leen solos.",
+      "sk.3.h": "Hacer que se repita sola, con pruebas",
+      "sk.3.p": "Pruebas automáticas y un robot semanal que mantienen el informe al día.",
+      "sk.ev.p": "Todo está abierto en el repositorio.",
+      "sk.repo": "Repositorio",
+      "job.text": "¿Buscas contratarme para un empleo? Mira mis proyectos y hoja de vida",
+      "job.link": "Volver a los proyectos"
+    };</script>
+    <script src="./public/js/i18n.js" defer></script>
+    <script src="./public/js/project.js" defer></script>
+    <script src="./public/js/secop.js" defer></script>
+  </head>
+  <body>
+    <a class="pj-skip" href="#main" data-i18n="skip">Skip to content</a>
+    <nav class="nav" aria-label="Main">
+      <a class="nav-brand" href="./index.html">sebherr<span>.</span></a>
+      <a class="btn btn-primary nav-resume" href="./public/resume/Sebastian-Herrera-resume-en.pdf" data-i18n-attr="href:url.resume" target="_blank" rel="noopener"><span data-i18n="nav.resume">Resume</span></a>
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Menu" data-i18n-attr="aria-label:nav.menu"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="./index.html#projects" data-i18n="nav.work">Work</a></li>
+        <li><a href="./services.html" data-i18n="nav.services">Services</a></li>
+      </ul>
+    </nav>
+
+    <header class="pj-hero" id="top">
+      <div class="wrap">
+        <p class="pj-eyebrow" data-i18n="h.eyebrow">Data project · SECOP II · Bolívar, Colombia · 2022–2025</p>
+        <h1 data-i18n="h.h1">The number hidden in the fine print</h1>
+        <p class="pj-lead" data-i18n="h.lead">Official labels say 2 in 100 public contracts in Bolívar grew in price after signing. The paperwork says nearly 14.</p>
+        <div class="big-nums" role="group" aria-label="Two numbers: 2.1% by the official label and 13.7% by reading the text, about 6.5 times more" data-i18n-attr="aria-label:h.numsaria">
+          <div class="big-num is-a"><b><span data-num>2.1%</span></b><span data-i18n="h.a">by the official label</span></div>
+          <div class="big-num is-b"><b><span data-num>13.7%</span></b><span data-i18n="h.b">by reading the text</span></div>
+          <p class="big-mid" data-i18n="h.mid">≈ 6.5× more</p>
+        </div>
+        <ul class="pj-hero-links">
+          <li><a class="btn btn-primary" href="https://github.com/soushiki/secop-bolivar" target="_blank" rel="noopener"><i class="fa-brands fa-github" aria-hidden="true"></i>&nbsp;<span data-i18n="h.repo">Code on GitHub</span></a></li>
+          <li><a class="btn" href="https://github.com/soushiki/secop-bolivar/blob/main/FINDINGS.md" target="_blank" rel="noopener" data-i18n="h.find">Full findings</a></li>
+        </ul>
+        <details class="evidence">
+          <summary data-i18n="ev">Show the evidence</summary>
+          <div class="ev-body">
+            <p data-i18n="h.ev.p">SECOP II is the online system where Colombian public bodies post their contracts. I used two open datasets, contracts signed 2022 to 2025. The report refreshes itself every Monday.</p>
+            <ul class="ev-links">
+              <li><a href="https://www.datos.gov.co/d/jbjy-vk9h" target="_blank" rel="noopener" data-i18n="h.ev.d1">SECOP II contracts (datos.gov.co)</a></li>
+              <li><a href="https://www.datos.gov.co/d/cb9c-h8sn" target="_blank" rel="noopener" data-i18n="h.ev.d2">SECOP II additions, i.e. modifications (datos.gov.co)</a></li>
+              <li><a href="https://github.com/soushiki/secop-bolivar" target="_blank" rel="noopener" data-i18n="h.ev.repo">Project repository</a></li>
+            </ul>
+          </div>
+        </details>
+      </div>
+    </header>
+
+    <div class="wrap pj-layout">
+      <nav class="steplist" aria-label="Page steps" data-i18n-attr="aria-label:steps.aria">
+        <ol>
+          <li><a href="#top" data-i18n="st.q">The question</a></li>
+          <li><a href="#collect" data-i18n="st.1">1 Collect</a></li>
+          <li><a href="#clean" data-i18n="st.2">2 Clean</a></li>
+          <li><a href="#read" data-i18n="st.3">3 Read the fine print</a></li>
+          <li><a href="#shows" data-i18n="st.4">4 What it shows</a></li>
+          <li><a href="#sowhat" data-i18n="st.5">So what</a></li>
+          <li><a href="#stays" data-i18n="st.6">Stays true</a></li>
+          <li><a href="#skills" data-i18n="st.7">What this shows</a></li>
+        </ol>
+      </nav>
+
+      <main id="main" tabindex="-1" style="min-width:0">
+
+        <!-- 2. Collect -->
+        <section class="pj-step" id="collect" aria-labelledby="collect-h">
+          <p class="step-label" data-i18n="c.label">Step 1 of 4</p>
+          <h2 id="collect-h" data-i18n="c.h">I downloaded only what the question needed: 15 columns, no personal data.</h2>
+          <p data-i18n="c.p">Each contract has modifications, the changes made after signing. The two are joined by the contract number.</p>
+          <ul class="stats reveal" aria-label="Download in numbers" data-i18n-attr="aria-label:c.stataria">
+            <li class="stat"><b data-num>102,146</b><span data-i18n="c.s1">contracts</span></li>
+            <li class="stat"><b data-num>127</b><span data-i18n="c.s2">public bodies</span></li>
+            <li class="stat"><b data-num>101,570</b><span data-i18n="c.s3">amendments</span></li>
+          </ul>
+          <h3 data-i18n="c.left">What I left behind</h3>
+          <ul class="left-behind reveal">
+            <li><s data-i18n="c.left1">Supplier names</s> <span class="sr-only" data-i18n="c.left.sr">not downloaded</span></li>
+            <li><s data-i18n="c.left2">ID numbers</s> <span class="sr-only" data-i18n="c.left.sr">not downloaded</span></li>
+            <li><s data-i18n="c.left3">Bank details</s> <span class="sr-only" data-i18n="c.left.sr">not downloaded</span></li>
+          </ul>
+          <details class="evidence">
+            <summary data-i18n="ev">Show the evidence</summary>
+            <div class="ev-body">
+              <p data-i18n="c.ev.p">These are the 15 contract columns. From the modifications I keep 5 fields; the description is only used to classify and never reaches the database.</p>
+              <pre><code>id_contrato, nit_entidad, nombre_entidad, ciudad, orden, sector,
+modalidad_de_contratacion, justificacion_modalidad_de,
+tipo_de_contrato, estado_contrato, fecha_de_firma,
+fecha_de_inicio_del_contrato, fecha_de_fin_del_contrato,
+valor_del_contrato, dias_adicionados</code></pre>
+              <p data-i18n="c.ev.join">The two datasets are joined by the contract number (id_contrato).</p>
+              <ul class="ev-links">
+                <li><a href="https://www.datos.gov.co/d/jbjy-vk9h" target="_blank" rel="noopener">datos.gov.co/d/jbjy-vk9h</a></li>
+                <li><a href="https://www.datos.gov.co/d/cb9c-h8sn" target="_blank" rel="noopener">datos.gov.co/d/cb9c-h8sn</a></li>
+              </ul>
+            </div>
+          </details>
+        </section>
+
+        <!-- 3. Clean -->
+        <section class="pj-step" id="clean" aria-labelledby="clean-h">
+          <p class="step-label" data-i18n="k.label">Step 2 of 4</p>
+          <h2 id="clean-h" data-i18n="k.h">One office spelled several ways gets counted as several offices.</h2>
+          <p data-i18n="k.p">Cleaning means keeping one name per public body. Otherwise counts per body come out wrong.</p>
+          <div class="cards cols-3 reveal">
+            <article class="card">
+              <div class="ba">
+                <code>GOBERNACIÓN DE BOLÍVAR//</code>
+                <span class="arrow" aria-hidden="true"></span>
+                <code>GOBERNACIÓN DE BOLÍVAR</code>
+              </div>
+              <p class="count" data-i18n="k.a1">27,963 names rewritten</p>
+              <p data-i18n="k.card1">Trailing // removed; case and spaces fixed</p>
+            </article>
+            <article class="card">
+              <div class="ba">
+                <code data-i18n="k.n1">1 NIT → 2+ names</code>
+                <span class="arrow" aria-hidden="true"></span>
+                <code data-i18n="k.n2">1 NIT → 1 name</code>
+              </div>
+              <p class="count" data-i18n="k.a2">1,507 tax IDs had more than one name</p>
+              <p data-i18n="k.card2">The NIT is the body's tax ID number</p>
+            </article>
+            <article class="card">
+              <div class="ba">
+                <code>RAMA JUDICIAL <span class="bad-char" role="img" aria-label="broken character" data-i18n-attr="aria-label:k.bad">�</span> DIRECCIÓN…</code>
+                <span class="arrow" aria-hidden="true"></span>
+                <code>RAMA JUDICIAL - DIRECCIÓN…</code>
+              </div>
+              <p class="count" data-i18n="k.a3">One broken dash, fixed</p>
+              <p data-i18n="k.card3">A Windows-1252 dash was read as a control character</p>
+            </article>
+          </div>
+          <details class="evidence">
+            <summary data-i18n="ev">Show the evidence</summary>
+            <div class="ev-body">
+              <details class="tbl" open>
+                <summary data-i18n="k.ev.rules">Cleaning rules, with the rows each touched</summary>
+                <div class="tbl-wrap">
+                  <table>
+                    <thead><tr><th data-i18n="k.ev.col1">Rule</th><th class="n" data-i18n="k.ev.col2">Rows</th></tr></thead>
+                    <tbody>
+                      <tr><td data-i18n="k.ev.r1">entity name changed (case, spaces, trailing //)</td><td class="n" data-num>27,963</td></tr>
+                      <tr><td data-i18n="k.ev.r2">entities with more than one name for the same tax ID</td><td class="n" data-num>1,507</td></tr>
+                      <tr><td data-i18n="k.ev.r3">value zero, negative or missing (counted, not summed)</td><td class="n" data-num>413</td></tr>
+                      <tr><td data-i18n="k.ev.r4">end date before start date (flagged, out of durations)</td><td class="n" data-num>19</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </details>
+              <p data-i18n="k.ev.tests">The rules are covered by 40 automated tests.</p>
+              <ul class="ev-links">
+                <li><a href="https://github.com/soushiki/secop-bolivar/blob/main/CLEANING-LOG.md" target="_blank" rel="noopener" data-i18n="k.ev.log">Full cleaning log</a></li>
+                <li><a href="https://github.com/soushiki/secop-bolivar/tree/main/tests" target="_blank" rel="noopener" data-i18n="k.ev.testlink">Tests folder</a></li>
+              </ul>
+            </div>
+          </details>
+        </section>
+
+        <!-- 4. Read the fine print -->
+        <section class="pj-step" id="read" aria-labelledby="read-h">
+          <p class="step-label" data-i18n="r.label">Step 3 of 4</p>
+          <h2 id="read-h" data-i18n="r.h">Offices could tick a box saying "this adds money". They ticked it 14% of the time.</h2>
+          <p data-i18n="r.p">That is 2,609 of 18,670 amendments whose text describes adding money. I wrote rules that read the text. Try them yourself.</p>
+
+          <h3 data-i18n="r.sort.h">Sort it yourself</h3>
+          <p data-i18n="r.sort.p">These are real texts. Pick the class each one belongs to.</p>
+          <div class="sorter" id="sorter">
+            <ol class="sort-list" aria-label="Real amendment texts to sort" data-i18n-attr="aria-label:r.sort.aria">
+              <li class="sort-card" data-answer="money">
+                <p class="sort-text" lang="es">“ADICIONAL EN <mark>TIEMPO Y VALOR</mark> No. 1 AL CONTRATO…”</p>
+                <p class="sort-gloss" lang="en">“Addition in time and value No. 1 to the contract…”</p>
+                <p class="sort-answer" data-i18n-html="r.a1">Adds money: it says “additional” next to <mark>valor</mark> (value).</p>
+              </li>
+              <li class="sort-card" data-answer="money">
+                <p class="sort-text" lang="es">“Se adiciona por <mark>la suma de $4.680.000</mark>…”</p>
+                <p class="sort-gloss" lang="en">“It is added for the sum of $4,680,000…”</p>
+                <p class="sort-answer" data-i18n-html="r.a2">Adds money: it says something is added and gives a sum in pesos.</p>
+              </li>
+              <li class="sort-card" data-answer="unclear">
+                <p class="sort-text" lang="es">“<mark>ADICIONAL 1</mark> CPS-302-2023”</p>
+                <p class="sort-gloss" lang="en">“Addition 1, contract CPS-302-2023”</p>
+                <p class="sort-answer" data-i18n-html="r.a3">Unclear: it names an addition but does not say if it is money or time.</p>
+              </li>
+              <li class="sort-card" data-answer="other">
+                <p class="sort-text" lang="es">“No fue necesario realizar <mark>modificaciones adicionales</mark>”</p>
+                <p class="sort-gloss" lang="en">“It was not necessary to make additional modifications”</p>
+                <p class="sort-answer" data-i18n-html="r.a4">Other: this is the false alarm the rules must skip. “Modificaciones adicionales” is not an addition.</p>
+              </li>
+            </ol>
+          </div>
+
+          <h3 data-i18n="w.h">Of every 100 amendments, about 18 add money. Almost none were labelled that way.</h3>
+          <figure class="chart">
+            <figcaption class="summary" data-i18n="w.sum">Each square is about 1,000 amendments, out of 101,570. Only 3 of the 18 "adds money" squares carry the official label.</figcaption>
+            <div class="chart-visual">
+              <div class="waffle-wrap">
+                <div class="waffle" role="img" aria-label="Grid of 100 squares: 74 other amendments, 18 add money (3 with the official label) and 8 unclear" data-i18n-attr="aria-label:w.aria">
+                  <i class="add off" style="--i:0"></i><i class="add off" style="--i:1"></i><i class="add off" style="--i:2"></i><i class="add" style="--i:3"></i><i class="add" style="--i:4"></i><i class="add" style="--i:5"></i><i class="add" style="--i:6"></i><i class="add" style="--i:7"></i><i class="add" style="--i:8"></i><i class="add" style="--i:9"></i>
+                  <i class="add" style="--i:10"></i><i class="add" style="--i:11"></i><i class="add" style="--i:12"></i><i class="add" style="--i:13"></i><i class="add" style="--i:14"></i><i class="add" style="--i:15"></i><i class="add" style="--i:16"></i><i class="add" style="--i:17"></i><i class="unc" style="--i:18"></i><i class="unc" style="--i:19"></i>
+                  <i class="unc" style="--i:20"></i><i class="unc" style="--i:21"></i><i class="unc" style="--i:22"></i><i class="unc" style="--i:23"></i><i class="unc" style="--i:24"></i><i class="unc" style="--i:25"></i><i style="--i:26"></i><i style="--i:27"></i><i style="--i:28"></i><i style="--i:29"></i>
+                  <i style="--i:30"></i><i style="--i:31"></i><i style="--i:32"></i><i style="--i:33"></i><i style="--i:34"></i><i style="--i:35"></i><i style="--i:36"></i><i style="--i:37"></i><i style="--i:38"></i><i style="--i:39"></i>
+                  <i style="--i:40"></i><i style="--i:41"></i><i style="--i:42"></i><i style="--i:43"></i><i style="--i:44"></i><i style="--i:45"></i><i style="--i:46"></i><i style="--i:47"></i><i style="--i:48"></i><i style="--i:49"></i>
+                  <i style="--i:50"></i><i style="--i:51"></i><i style="--i:52"></i><i style="--i:53"></i><i style="--i:54"></i><i style="--i:55"></i><i style="--i:56"></i><i style="--i:57"></i><i style="--i:58"></i><i style="--i:59"></i>
+                  <i style="--i:60"></i><i style="--i:61"></i><i style="--i:62"></i><i style="--i:63"></i><i style="--i:64"></i><i style="--i:65"></i><i style="--i:66"></i><i style="--i:67"></i><i style="--i:68"></i><i style="--i:69"></i>
+                  <i style="--i:70"></i><i style="--i:71"></i><i style="--i:72"></i><i style="--i:73"></i><i style="--i:74"></i><i style="--i:75"></i><i style="--i:76"></i><i style="--i:77"></i><i style="--i:78"></i><i style="--i:79"></i>
+                  <i style="--i:80"></i><i style="--i:81"></i><i style="--i:82"></i><i style="--i:83"></i><i style="--i:84"></i><i style="--i:85"></i><i style="--i:86"></i><i style="--i:87"></i><i style="--i:88"></i><i style="--i:89"></i>
+                  <i style="--i:90"></i><i style="--i:91"></i><i style="--i:92"></i><i style="--i:93"></i><i style="--i:94"></i><i style="--i:95"></i><i style="--i:96"></i><i style="--i:97"></i><i style="--i:98"></i><i style="--i:99"></i>
+                </div>
+                <ul class="waffle-legend">
+                  <li><span class="sw muted" aria-hidden="true"></span><span data-i18n="w.l1">Other: 74,750</span></li>
+                  <li><span class="sw amber" aria-hidden="true"></span><span data-i18n="w.l2">Adds money: 18,670</span></li>
+                  <li><span class="sw ring" aria-hidden="true"></span><span data-i18n="w.l3">With the official label: 2,609 (3 outlined squares)</span></li>
+                  <li><span class="sw hatch" aria-hidden="true"></span><span data-i18n="w.l4">Unclear: 7,755</span></li>
+                  <li><span class="sw" aria-hidden="true" style="border:1px solid var(--muted)"></span><span data-i18n="w.l5">Time only: 395 (less than one square)</span></li>
+                </ul>
+              </div>
+            </div>
+            <details class="tbl">
+              <summary data-i18n="tbl">View as table</summary>
+              <div class="tbl-wrap">
+                <table>
+                  <caption data-i18n="w.t.cap">Amendments by class</caption>
+                  <thead><tr><th data-i18n="w.t.c1">Class</th><th class="n" data-i18n="w.t.c2">Amendments</th></tr></thead>
+                  <tbody>
+                    <tr><td data-i18n="w.t.r1">Other</td><td class="n" data-num>74,750</td></tr>
+                    <tr><td data-i18n="w.t.r2">Adds money (total)</td><td class="n" data-num>18,670</td></tr>
+                    <tr><td data-i18n="w.t.r3">of which with the official label</td><td class="n" data-num>2,609</td></tr>
+                    <tr><td data-i18n="w.t.r4">Unclear</td><td class="n" data-num>7,755</td></tr>
+                    <tr><td data-i18n="w.t.r5">Time only</td><td class="n" data-num>395</td></tr>
+                    <tr><th data-i18n="w.t.r6">Total</th><td class="n" data-num>101,570</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </details>
+            <p class="chart-source"><span data-i18n="src">Source:</span> <a href="https://www.datos.gov.co/d/cb9c-h8sn" target="_blank" rel="noopener">datos.gov.co/d/cb9c-h8sn</a></p>
+          </figure>
+
+          <details class="evidence">
+            <summary data-i18n="ev">Show the evidence</summary>
+            <div class="ev-body">
+              <h4 data-i18n="r.ev.rules">How the rule decides</h4>
+              <ul>
+                <li data-i18n="r.ev.l1">Adds money: the official label "Adicion en el valor", or a text that names an addition next to money words (valor, $, pesos, suma, CDP, presupuesto, recursos).</li>
+                <li data-i18n="r.ev.l2">Adds money too: "adición y prórroga", because in Colombian contracting the adición is the money part.</li>
+                <li data-i18n="r.ev.l3">Unclear: names an addition but does not say money or time. It counts only toward the 20.0% ceiling.</li>
+                <li data-i18n="r.ev.l4">Time only: "adición en el plazo", months or days with no money words.</li>
+                <li data-i18n="r.ev.l5">Other: a negation ("sin adición", "no se realizó adición") or "modificaciones adicionales".</li>
+              </ul>
+              <p data-i18n="r.ev.false">The false alarm: "No fue necesario realizar modificaciones adicionales" contains the word "adicionales" but is not an addition. The cases are pinned in tests/test_clean.py.</p>
+              <ul class="ev-links">
+                <li><a href="https://github.com/soushiki/secop-bolivar/blob/main/secop/clean.py" target="_blank" rel="noopener" data-i18n="r.ev.link">Classifier code (clean.py)</a></li>
+              </ul>
+            </div>
+          </details>
+        </section>
+
+        <!-- 5. What it shows -->
+        <section class="pj-step" id="shows" aria-labelledby="shows-h">
+          <p class="step-label" data-i18n="s4.label">Step 4 of 4</p>
+          <h2 id="shows-h" data-i18n="s4.h">Most contracts are awarded directly, but most of the money goes through competitions.</h2>
+          <p data-i18n="s4.p">A direct award is when a body picks the supplier without a competition. It is legal in cases set by law.</p>
+
+          <!-- Chart 1: dumbbell -->
+          <figure class="chart">
+            <figcaption class="summary" data-i18n="c1.sum">82.9% of contracts are direct, but they hold only 33.9% of the money.</figcaption>
+            <div class="chart-visual reveal">
+              <ul class="legend" style="margin:0 0 .8rem">
+                <li><span class="sw amber circ" aria-hidden="true"></span><span data-i18n="c1.l1">Share of contracts</span></li>
+                <li><span class="sw indigo dia" aria-hidden="true"></span><span data-i18n="c1.l2">Share of money</span></li>
+              </ul>
+              <div role="img" aria-label="Dumbbell chart: share of contracts and of money by modality. Direct 82.9% and 33.9%; special regime 11.1% and 21.2%; competitive 6.0% and 44.8%" data-i18n-attr="aria-label:c1.aria">
+                <ul class="dumb">
+                  <li>
+                    <p class="dumb-name"><span data-i18n="c1.r1">Direct</span></p>
+                    <div class="dumb-track"><span class="dumb-line" style="left:33.9%;width:49%"></span>
+                      <span class="dumb-dot a" style="left:82.9%"></span><span class="dumb-val a" style="left:82.9%" data-num>82.9%</span>
+                      <span class="dumb-dot m" style="left:33.9%"></span><span class="dumb-val m" style="left:33.9%" data-num>33.9%</span></div>
+                  </li>
+                  <li>
+                    <p class="dumb-name"><span data-i18n="c1.r2">Special regime</span></p>
+                    <div class="dumb-track"><span class="dumb-line" style="left:11.1%;width:10.1%"></span>
+                      <span class="dumb-dot a" style="left:11.1%"></span><span class="dumb-val a" style="left:11.1%" data-num>11.1%</span>
+                      <span class="dumb-dot m" style="left:21.2%"></span><span class="dumb-val m" style="left:21.2%" data-num>21.2%</span></div>
+                  </li>
+                  <li>
+                    <p class="dumb-name"><span data-i18n="c1.r3">Competitive</span></p>
+                    <div class="dumb-track"><span class="dumb-line" style="left:6%;width:38.8%"></span>
+                      <span class="dumb-dot a" style="left:6%"></span><span class="dumb-val a" style="left:6%" data-num>6.0%</span>
+                      <span class="dumb-dot m" style="left:44.8%"></span><span class="dumb-val m" style="left:44.8%" data-num>44.8%</span></div>
+                  </li>
+                </ul>
+                <div class="axis"><span style="left:0">0</span><span style="left:25%" data-num>25%</span><span style="left:50%" data-num>50%</span><span style="left:75%" data-num>75%</span><span style="left:100%" data-num>100%</span></div>
+              </div>
+            </div>
+            <p class="chart-note" data-i18n="c1.note">96% of direct awards are individual service contracts.</p>
+            <details class="tbl">
+              <summary data-i18n="tbl">View as table</summary>
+              <div class="tbl-wrap">
+                <table>
+                  <caption data-i18n="c1.t.cap">Share of contracts and of money by modality</caption>
+                  <thead><tr><th data-i18n="c1.t.c1">Modality</th><th class="n" data-i18n="c1.t.c2">% of contracts</th><th class="n" data-i18n="c1.t.c3">% of money</th></tr></thead>
+                  <tbody>
+                    <tr><td data-i18n="c1.r1">Direct</td><td class="n" data-num>82.9%</td><td class="n" data-num>33.9%</td></tr>
+                    <tr><td data-i18n="c1.r2">Special regime</td><td class="n" data-num>11.1%</td><td class="n" data-num>21.2%</td></tr>
+                    <tr><td data-i18n="c1.r3">Competitive</td><td class="n" data-num>6.0%</td><td class="n" data-num>44.8%</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </details>
+            <p class="chart-source"><span data-i18n="src">Source:</span> <a href="https://www.datos.gov.co/d/jbjy-vk9h" target="_blank" rel="noopener">datos.gov.co/d/jbjy-vk9h</a></p>
+          </figure>
+
+          <!-- Chart 2: unit blocks -->
+          <figure class="chart">
+            <figcaption class="summary" data-i18n="c2.sum">An average direct contract is small. A competitive one is about 18 times bigger.</figcaption>
+            <div class="chart-visual reveal">
+              <div role="img" aria-label="Blocks: 1 block for a direct contract, about COP 60 million; 18 blocks for a competitive one, about COP 1,089 million" data-i18n-attr="aria-label:c2.aria">
+                <div class="units">
+                  <div class="unit-row"><p class="unit-name" data-i18n="c2.r1">Direct: about COP 60 million</p><div class="unit-blocks"><i></i></div></div>
+                  <div class="unit-row"><p class="unit-name" data-i18n="c2.r2">Competitive: about COP 1,089 million</p><div class="unit-blocks"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+                </div>
+              </div>
+            </div>
+            <p class="chart-note" data-i18n="c2.legend">Each block is about COP 60 million.</p>
+            <details class="tbl">
+              <summary data-i18n="tbl">View as table</summary>
+              <div class="tbl-wrap">
+                <table>
+                  <caption data-i18n="c2.t.cap">Average size by contract type</caption>
+                  <thead><tr><th data-i18n="c2.t.c1">Type</th><th class="n" data-i18n="c2.t.c2">COP million</th><th class="n" data-i18n="c2.t.c3">Blocks</th></tr></thead>
+                  <tbody>
+                    <tr><td data-i18n="c2.t.r1">Direct</td><td class="n" data-num>60</td><td class="n">1</td></tr>
+                    <tr><td data-i18n="c2.t.r2">Competitive</td><td class="n" data-num>1,089</td><td class="n">18</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </details>
+            <p class="chart-source"><span data-i18n="src">Source:</span> <a href="https://www.datos.gov.co/d/jbjy-vk9h" target="_blank" rel="noopener">datos.gov.co/d/jbjy-vk9h</a></p>
+          </figure>
+
+          <!-- Chart 3: track -->
+          <figure class="chart">
+            <figcaption class="summary" data-i18n="c3.sum">The official label catches 2.1% of contracts that grow. The text shows 13.7%, and up to 20.0%.</figcaption>
+            <div class="chart-visual reveal">
+              <div role="img" aria-label="Line from 0 to 25%: official label 2.1%, reading the text 13.7%, up to 20.0%. Competitive 23.2%, direct 12.5%" data-i18n-attr="aria-label:c3.aria">
+                <div class="track">
+                  <span class="track-band" style="left:54.8%;width:25.2%"></span>
+                  <span class="track-lab off" style="left:8.4%" data-i18n="c3.off">Official label 2.1%</span>
+                  <span class="track-mark off" style="left:8.4%"></span>
+                  <span class="track-lab txt" style="left:54.8%" data-i18n="c3.txt">Reading the text 13.7%</span>
+                  <span class="track-mark txt" style="left:54.8%"></span>
+                </div>
+                <div class="track-axis"><span style="left:0" data-num>0%</span><span style="left:20%" data-num>5%</span><span style="left:40%" data-num>10%</span><span style="left:60%" data-num>15%</span><span style="left:80%" data-num>20%</span><span style="left:100%" data-num>25%</span></div>
+                <p class="track-gap" data-i18n="c3.gap">≈ 6.5× too low</p>
+                <p class="chart-note" style="margin-top:.2rem" data-i18n="c3.band">The hatched band runs to 20.0%: "could be up to".</p>
+                <ul class="hbars">
+                  <li><p class="hbar-name" data-i18n="c3.b1">Competitive contracts</p><div class="hbar-track"><span class="hbar-bar" style="width:92.8%"></span><span class="hbar-val" style="left:92.8%" data-num>23.2%</span></div></li>
+                  <li><p class="hbar-name" data-i18n="c3.b2">Direct contracts</p><div class="hbar-track"><span class="hbar-bar" style="width:50%"></span><span class="hbar-val" style="left:50%" data-num>12.5%</span></div></li>
+                </ul>
+              </div>
+            </div>
+            <details class="tbl">
+              <summary data-i18n="tbl">View as table</summary>
+              <div class="tbl-wrap">
+                <table>
+                  <caption data-i18n="c3.t.cap">Contracts with at least one value addition</caption>
+                  <thead><tr><th data-i18n="c3.t.c1">Measure</th><th class="n" data-i18n="c3.t.c2">% of contracts</th></tr></thead>
+                  <tbody>
+                    <tr><td data-i18n="c3.t.r1">By the official label</td><td class="n" data-num>2.1%</td></tr>
+                    <tr><td data-i18n="c3.t.r2">Reading the text</td><td class="n" data-num>13.7%</td></tr>
+                    <tr><td data-i18n="c3.t.r3">Ceiling (counting unclear texts)</td><td class="n" data-num>20.0%</td></tr>
+                    <tr><td data-i18n="c3.t.r4">Competitive, reading the text</td><td class="n" data-num>23.2%</td></tr>
+                    <tr><td data-i18n="c3.t.r5">Direct, reading the text</td><td class="n" data-num>12.5%</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </details>
+            <p class="chart-source"><span data-i18n="src">Source:</span> <a href="https://www.datos.gov.co/d/jbjy-vk9h" target="_blank" rel="noopener">datos.gov.co/d/jbjy-vk9h</a> · <a href="https://www.datos.gov.co/d/cb9c-h8sn" target="_blank" rel="noopener">datos.gov.co/d/cb9c-h8sn</a></p>
+          </figure>
+
+          <!-- Chart 4: ranked bars -->
+          <figure class="chart">
+            <figcaption class="summary" data-i18n="c4.sum">In some bodies, more than half of the contracts get a value addition.</figcaption>
+            <div class="chart-visual reveal">
+              <p class="rank-ref-lab" data-i18n="c4.ref">Dashed line: 13.7% of all contracts</p>
+              <div role="img" aria-label="Bars for the 10 bodies with 300+ contracts and the most value additions, from 51.3% to 26.1%, with a line at 13.7%" data-i18n-attr="aria-label:c4.aria">
+                <ol class="hbars rank">
+                  <li><p class="hbar-name">ICBF Regional Bolívar <span>(<span data-num>3,166</span> <span data-i18n="u.contracts">contracts</span>)</span></p><div class="hbar-track"><span class="hbar-bar" style="width:73.3%"></span><span class="hbar-val" style="left:73.3%" data-num>51.3%</span></div></li>
+                  <li><p class="hbar-name">Dirección de Sanidad, Armada Nacional <span>(<span data-num>311</span> <span data-i18n="u.contracts">contracts</span>)</span></p><div class="hbar-track"><span class="hbar-bar" style="width:64.7%"></span><span class="hbar-val" style="left:64.7%" data-num>45.3%</span></div></li>
+                  <li><p class="hbar-name">Hospital Naval de Cartagena <span>(<span data-num>2,497</span> <span data-i18n="u.contracts">contracts</span>)</span></p><div class="hbar-track"><span class="hbar-bar" style="width:54.0%"></span><span class="hbar-val" style="left:54.0%" data-num>37.8%</span></div></li>
+                  <li><p class="hbar-name">Cardique (Canal del Dique) <span>(<span data-num>764</span> <span data-i18n="u.contracts">contracts</span>)</span></p><div class="hbar-track"><span class="hbar-bar" style="width:53.1%"></span><span class="hbar-val" style="left:53.1%" data-num>37.2%</span></div></li>
+                  <li><p class="hbar-name">Rama Judicial, seccional Cartagena <span>(<span data-num>525</span> <span data-i18n="u.contracts">contracts</span>)</span></p><div class="hbar-track"><span class="hbar-bar" style="width:51.4%"></span><span class="hbar-val" style="left:51.4%" data-num>36.0%</span></div></li>
+                  <li><p class="hbar-name">Base Naval No. 1, ARC Bolívar <span>(<span data-num>538</span> <span data-i18n="u.contracts">contracts</span>)</span></p><div class="hbar-track"><span class="hbar-bar" style="width:43.6%"></span><span class="hbar-val" style="left:43.6%" data-num>30.5%</span></div></li>
+                  <li><p class="hbar-name">Escuela Naval de Cadetes <span>(<span data-num>318</span> <span data-i18n="u.contracts">contracts</span>)</span></p><div class="hbar-track"><span class="hbar-bar" style="width:42.3%"></span><span class="hbar-val" style="left:42.3%" data-num>29.6%</span></div></li>
+                  <li><p class="hbar-name">Municipio de Santa Rosa <span>(<span data-num>818</span> <span data-i18n="u.contracts">contracts</span>)</span></p><div class="hbar-track"><span class="hbar-bar" style="width:40.1%"></span><span class="hbar-val" style="left:40.1%" data-num>28.1%</span></div></li>
+                  <li><p class="hbar-name">Policía Metropolitana de Cartagena, Sanidad <span>(<span data-num>707</span> <span data-i18n="u.contracts">contracts</span>)</span></p><div class="hbar-track"><span class="hbar-bar" style="width:38.1%"></span><span class="hbar-val" style="left:38.1%" data-num>26.7%</span></div></li>
+                  <li><p class="hbar-name">Grupo Intendencia Regional Caribe <span>(<span data-num>1,203</span> <span data-i18n="u.contracts">contracts</span>)</span></p><div class="hbar-track"><span class="hbar-bar" style="width:37.3%"></span><span class="hbar-val" style="left:37.3%" data-num>26.1%</span></div></li>
+                </ol>
+              </div>
+            </div>
+            <p class="chart-note" data-i18n="c4.note">Additions and direct awards are legal tools, not proof of wrongdoing. A high rate is a reason to look closer.</p>
+            <details class="tbl">
+              <summary data-i18n="tbl">View as table</summary>
+              <div class="tbl-wrap">
+                <table>
+                  <caption data-i18n="c4.t.cap">Bodies with 300+ contracts and the most value additions</caption>
+                  <thead><tr><th data-i18n="c4.t.c1">Body</th><th class="n" data-i18n="c4.t.c2">Contracts</th><th class="n" data-i18n="c4.t.c3">With a value addition</th></tr></thead>
+                  <tbody>
+                    <tr><td>ICBF Regional Bolívar</td><td class="n" data-num>3,166</td><td class="n" data-num>51.3%</td></tr>
+                    <tr><td>Dirección de Sanidad, Armada Nacional</td><td class="n" data-num>311</td><td class="n" data-num>45.3%</td></tr>
+                    <tr><td>Hospital Naval de Cartagena</td><td class="n" data-num>2,497</td><td class="n" data-num>37.8%</td></tr>
+                    <tr><td>Cardique (Canal del Dique)</td><td class="n" data-num>764</td><td class="n" data-num>37.2%</td></tr>
+                    <tr><td>Rama Judicial, seccional Cartagena</td><td class="n" data-num>525</td><td class="n" data-num>36.0%</td></tr>
+                    <tr><td>Base Naval No. 1, ARC Bolívar</td><td class="n" data-num>538</td><td class="n" data-num>30.5%</td></tr>
+                    <tr><td>Escuela Naval de Cadetes</td><td class="n" data-num>318</td><td class="n" data-num>29.6%</td></tr>
+                    <tr><td>Municipio de Santa Rosa</td><td class="n" data-num>818</td><td class="n" data-num>28.1%</td></tr>
+                    <tr><td>Policía Metropolitana de Cartagena, Sanidad</td><td class="n" data-num>707</td><td class="n" data-num>26.7%</td></tr>
+                    <tr><td>Grupo Intendencia Regional Caribe</td><td class="n" data-num>1,203</td><td class="n" data-num>26.1%</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </details>
+            <p class="chart-source"><span data-i18n="src">Source:</span> <a href="https://www.datos.gov.co/d/jbjy-vk9h" target="_blank" rel="noopener">datos.gov.co/d/jbjy-vk9h</a> · <a href="https://www.datos.gov.co/d/cb9c-h8sn" target="_blank" rel="noopener">datos.gov.co/d/cb9c-h8sn</a></p>
+          </figure>
+
+          <details class="evidence">
+            <summary data-i18n="ev">Show the evidence</summary>
+            <div class="ev-body">
+              <p data-i18n="s4.ev.p">These queries are in the repo's sql/ folder, trimmed here to the essentials.</p>
+              <h4 data-i18n="s4.ev.q3">Chart 3: how often contracts grow (sql/03_adiciones_por_modalidad.sql)</h4>
+              <pre><code>WITH m AS (
+  SELECT id_contrato,
+         SUM(clase = 'adicion_valor') AS n_valor,
+         SUM(clase IN ('adicion_valor', 'adicion_sin_detalle')) AS n_max
+  FROM adiciones GROUP BY id_contrato
+)
+SELECT c.modalidad_familia AS modalidad, COUNT(*) AS contratos,
+  ROUND(100.0 * SUM(COALESCE(m.n_valor, 0) > 0) / COUNT(*), 1) AS pct_con_adicion,
+  ROUND(100.0 * SUM(COALESCE(m.n_max, 0) > 0) / COUNT(*), 1)   AS pct_max
+FROM contratos c LEFT JOIN m ON m.id_contrato = c.id_contrato
+GROUP BY c.modalidad_familia;</code></pre>
+              <h4 data-i18n="s4.ev.q4">Chart 4: bodies with the most additions (sql/04_adiciones_por_entidad.sql)</h4>
+              <pre><code>WITH n_adic AS (
+  SELECT id_contrato, COUNT(*) AS n FROM adiciones
+  WHERE clase = 'adicion_valor' GROUP BY id_contrato
+)
+SELECT c.nombre_entidad AS entidad, COUNT(*) AS contratos,
+  ROUND(100.0 * SUM(a.n IS NOT NULL) / COUNT(*), 1) AS pct_con_adicion
+FROM contratos c LEFT JOIN n_adic a ON a.id_contrato = c.id_contrato
+GROUP BY c.nit_entidad
+HAVING COUNT(*) &gt;= 300
+ORDER BY pct_con_adicion DESC LIMIT 15;</code></pre>
+              <h4 data-i18n="s4.ev.q5">Chart 1 note: the 96% of direct contracts (sql/05_justificacion_directa.sql)</h4>
+              <pre><code>SELECT justificacion_modalidad_de AS justificacion, COUNT(*) AS contratos,
+  ROUND(100.0 * COUNT(*) / (SELECT COUNT(*) FROM contratos
+        WHERE modalidad_familia = 'Directa'), 1) AS pct
+FROM contratos WHERE modalidad_familia = 'Directa'
+GROUP BY justificacion_modalidad_de ORDER BY contratos DESC LIMIT 8;</code></pre>
+              <h4 data-i18n="s4.ev.q2">Share of value awarded directly, by body (sql/02_directa_participacion_valor.sql)</h4>
+              <pre><code>SELECT nombre_entidad AS entidad, COUNT(*) AS contratos,
+  SUM(CASE WHEN modalidad_familia = 'Directa' AND NOT flag_valor_no_positivo
+           THEN valor_del_contrato END) AS valor_directa
+FROM contratos GROUP BY nit_entidad HAVING COUNT(*) &gt;= 300;</code></pre>
+              <ul class="ev-links">
+                <li><a href="https://github.com/soushiki/secop-bolivar/tree/main/sql" target="_blank" rel="noopener" data-i18n="s4.ev.all">All queries</a></li>
+                <li><a href="https://github.com/soushiki/secop-bolivar/blob/main/FINDINGS.md" target="_blank" rel="noopener" data-i18n="s4.ev.find">Findings with the full numbers</a></li>
+              </ul>
+            </div>
+          </details>
+        </section>
+
+        <!-- 6. So what -->
+        <section class="pj-step" id="sowhat" aria-labelledby="sowhat-h">
+          <p class="step-label" data-i18n="so.label">So what</p>
+          <h2 id="sowhat-h" data-i18n="so.h">Colombia Compra Eficiente, the national procurement agency, should make the amendment type and the added amount required fields.</h2>
+          <div class="cards cols-2 reveal">
+            <article class="card reco">
+              <h3 data-i18n="so.reco">Recommendation</h3>
+              <p data-i18n="so.reco.p">Today, anyone checking contract growth from open data gets a figure about six times too low. One required field would make the right number one query away.</p>
+            </article>
+            <article class="card limits">
+              <h3><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i><span data-i18n="so.lim">What this does not say</span></h3>
+              <p data-i18n="so.lim.p">Direct awards and additions are legal tools, not proof of wrongdoing.</p>
+            </article>
+          </div>
+          <details class="evidence">
+            <summary data-i18n="ev">Show the evidence</summary>
+            <div class="ev-body">
+              <ul>
+                <li data-i18n="so.ev.l1">SECOP I is not included: only SECOP II.</li>
+                <li data-i18n="so.ev.l2">Contracts signed in 2025 have had less time to be amended, so their rate will still rise.</li>
+                <li data-i18n="so.ev.l3">The classifier is rule-based. The gap between 13.7% and 20.0% is what it cannot decide.</li>
+                <li data-i18n="so.ev.l4">The amendments dataset has no amount field, so the growth in pesos cannot be summed.</li>
+              </ul>
+            </div>
+          </details>
+        </section>
+
+        <!-- 7. Stays true -->
+        <section class="pj-step" id="stays" aria-labelledby="stays-h">
+          <p class="step-label" data-i18n="st.label">Stays true</p>
+          <h2 id="stays-h" data-i18n="stay.h">If the data changes shape, a test fails before the report gets it wrong.</h2>
+          <p class="strip reveal"><span data-i18n="stay.strip1">40 tests</span><span aria-hidden="true">·</span><span data-i18n="stay.strip2">a robot refreshes the data every Monday</span></p>
+          <p data-i18n="stay.p">Every Monday at 12:00 UTC a GitHub robot downloads the data again, runs the tests and rebuilds the report.</p>
+          <details class="evidence">
+            <summary data-i18n="ev">Show the evidence</summary>
+            <div class="ev-body">
+              <p data-i18n="stay.ev.p">The workflow runs the tests on every change and the report every Monday.</p>
+              <pre><code>on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "0 12 * * 1"   # every Monday 12:00 UTC
+  workflow_dispatch:</code></pre>
+              <ul class="ev-links">
+                <li><a href="https://github.com/soushiki/secop-bolivar/actions/workflows/ci.yml" target="_blank" rel="noopener" data-i18n="stay.wf">Workflow (CI)</a></li>
+                <li><a href="https://github.com/soushiki/secop-bolivar/blob/main/REPORT.md" target="_blank" rel="noopener" data-i18n="stay.rep">Current report (REPORT.md)</a></li>
+              </ul>
+            </div>
+          </details>
+        </section>
+
+        <!-- 8. Skills -->
+        <section class="pj-step" id="skills" aria-labelledby="skills-h">
+          <h2 id="skills-h" data-i18n="sk.h">What this shows I can do</h2>
+          <ul class="skills reveal">
+            <li><h3 style="margin:0 0 .3rem;font-size:1.05rem"><i class="fa-solid fa-broom" aria-hidden="true"></i><span data-i18n="sk.1.h">Clean messy public data</span></h3><p style="margin:0;color:var(--muted-on-surface)" data-i18n="sk.1.p">Repeated names, broken characters and empty values, with every rule logged and tested.</p></li>
+            <li><h3 style="margin:0 0 .3rem;font-size:1.05rem"><i class="fa-solid fa-database" aria-hidden="true"></i><span data-i18n="sk.2.h">Turn a question into SQL and charts</span></h3><p style="margin:0;color:var(--muted-on-surface)" data-i18n="sk.2.p">From a doubt in words to queries you can check and charts that explain themselves.</p></li>
+            <li><h3 style="margin:0 0 .3rem;font-size:1.05rem"><i class="fa-solid fa-robot" aria-hidden="true"></i><span data-i18n="sk.3.h">Make it repeat itself, with tests</span></h3><p style="margin:0;color:var(--muted-on-surface)" data-i18n="sk.3.p">Automatic tests and a weekly robot keep the report up to date.</p></li>
+          </ul>
+          <details class="evidence">
+            <summary data-i18n="ev">Show the evidence</summary>
+            <div class="ev-body">
+              <p data-i18n="sk.ev.p">Everything is open in the repository.</p>
+              <ul class="ev-links">
+                <li><a href="https://github.com/soushiki/secop-bolivar" target="_blank" rel="noopener" data-i18n="sk.repo">Repository</a></li>
+                <li><a href="https://github.com/soushiki/secop-bolivar/blob/main/FINDINGS.md" target="_blank" rel="noopener">FINDINGS.md</a></li>
+                <li><a href="https://github.com/soushiki/secop-bolivar/blob/main/CLEANING-LOG.md" target="_blank" rel="noopener">CLEANING-LOG.md</a></li>
+              </ul>
+            </div>
+          </details>
+        </section>
+      </main>
+    </div>
+
+    <footer class="job-line">
+      <div class="wrap">
+        <span data-i18n="job.text">Looking to hire me for a job? See my projects and resume</span>
+        <br /><a href="./index.html#projects" data-i18n="job.link">Back to projects</a>
+      </div>
+    </footer>
+
+    <script>
+    (function () {
+      var b = document.querySelector('.nav-toggle'), l = document.getElementById('nav-links');
+      if (!b || !l) return;
+      function set(o) { b.setAttribute('aria-expanded', o ? 'true' : 'false'); l.classList.toggle('open', o); }
+      b.addEventListener('click', function () { set(b.getAttribute('aria-expanded') !== 'true'); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && b.getAttribute('aria-expanded') === 'true') { set(false); b.focus(); }
+      });
+      l.addEventListener('click', function (e) { if (e.target.closest('a')) set(false); });
+    })();
+  </script>
+</body>
+</html>
