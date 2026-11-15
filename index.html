@@ -123,6 +123,9 @@
       "q.p": "Las apps que usan una API pública se rompen sin aviso cuando la API cambia su forma de responder.",
       "q.s": "Un plan de pruebas escrito y 44 pruebas automáticas para la API de datos abiertos 311 de la ciudad de Nueva York: el contrato de respuesta, los filtros y la paginación, y cómo rechaza solicitudes mal hechas.",
       "q.v": "GitHub las corre en cada cambio y cada mañana, así que un cambio en la API aparece como una prueba fallida el mismo día.",
+      "c2.p": "Los datos de contratación pública son abiertos pero desordenados: quien cuenta solo la etiqueta oficial ve una parte pequeña de los contratos que crecen después de firmados.",
+      "c2.s": "Un proceso en Python y SQL sobre 102.146 contratos públicos firmados en Bolívar entre 2022 y 2025. Lee el texto de cada modificación para encontrar las adiciones que la etiqueta oficial no marca, y registra cada regla de limpieza.",
+      "c2.v": "Muestra que el 13,7 % de los contratos crece en valor, no el 2,1 % que sugiere la etiqueta, y cierra con una recomendación. GitHub actualiza los datos cada semana.",
       "how.h": "Cómo funciona",
       "s1.h": "Resumen por escrito",
       "s1.p": "Me cuentas lo que necesitas en un mensaje corto.",
@@ -139,6 +142,8 @@
       "a.data": "Abrir el portafolio de ciencia de datos",
       "t.apitests": "Pruebas de la API NYC 311",
       "a.apitests": "Abrir las pruebas de la API NYC 311 en GitHub",
+      "t.secop": "Contratos públicos de Bolívar (SECOP II)",
+      "a.secop": "Abrir el proyecto de contratos públicos de Bolívar en GitHub",
       "c.brasa": "Prototipo de landing page para un restaurante de Cartagena: smash burgers, pizza al horno de leña y costillas, con secciones de menú, sedes y pedidos.",
       "c.gacha": "Juego gacha de máquina de cápsulas con 21 gatos con poderes: pity suave y duro, sistema 50/50 de probabilidad aumentada, un frasco de premios, retos diarios y una revelación Mítica animada.",
       "c.davinci": "App de notas en Markdown con inicio de sesión y base de datos en Firebase.",
@@ -152,6 +157,7 @@
       "l.demo": "Así funciona",
       "l.code": "Código",
       "l.plan": "Plan de pruebas",
+      "l.findings": "Hallazgos",
       "l.play": "Jugar",
       "a.minoscreto": "Abrir Minoscreto",
       "a.ingresos": "Caso de estudio de Ingresos App",
@@ -375,6 +381,25 @@
               <div class="card-links">
                 <a href="https://github.com/soushiki/api-tests-nyc311" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> <span data-i18n="l.code">Code</span></a>
                 <a href="https://github.com/soushiki/api-tests-nyc311/blob/main/TEST-PLAN.md" target="_blank" rel="noopener"><i class="fa-solid fa-book-open"></i> <span data-i18n="l.plan">Test plan</span></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="card">
+            <a class="card-media media-placeholder media-secop" href="https://github.com/soushiki/secop-bolivar" target="_blank" rel="noopener" aria-label="Open the Bolívar public contracts project on GitHub" data-i18n-attr="aria-label:a.secop">
+              <i class="fa-solid fa-file-contract"></i>
+            </a>
+            <div class="card-body">
+              <h3 data-i18n="t.secop">Bolívar public contracts (SECOP II)</h3>
+              <dl class="case">
+                <div><dt data-i18n="case.p">Problem</dt><dd data-i18n="c2.p">Public contracting data is open but messy: anyone who counts only the official label sees a small part of the contracts that grow after signing.</dd></div>
+                <div><dt data-i18n="case.s">Solution</dt><dd data-i18n="c2.s">A Python and SQL pipeline over 102,146 public contracts signed in Bolívar from 2022 to 2025. It reads the text of each amendment to find the additions the official label misses, and logs every cleaning rule.</dd></div>
+                <div><dt data-i18n="case.v">What it changes</dt><dd data-i18n="c2.v">It shows that 13.7% of contracts grow in value, not the 2.1% the label suggests, and ends with one recommendation. GitHub refreshes the data every week.</dd></div>
+              </dl>
+              <ul class="tags"><li>Python</li><li>pandas</li><li>SQL</li><li>GitHub Actions</li></ul>
+              <div class="card-links">
+                <a href="https://github.com/soushiki/secop-bolivar" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> <span data-i18n="l.code">Code</span></a>
+                <a href="https://github.com/soushiki/secop-bolivar/blob/main/FINDINGS.md" target="_blank" rel="noopener"><i class="fa-solid fa-magnifying-glass-chart"></i> <span data-i18n="l.findings">Findings</span></a>
               </div>
             </div>
           </article>
