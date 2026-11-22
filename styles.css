@@ -502,6 +502,13 @@ html { scroll-padding-top: var(--nav-h); scroll-behavior: smooth; } /* intro.js 
 .dots a::before { content: ""; width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--accent); background: transparent; transition: background 0.2s, transform 0.2s; }
 .dots a[aria-current="true"]::before { background: var(--accent); transform: scale(1.25); }
 .dots a:hover::before { background: var(--accent); }
+/* Newer browsers: the browser itself marks the dot of the section in view (scroll-target-group); JS still sets aria-current for screen readers */
+@supports selector(:target-current) {
+  .dots ul { scroll-target-group: auto; }
+  .dots a[aria-current="true"]::before { background: transparent; transform: none; }
+  .dots a:target-current::before { background: var(--accent); transform: scale(1.25); }
+  .dots a:hover::before { background: var(--accent); }
+}
 
 /* Persistent Resume in the nav */
 .nav-resume { order: 3; padding: 0.3rem 0.95rem; font-size: 0.9rem; white-space: nowrap; min-height: 36px; }
@@ -514,6 +521,8 @@ html { scroll-padding-top: var(--nav-h); scroll-behavior: smooth; } /* intro.js 
 .js .panel:not(#intro):not(.is-in) > * { opacity: 0; transform: translateY(24px); }
 .js .panel.is-in > * { opacity: 1; transform: none; }
 .panel > :nth-child(2) { --i: 1; } .panel > :nth-child(3) { --i: 2; } .panel > :nth-child(4) { --i: 3; } .panel > :nth-child(5) { --i: 4; } .panel > :nth-child(6) { --i: 5; } .panel > :nth-child(7) { --i: 6; }
+/* Newer browsers: index from sibling-index(), capped at 6 like the rules above (cosmetic stagger only) */
+@supports (order: sibling-index()) { .panel > :nth-child(n) { --i: min(calc(sibling-index() - 1), 6); } }
 
 @media (max-width: 1024px) { .kinds, .stats { gap: 1rem; } }
 @media (max-width: 800px) { .kinds { grid-template-columns: 1fr; } }

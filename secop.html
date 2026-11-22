@@ -7,8 +7,8 @@
     <title>The number hidden in the fine print · Sebastian Herrera</title>
     <script>document.documentElement.className += ' js';
     (function () {
-      var m = /[?&]motion=(calm|full)(?:&|$)/.exec(location.search), mode, source;
-      if (m) { mode = m[1]; source = 'url'; }
+      var q = new URLSearchParams(location.search).get('motion'), mode, source;
+      if (q === 'calm' || q === 'full') { mode = q; source = 'url'; }
       else {
         try { var v = localStorage.getItem('p2d-motion'); if (v === 'calm' || v === 'full') { mode = v; source = 'saved'; } } catch (e) {}
         if (!mode) { source = 'OS'; mode = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'calm' : 'full'; }

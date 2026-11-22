@@ -9,8 +9,8 @@
   var listeners = [];
 
   function detect() {
-    var m = /[?&]lang=(es|en)\b/.exec(location.search);
-    if (m) return m[1];
+    var q = new URLSearchParams(location.search).get('lang');
+    if (q === 'es' || q === 'en') return q;
     try { var s = localStorage.getItem('lang'); if (s === 'es' || s === 'en') return s; } catch (e) {}
     var d = document.documentElement.getAttribute('data-default-lang');
     if (d === 'es' || d === 'en') return d;

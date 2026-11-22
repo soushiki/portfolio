@@ -43,6 +43,11 @@ a { overflow-wrap: anywhere; }
   .steplist a { display: flex; align-items: center; min-height: 44px; padding: 0 .75rem; color: var(--muted); font-size: .95rem; margin-left: -2px; border-left: 2px solid transparent; }
   .steplist a:hover { color: var(--text); text-decoration: none; }
   .steplist a[aria-current="true"] { color: var(--text); border-left-color: var(--accent); font-weight: 600; }
+  @supports selector(:target-current) {
+    .steplist ol { scroll-target-group: auto; }
+    .steplist a[aria-current="true"] { color: var(--muted); border-left-color: transparent; font-weight: inherit; }
+    .steplist a:target-current { color: var(--text); border-left-color: var(--accent); font-weight: 600; }
+  }
 }
 
 /* Steps */
@@ -318,6 +323,8 @@ html.pj-ready:not(.motion-calm) .waffle:not(.is-seen) i { opacity: 0; }
 .brk-rows { list-style: none; margin: 0; padding: 0; display: grid; gap: .4rem; }
 .brk-row label { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "sw name state" "sw val val"; gap: 0 .75rem; align-items: center; min-height: 44px; padding: .4rem .6rem; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); cursor: pointer; }
 .brk-row input { grid-area: sw; width: 1.4rem; height: 1.4rem; accent-color: var(--accent); margin: 0; cursor: pointer; }
+/* Native switch (Safari today): give it switch proportions; other browsers keep the checkbox */
+@supports selector(input[switch]::thumb) { .brk-row input[switch] { width: 2.4rem; height: 1.4rem; } }
 .brk-row input:disabled { cursor: default; }
 .brk-name { grid-area: name; overflow-wrap: anywhere; }
 .brk-state { grid-area: state; font-size: .85rem; color: var(--muted-on-surface); }

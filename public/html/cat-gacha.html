@@ -1452,7 +1452,7 @@ window.MEOW_CLIPS = [{"len":0.83,"data":"UklGRuRnAABXQVZFZm10IBAAAAABAAEAgD4AAAB
   function openOverlay() { el.overlay.hidden = false; document.body.style.overflow = "hidden"; }
   function resetOverlay() {
     clearTimers(); seq = null;
-    el.rays.className = "rays"; el.stage.innerHTML = ""; el.particles.innerHTML = "";
+    el.rays.className = "rays"; el.stage.replaceChildren(); el.particles.replaceChildren();
   }
   function closeOverlay() {
     resetOverlay();
@@ -1570,7 +1570,7 @@ window.MEOW_CLIPS = [{"len":0.83,"data":"UklGRuRnAABXQVZFZm10IBAAAAABAAEAgD4AAAB
 
   // 10-pull: one cat at a time (lowest rarity first), with skip
   function startSequence(results) {
-    seq = { list: results.slice().sort((a, b) => a.cat.r - b.cat.r), i: 0 };
+    seq = { list: results.toSorted((a, b) => a.cat.r - b.cat.r), i: 0 };
     showSeqItem();
   }
   function showSeqItem() {
