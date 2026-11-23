@@ -7,3 +7,8 @@
 /docs/research
 /docs/HANDOFF-*.md
 /docs/feedback
+
+/tests/node_modules
+/tests/.pw-browsers
+/tests/test-results
+/tests/playwright-report

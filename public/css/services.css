@@ -60,7 +60,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outlin
 /* Contact + footer */
 .contact-box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.6rem; max-width: 640px; }
 .contact-box p { margin: 0 0 1.1rem; color: var(--muted); }
-.job-line { padding: 2rem 0 5.5rem; text-align: center; color: var(--muted); }
+.job-line { padding: 2rem 0 calc(44px + 32px + env(safe-area-inset-bottom)); text-align: center; color: var(--muted); }
 .job-line a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; }
 
 /* Tablet */
@@ -104,7 +104,7 @@ a.pending[aria-disabled="true"] { cursor: not-allowed; text-decoration: line-thr
     #services, #examples, #contact { background: var(--bg); }
     #prices-section, #how { background: var(--surface); }
     #prices-section .btn, #prices-section .price-toggle { width: 100%; justify-content: center; }
-    .svc-hero { padding: var(--s4) 0 var(--s5); }
+    .svc-hero { padding: var(--s4) 0 calc(44px + 32px + env(safe-area-inset-bottom)); }
     .svc-hero .wrap { gap: var(--s4); }
     .pill { margin-bottom: var(--s2); font-size: 0.82rem; }
     .svc-hero h1 { font-size: clamp(1.3rem, 6vw, 1.9rem); line-height: 1.1; margin-bottom: var(--s2); }
@@ -126,3 +126,4 @@ a.pending[aria-disabled="true"] { cursor: not-allowed; text-decoration: line-thr
     .contact-box .btn { width: 100%; justify-content: center; }
     .job-line { text-align: left; padding: var(--s4) 0 var(--s5); }
 }
+@media (max-width: 420px) { .job-line { padding-bottom: calc(80px + 44px + 16px + env(safe-area-inset-bottom)); } }

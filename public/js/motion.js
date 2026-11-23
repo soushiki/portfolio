@@ -13,8 +13,8 @@
     btn.title = t('help');
   }
   function init() {
-    var lang = document.querySelector('.nav-links .lang-toggle');
-    if (!lang) return;
+    var menu = document.getElementById('nav-links');
+    if (!menu) return;
     btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'motion-toggle';
@@ -25,7 +25,9 @@
       window.__motion = { mode: calm ? 'calm' : 'full', source: 'saved' };
       render();
     });
-    lang.parentNode.insertBefore(btn, lang.nextSibling);
+    var li = document.createElement('li');
+    li.appendChild(btn);
+    menu.appendChild(li);
     render();
     if (window.I18N) window.I18N.onChange(render);
   }
