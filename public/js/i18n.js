@@ -120,11 +120,6 @@
   }
 
   function init() {
-    var bar = document.querySelector('.nav');
-    if (bar) {
-      var brand = bar.querySelector('.nav-brand'), tg = makeToggle();
-      bar.insertBefore(tg, brand ? brand.nextSibling : bar.firstChild);
-    }
     document.querySelectorAll('[data-lang-toggle]').forEach(function (h) { h.appendChild(makeToggle()); });
     apply();
   }

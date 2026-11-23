@@ -60,7 +60,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outlin
 /* Contact + footer */
 .contact-box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.6rem; max-width: 640px; }
 .contact-box p { margin: 0 0 1.1rem; color: var(--muted); }
-.job-line { padding: 2rem 0 calc(44px + 32px + env(safe-area-inset-bottom)); text-align: center; color: var(--muted); }
+.job-line { padding: 2rem 0 calc(88px + 96px + 16px + env(safe-area-inset-bottom)); text-align: center; color: var(--muted); }
 .job-line a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; }
 
 /* Tablet */
@@ -124,6 +124,5 @@ a.pending[aria-disabled="true"] { cursor: not-allowed; text-decoration: line-thr
     .steps { gap: var(--s3); }
     .example .btn { width: 100%; justify-content: center; }
     .contact-box .btn { width: 100%; justify-content: center; }
-    .job-line { text-align: left; padding: var(--s4) 0 var(--s5); }
+    .job-line { text-align: left; padding: var(--s4) 0 calc(88px + 96px + 16px + env(safe-area-inset-bottom)); }
 }
-@media (max-width: 420px) { .job-line { padding-bottom: calc(80px + 44px + 16px + env(safe-area-inset-bottom)); } }

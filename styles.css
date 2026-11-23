@@ -216,7 +216,7 @@ a.media-placeholder:hover { text-decoration: none; }
     align-items: center;
     max-width: var(--max);
     margin: 2rem auto 0;
-    padding: 1.5rem 1rem calc(44px + 32px + env(safe-area-inset-bottom));
+    padding: 1.5rem 1rem calc(88px + 96px + 16px + env(safe-area-inset-bottom));
     border-top: 1px solid var(--border);
     color: var(--muted);
 }
@@ -432,7 +432,7 @@ html.motion-calm .dots a::before { transition: background 0.2s; }
     .skills h3 { margin-bottom: var(--s2); }
     .skills-proof { margin-top: var(--s4); }
 
-    .footer { padding: var(--s4) var(--s3) calc(44px + 32px + env(safe-area-inset-bottom)); margin-top: 0; }
+    .footer { padding: var(--s4) var(--s3) calc(88px + 96px + 16px + env(safe-area-inset-bottom)); margin-top: 0; }
 }
 @media (max-width: 600px) and (max-width: 359px) {
     .status-pill { font-size: 0.74rem; padding: 0.25rem 0.6rem; }
@@ -526,8 +526,6 @@ html { scroll-padding-top: var(--nav-h); scroll-behavior: smooth; } /* intro.js 
     :root { --nav-h: 74px; }
     .dots { display: none; }
     .nav-resume { order: 0; margin-left: auto; min-height: 44px; }
-    .nav > .lang-toggle { order: 0; min-height: 44px; font-size: 0.85rem; padding: 0; gap: 0; align-items: stretch; }
-    .nav > .lang-toggle span { padding-inline: 0.5rem; }
     .nav-toggle { margin-left: auto; }
     .nav-resume ~ .nav-toggle { margin-left: 0; }
     .panel { padding: var(--s4) var(--s3); min-height: calc(100svh - var(--nav-h)); justify-content: center; }
@@ -638,18 +636,16 @@ html:not(.js) .dots { display: none; }
   .hero-pills { margin-bottom: var(--s3, 16px); }
 }
 
-/* Language switch in the header bar (inserted by i18n.js after the brand) */
-.nav > .lang-toggle { align-self: center; flex-shrink: 0; }
-/* Bold active label must not change the switch width */
-@media (min-width: 601px) { .lang-toggle span { justify-content: center; min-width: 2.5rem; } }
-@media (min-width: 601px) { .nav > .lang-toggle { order: 1; } .nav > .nav-links { margin-left: auto; } }
-@media (min-width: 601px) and (max-width: 1024px) { .nav > .lang-toggle { min-height: 44px; } }
+/* Desktop: nav links right-aligned (language switch now lives in .corner-stack) */
+@media (min-width: 601px) { .nav > .nav-links { margin-left: auto; } }
 
-/* Fixed 3D pill: always visible, bottom-left, every page and size */
-.corner-3d { position: fixed; z-index: 9; left: max(16px, env(safe-area-inset-left)); bottom: calc(16px + env(safe-area-inset-bottom));
-  display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 44px; min-width: 8.5rem; padding: 0 1rem;
+/* Fixed bottom-right stack (lang switch above 3D pill), just above the Netlify badge zone (240x72) */
+.corner-stack { position: fixed; z-index: 9; right: max(16px, env(safe-area-inset-right)); bottom: calc(88px + env(safe-area-inset-bottom)); display: flex; flex-direction: column-reverse; align-items: flex-end; gap: 8px; }
+.corner-stack > .lang-toggle { min-height: 44px; background: var(--surface); border: 1px solid var(--accent); border-radius: 999px; box-shadow: 0 4px 16px rgb(0 0 0 / .25); font-size: .8rem; align-items: stretch; }
+.corner-stack > .lang-toggle span { min-width: 2.25rem; justify-content: center; align-items: center; }
+.corner-3d { display: inline-flex; align-items: center; justify-content: center; gap: .4rem; min-height: 44px; min-width: 7.5rem; padding: 0 .8rem;
   background: var(--surface); color: var(--text); border: 1px solid var(--accent); border-radius: 999px;
-  font-size: .9rem; font-weight: 600; white-space: nowrap; text-decoration: none;
+  font-size: .8rem; font-weight: 600; white-space: nowrap; text-decoration: none;
   box-shadow: 0 4px 16px rgb(0 0 0 / .25);
   transition: background-color 180ms cubic-bezier(.2,.8,.2,1), color 180ms cubic-bezier(.2,.8,.2,1), transform 160ms cubic-bezier(.2,.8,.2,1); }
 .corner-3d i { color: var(--accent); }
@@ -662,9 +658,4 @@ html:not(.js) .dots { display: none; }
     .nav-resume .label-long { display: none; }
     .nav-resume .label-short { display: inline; }
 }
-@media (max-width: 359px) { .nav-resume { padding-inline: 0.7rem; min-width: 4.7rem; } .nav > .lang-toggle span { padding-inline: 0.4rem; } }
-/* Phones: lift the 3D pill above the Netlify badge zone (240x72) */
-@media (max-width: 420px) {
-    .corner-3d { bottom: calc(80px + env(safe-area-inset-bottom)); }
-    .footer { padding-bottom: calc(80px + 44px + 16px + env(safe-area-inset-bottom)); }
-}
+@media (max-width: 359px) { .nav-resume { padding-inline: 0.7rem; min-width: 4.7rem; } }

@@ -143,20 +143,23 @@ for (const url of PAGES) {
         const r = await page.evaluate(() => {
           const rc = (e) => { if (!e) return null; const b = e.getBoundingClientRect(); return { l: b.left, t: b.top, r: b.right, b: b.bottom, w: b.width, h: b.height }; };
           const q = (s) => rc(document.querySelector(s));
-          return { iw: innerWidth, ih: innerHeight, lang: q('.nav > .lang-toggle'), pill: q('.corner-3d'), nav: q('.nav'), brand: q('.nav-brand'), resume: q('.nav-resume'), burger: q('.nav-toggle') };
+          return { iw: innerWidth, ih: innerHeight, lang: q('.corner-stack > .lang-toggle'), pill: q('.corner-3d'), nav: q('.nav'), brand: q('.nav-brand'), resume: q('.nav-resume'), burger: q('.nav-toggle'), langInNav: !!document.querySelector('.nav .lang-toggle') };
         });
         const inter = (a, b) => a && b && a.w > 0 && b.w > 0 && a.l < b.r && a.r > b.l && a.t < b.b && a.b > b.t;
         for (const [name, el] of [['lang', r.lang], ['pill', r.pill]]) {
           expect(el, `${name} missing`).not.toBeNull();
           expect(el.w > 0 && el.h > 0, `${name} has no size`).toBe(true);
           expect(el.l >= 0 && el.t >= 0 && el.r <= r.iw + 0.5 && el.b <= r.ih + 0.5, `${name} outside viewport ${fmt(el)}`).toBe(true);
-          if (vp.w <= 1024) expect(el.h, `${name} height`).toBeGreaterThanOrEqual(43.5);
+          expect(el.h, `${name} height`).toBeGreaterThanOrEqual(43.5);
         }
-        expect(inter(r.pill, { l: r.iw - 240, t: r.ih - 72, r: r.iw, b: r.ih, w: 240, h: 72 }), 'pill in netlify corner').toBeFalsy();
-        expect(inter(r.pill, r.nav), 'pill overlaps nav').toBeFalsy();
-        if (vp.w <= 600) {
-          for (const k of ['brand', 'resume', 'burger']) expect(inter(r.lang, r[k]), `lang overlaps ${k}: ${fmt([r.lang, r[k]])}`).toBeFalsy();
+        const zone = { l: r.iw - 240, t: r.ih - 72, r: r.iw, b: r.ih, w: 240, h: 72 };
+        for (const [name, el] of [['lang', r.lang], ['pill', r.pill]]) {
+          expect(inter(el, zone), `${name} in netlify corner`).toBeFalsy();
+          expect(inter(el, r.nav), `${name} overlaps nav`).toBeFalsy();
         }
+        expect(inter(r.lang, r.pill), 'lang intersects pill').toBeFalsy();
+        expect(r.lang.b, 'lang above pill').toBeLessThanOrEqual(r.pill.t + 0.5);
+        expect(r.langInNav, 'lang toggle still in nav').toBe(false);
       });
     });
   }

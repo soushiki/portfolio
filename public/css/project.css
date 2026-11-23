@@ -133,7 +133,7 @@ caption { text-align: left; color: var(--muted-on-surface); padding: 0 0 .4rem; 
 @media (min-width: 700px) { .skills { grid-template-columns: repeat(3, 1fr); } }
 
 /* Footer */
-.job-line { padding: 2rem 0 calc(44px + 32px + env(safe-area-inset-bottom)); text-align: center; color: var(--muted); }
+.job-line { padding: 2rem 0 calc(88px + 96px + 16px + env(safe-area-inset-bottom)); text-align: center; color: var(--muted); }
 .job-line a { display: inline-flex; align-items: center; min-height: 44px; }
 
 /* Reveal once. Only hides when project.js says it can show it again. */
@@ -333,7 +333,7 @@ html.pj-ready:not(.motion-calm) .waffle:not(.is-seen) i { opacity: 0; }
 .brk-row.is-off .brk-val { text-decoration: line-through; text-decoration-color: var(--c-amber); }
 .brk-row.is-off .brk-state { color: var(--text); font-weight: 700; }
 .brk-row input:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
-.brk-verdict { position: sticky; bottom: calc(16px + 44px + 8px + env(safe-area-inset-bottom)); z-index: 2; margin: .9rem 0 0; padding: .7rem 1rem; min-height: 44px; background: var(--surface-2); border: 2px solid var(--border); border-radius: 10px; font-weight: 700; overflow-wrap: anywhere; }
+.brk-verdict { position: sticky; bottom: calc(88px + 96px + 8px + env(safe-area-inset-bottom)); z-index: 2; margin: .9rem 0 0; padding: .7rem 1rem; min-height: 44px; background: var(--surface-2); border: 2px solid var(--border); border-radius: 10px; font-weight: 700; overflow-wrap: anywhere; }
 .brk-verdict.is-fail { border-color: var(--c-amber); }
 .brk-verdict.is-pass { border-color: var(--c-indigo); }
 .brk-reset { display: none; margin: .6rem 0 0; min-height: 44px; padding: 0 1rem; font: inherit; color: var(--text); background: transparent; border: 1px solid var(--border); border-radius: 999px; cursor: pointer; }
@@ -368,7 +368,3 @@ html.pj-ready:not(.motion-calm) .waffle:not(.is-seen) i { opacity: 0; }
 .day-axis span:first-child { transform: none; }
 .day-axis span:last-child { transform: translateX(-100%); }
 .day-lab { margin: .4rem 0 0 .6rem; font-weight: 700; color: var(--text); }
-@media (max-width: 420px) {
-  .brk-verdict { bottom: calc(80px + 44px + 8px + env(safe-area-inset-bottom)); }
-  .job-line { padding-bottom: calc(80px + 44px + 16px + env(safe-area-inset-bottom)); }
-}
