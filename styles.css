@@ -350,10 +350,13 @@ html.motion-calm .dots a::before { transition: background 0.2s; }
     .nav-toggle { display: inline-flex; align-items: center; justify-content: center; }
     .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; padding: 0.5rem 1rem 0.75rem; background: var(--bg); border-bottom: 1px solid var(--border); }
     .nav-links.open { display: flex; }
-    .nav .nav-links a { display: flex; align-items: center; min-height: 44px; font-size: 1rem; }
-    .nav-links .nav-3d { align-self: flex-start; padding: 0 0.9rem; margin: 0.25rem 0; }
-    .nav-links .lang-toggle { min-height: 44px; font-size: 0.95rem; margin-top: 0.25rem; }
-    .nav-links .motion-toggle { min-height: 44px; font-size: 0.95rem; margin-top: 0.25rem; }
+    .nav .nav-links a { display: flex; align-items: center; min-height: 44px; padding-inline: 0; font-size: 1rem; }
+    /* One left edge for every row; settings in their own row under a divider */
+    .nav .nav-links { align-items: stretch; }
+    .nav .nav-links a.nav-3d { gap: 0.4rem; padding: 0; border: 0; border-radius: 0; color: var(--accent); }
+    .nav .nav-links a.nav-3d:hover { background: none; color: var(--text); }
+    .nav-links li:has(> .lang-toggle) { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin-top: 0.25rem; padding-top: 0.75rem; border-top: 1px solid var(--border); }
+    .nav-links .lang-toggle, .nav-links .motion-toggle { min-height: 44px; font-size: 0.95rem; }
     .strip { flex-direction: column; align-items: center; }
     .strip li + li::before { content: none; }
 }
